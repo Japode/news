@@ -69,22 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN19 JN19 — The home as drawn
-
-`Home.tsx` rebuilt to the "Início" artboard, in this order, each block carrying its
-`data-design` name:
-
-1. `intro`: the channel's line, "Vídeos curtos em português sobre a história e o porquê das ferramentas que desenvolvedores usam todo dia, contados a partir de fontes reais." (18px, at most 760px wide).
-2. `lead`: the newest video. The thumbnail at 16:9 with `object-fit: contain` (never cropped: the thumbnails carry text to their edges) and "Assistir · m:ss" under it, not over it; beside it the kicker, the title (40px, 800), the dek, the byline, the first source with "Ler o original", and the buttons "Ler e assistir" and "Ver as fontes". Under 960px the two columns stack.
-3. `videos`: "Todos os vídeos" with the count, a grid of cards (thumbnail, kicker, title, date, length, number of sources), newest first, then any `upcoming` card with its dashed frame.
-4. `method`: "O que cada página traz", the four numbered columns, and the link to the method page once it exists.
-5. `terms`: every term of every video as a chip, each linking its video's `#termos`.
-
-The Japode Ads strip has its slot between `videos` and `method`, filled by its own task.
-
-JN4's checks still hold: no landing hero class, and every video listed newest first.
-Done when tier 2 passes for the home at 1280, with the Scion video imported as it is.
-
 ### §JN20 JN20 — The video page as drawn
 
 `VideoPage.tsx` rebuilt to the "Página do vídeo" artboard. Main column: breadcrumb;
