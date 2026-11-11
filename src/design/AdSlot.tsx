@@ -2,7 +2,8 @@
    network (ads.japode.com/v1/ads.js, loaded in index.html) fills the inner div at random
    on each visit from its own weighted catalogue; this site adds no logic to the choice.
    data-ad-memory="off" keeps the loader from storing its rotation, so nothing about the
-   reader is kept, and with no data-ad-lang it shows campaigns in the page's language.
+   reader is kept, and data-ad-lang="" lets every campaign in, in any language (the
+   Alexandre, 2026-11-11), not only the ones written in the page's Portuguese.
    The label says what the box is, so it never reads as part of the article. With
    scripts off, index.html's <noscript> hides every frame rather than leave it empty. */
 
@@ -26,7 +27,7 @@ export function AdSlot({ format, slot, design, note, label = "AnÃºncio da casa Â
       <p className="jn-ad-label" data-design={design}>
         {label}
       </p>
-      <div data-japode-ads="" data-ad-format={format} data-ad-slot={slot} data-ad-theme="light" data-ad-memory="off" />
+      <div data-japode-ads="" data-ad-format={format} data-ad-slot={slot} data-ad-theme="light" data-ad-memory="off" data-ad-lang="" />
       {note && <p className="jn-ad-note">{note}</p>}
     </aside>
   )

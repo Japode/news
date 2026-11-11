@@ -276,9 +276,9 @@ if (existsSync(join(DIST, app.outputDir(methodPath), "index.html"))) {
 check("JN22", sitemap.includes(`<loc>${SITE.origin}${methodPath}</loc>`), `the sitemap lacks ${methodPath}`)
 
 // JN24 — the house ads: the home's strip and a video page's in-content and sidebar slots,
-// each labelled and storing nothing, none inside an article, none on the method page,
+// each labelled, storing nothing and open to every campaign, none inside an article, none on the method page,
 // and the frames hidden with scripts off.
-const slots = (text) => [...text.matchAll(/<div data-japode-ads="" data-ad-format="([^"]+)" data-ad-slot="([^"]+)" data-ad-theme="light" data-ad-memory="off"><\/div>/g)].map((m) => m[2])
+const slots = (text) => [...text.matchAll(/<div data-japode-ads="" data-ad-format="([^"]+)" data-ad-slot="([^"]+)" data-ad-theme="light" data-ad-memory="off" data-ad-lang=""><\/div>/g)].map((m) => m[2])
 check("JN24", slots(page("/")).join() === "home-strip", `the home's house-ad slots are ${slots(page("/")).join(", ") || "none"}, not home-strip`)
 for (const v of app.VIDEOS) {
   const text = page(`/${v.slug}/`)
