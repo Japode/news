@@ -169,11 +169,28 @@ for (const v of app.VIDEOS) {
   check("JN9", llms.includes(`(${SITE.origin}${path})`), `llms.txt lacks ${path}`)
 }
 
-// JN12 — every page's footer links japode.com, the English catalogue, which links back.
+// JN12 — every page's footer links japode.com, the apps site, which links back
+// (relabelled "Aplicativos Japode" in JN16: japode.com is not this site in English).
 for (const r of ROUTES) {
   const text = page(r.path)
   const footer = text.slice(text.lastIndexOf("<footer"))
-  check("JN12", footer.includes(`href="${SITE.catalogue}"`) && footer.includes("Os produtos da Japode"), `${r.path}'s footer does not link japode.com`)
+  check("JN12", footer.includes(`href="${SITE.catalogue}"`) && footer.includes("Aplicativos Japode (japode.com)"), `${r.path}'s footer does not link japode.com`)
+}
+
+// JN16 — one header and one footer: every page carries the same HTML for both, save the
+// aria-current that marks the page you are on.
+const chrome = (path) => {
+  const text = page(path).replace(/ aria-current="page"/g, "")
+  const header = text.match(/<header class="jn-head"[\s\S]*?<\/header>/)?.[0]
+  const footer = text.match(/<footer class="jn-foot"[\s\S]*?<\/footer>/)?.[0]
+  return { header, footer }
+}
+const homeChrome = chrome("/")
+check("JN16", Boolean(homeChrome.header && homeChrome.footer), "the home page lacks the site's header or footer")
+for (const r of ROUTES) {
+  const c = chrome(r.path)
+  check("JN16", c.header === homeChrome.header, `${r.path}'s header differs from the home page's`)
+  check("JN16", c.footer === homeChrome.footer, `${r.path}'s footer differs from the home page's`)
 }
 
 // JN13 — the artboards are in the repo as the reference, each with its baseline, and the

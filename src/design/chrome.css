@@ -1,0 +1,232 @@
+/* The header and the footer (JN16), as design/home.html draws them at 1280 and
+   design/video-mobile.html at 390. Under 600px the header folds its nav into the menu
+   and the footer stacks its blocks, the phone artboard's measures. */
+
+/* --- header */
+.jn-head {
+  position: relative;
+  border-bottom: var(--line-rule) solid var(--ink);
+}
+.jn-head-row {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-18) var(--space-24);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+.jn-head-brand,
+.jn-head-brand:hover {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  color: var(--ink);
+  text-decoration: none;
+}
+.jn-head-brand img {
+  width: 36px;
+  height: 36px;
+}
+.jn-head-brand span {
+  font-size: var(--text-24);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-title);
+}
+.jn-head-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-28);
+  font-size: var(--text-15);
+  font-weight: var(--weight-semibold);
+}
+.jn-head-nav a,
+.jn-head-nav a:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+.jn-head-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+.jn-head-nav .jn-head-subscribe {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 var(--space-16);
+  border: var(--line-hair) solid var(--ink);
+  border-radius: var(--radius-control);
+}
+.jn-head-menu {
+  display: none;
+}
+
+/* --- footer */
+.jn-foot {
+  background: var(--footer-bg);
+  color: var(--footer-lead);
+}
+.jn-foot-main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-48) var(--space-24) var(--space-24);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-32) var(--space-40);
+  justify-content: space-between;
+}
+.jn-foot-about,
+.jn-foot-corrections {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+}
+.jn-foot-about {
+  gap: var(--space-12);
+}
+.jn-foot-corrections {
+  gap: var(--space-10);
+}
+.jn-foot-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+  color: var(--footer-heading);
+  font-size: var(--text-20);
+  font-weight: var(--weight-extrabold);
+}
+.jn-foot-brand img {
+  width: 28px;
+  height: 28px;
+}
+.jn-foot p {
+  font-size: var(--text-14);
+  line-height: 1.6;
+  color: var(--footer-text);
+}
+.jn-foot-about p {
+  max-width: 420px;
+}
+.jn-foot-heading {
+  color: var(--footer-heading);
+  font-size: var(--text-14);
+  font-weight: var(--weight-bold);
+}
+.jn-foot a,
+.jn-foot a:hover {
+  color: var(--green-light);
+}
+.jn-foot-nav {
+  flex: 0 1 240px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  font-size: var(--text-14);
+}
+.jn-foot-legal {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-24) var(--space-32);
+  border-top: var(--line-hair) solid var(--footer-rule);
+  color: var(--footer-fine);
+  font-size: var(--text-13);
+}
+
+/* --- a phone: the measures of design/video-mobile.html */
+@media (max-width: 600px) {
+  .jn-head-row {
+    padding: var(--space-12) var(--space-16);
+    flex-wrap: nowrap;
+  }
+  .jn-head-brand {
+    gap: var(--space-10);
+  }
+  .jn-head-brand img {
+    width: 32px;
+    height: 32px;
+  }
+  .jn-head-brand span {
+    font-size: var(--text-20);
+  }
+  .jn-head-nav {
+    display: none;
+  }
+  .jn-head-menu {
+    display: block;
+  }
+  .jn-head-menu summary {
+    width: var(--target);
+    height: var(--target);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+  }
+  .jn-head-menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .jn-head-menu nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-8) var(--space-16) var(--space-16);
+    border-bottom: var(--line-rule) solid var(--ink);
+    background: var(--surface);
+    font-size: var(--text-16);
+    font-weight: var(--weight-semibold);
+  }
+  .jn-head-menu nav a,
+  .jn-head-menu nav a:hover {
+    display: flex;
+    align-items: center;
+    min-height: var(--target);
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .jn-foot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+    padding: var(--space-32) var(--space-16) var(--space-24);
+  }
+  .jn-foot-main {
+    display: contents;
+  }
+  .jn-foot-about,
+  .jn-foot-corrections,
+  .jn-foot-nav {
+    flex: none;
+  }
+  .jn-foot-about {
+    gap: var(--space-10);
+  }
+  .jn-foot-about p {
+    max-width: none;
+  }
+  .jn-foot-corrections {
+    gap: var(--space-8);
+  }
+  .jn-foot-nav {
+    gap: var(--space-4);
+  }
+  .jn-foot-nav a {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+  }
+  .jn-foot-legal {
+    max-width: none;
+    margin: 0;
+    padding: var(--space-16) 0 0;
+  }
+}

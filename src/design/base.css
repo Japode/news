@@ -5,12 +5,10 @@
 @import "./tokens.css";
 @import "./fonts.css";
 @import "./primitives.css";
+@import "./chrome.css";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* No global box-sizing: the artboards size their boxes as content-box, and a padded
+   1200px container sits 1248px wide in both, so the site measures the same. */
 
 html {
   -webkit-text-size-adjust: 100%;

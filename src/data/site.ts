@@ -15,6 +15,10 @@ export const SITE = {
   catalogue: "https://japode.com",
   github: "https://github.com/Japode",
   author: "Alexandre Oliveira",
+  /** The method page (JN22), which the header and the footer link. */
+  method: "/como-fazemos/",
+  /** Where a reader reports an error (JN23): the form on the method page. */
+  corrections: "/como-fazemos/#corrigir",
 } as const
 
 export const absolute = (path: string) => `${SITE.origin}${path}`

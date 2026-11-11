@@ -8,8 +8,7 @@
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-- 📋 **JN16** (deps: JN15 ✅) **Header and footer are generic site chrome, not the artboard's, and nothing keeps them identical on every page** — The Alexandre saw the footer differ between pages in the artboard; one component per region is what stops that on the site. → §JN16
-- 📋 **JN17** (deps: JN16) **No page says the site is sponsored by Viglet, nor that Viglet belongs to the author** — A sponsor shown openly, with the tie and the rule beside it, is what lets a reader trust the rest of the page. → §JN17
+- 📋 **JN17** (deps: JN16 ✅) **No page says the site is sponsored by Viglet, nor that Viglet belongs to the author** — A sponsor shown openly, with the tie and the rule beside it, is what lets a reader trust the rest of the page. → §JN17
 - 📋 **JN18** (deps: JN3 ✅) **The import lacks the kicker, the numbers with their sources, the narration credit and the sponsor tie the artboard shows** — A video's facts are imported, never retyped, so every new field the pages show must come through import-video.mjs first. → §JN18
 - 📋 **JN19** (deps: JN17, JN18) **The home is a list of rows, not the artboard's lead story, video grid, method strip and term index** — The home is where a visitor decides to trust the site, and the artboard puts the newest video's source on the first screen. → §JN19
 - 📋 **JN20** (deps: JN17, JN18) **A video page lacks the artboard's byline bar, sources box, numbers table, chapters aside and ficha** — These are the parts that let a reader check the video, so the page is where the artboard's credibility has to survive the build. → §JN20

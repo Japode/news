@@ -34,3 +34,16 @@ also rewrites the links between artboards to the exported pages.
 A baseline is regenerated only with a new export of the canvas, never to make a failing page
 pass. When the site and a baseline disagree, the site is the one to fix, unless the canvas
 itself changed.
+
+## Matching an artboard to the pixel
+
+What `npm run visual` has caught so far, and the fix each one needed:
+
+- **Box model.** The artboards size their boxes as `content-box`, so a 1200px container with
+  24px padding is 1248px wide. The site sets no global `box-sizing` for the same reason.
+- **One run of text stays one string.** React renders `Feito por {name}.` as three text nodes,
+  and Chrome shapes each node apart, so the kerning across the seams moves a few glyphs. Copy
+  that the artboard writes as a single run is rendered from a single template string.
+- **Sub-pixel tops.** A region's top lands on a different fraction of a pixel when the content
+  above it differs. The gate moves each region onto a whole pixel on both sides before the
+  capture, so this needs nothing from the page.

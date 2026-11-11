@@ -108,7 +108,23 @@ function compareLayout(ref, site) {
 }
 const fmt = (n) => (n === null ? "none" : `${Math.round(n * 10) / 10}px`)
 
+/** Moves an element up by the fraction of a pixel its top sits at, so its glyphs land on
+    the same sub-pixel grid on both sides. The content above a region differs (the mock
+    copy against the real article), and a footer that starts at y .34 on one page and .17
+    on the other rasterises its text a few pixels apart while being drawn identically. */
+const snap = (page, selector) =>
+  page.evaluate((selector) => {
+    const el = document.querySelector(selector)
+    const top = el.getBoundingClientRect().top + scrollY
+    const frac = top - Math.floor(top)
+    if (!frac) return
+    if (getComputedStyle(el).position === "static") el.style.position = "relative"
+    el.style.top = `${(parseFloat(getComputedStyle(el).top) || 0) - frac}px`
+  }, selector)
+
 async function comparePixels(refPage, refSel, sitePage, siteSel, out) {
+  await snap(refPage, refSel)
+  await snap(sitePage, siteSel)
   const a = PNG.sync.read(await refPage.locator(refSel).first().screenshot())
   const b = PNG.sync.read(await sitePage.locator(siteSel).first().screenshot())
   if (a.width !== b.width || a.height !== b.height) return [`size ${b.width}x${b.height}, artboard ${a.width}x${a.height}`]

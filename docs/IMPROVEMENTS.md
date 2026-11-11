@@ -69,28 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN16 JN16 — One header and one footer
-
-`Layout.tsx` stops using `SiteNav` and `SiteFooter` and renders `Header` and `Footer`
-from `src/design/`, drawn from the artboard.
-
-Header: a 2px ink rule under it; the mark (36px) and "Japode" (24px, 800, -0.02em)
-linking home; the nav "Vídeos", "Termos", "Como fazemos" (15px, 600) and an outlined
-"Inscrever-se no canal" button to the channel. Under 600px the nav folds behind a 44px
-menu button, as in the mobile artboard.
-
-Footer, black: the mark and the one-line description with the author; the "Correções"
-column, whose link reads "Envie uma correção"; the links "Como fazemos", "Canal no
-YouTube", "GitHub" and "Aplicativos Japode (japode.com)" (japode.com is the apps site,
-never "the English version"); then a ruled line with "© 2026 Japode". Under 600px the
-columns stack in the same order.
-
-The current JN12 links stay, relabelled as above, so JN12's checks still hold.
-
-Done when `npm run visual` passes tier 1 for `data-design="header"` and `"footer"` on
-every route at 1280, and at 390 on the video page, and `scripts/verify.mjs` asserts that
-every prerendered page carries byte-identical header and footer HTML.
-
 ### §JN17 JN17 — The "Oferecimento" band
 
 Chosen by the Alexandre on 2026-11-11: Viglet sponsors the site, and the form is this

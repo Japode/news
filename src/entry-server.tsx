@@ -8,7 +8,7 @@ export { SITE } from "./data/site.ts"
 export { VIDEOS } from "./data/videos.ts"
 export { articleFor } from "./data/articles.ts"
 
-export const render = (path: string) => renderToString(<Layout>{routeFor(path).render()}</Layout>)
+export const render = (path: string) => renderToString(<Layout path={routeFor(path).path}>{routeFor(path).render()}</Layout>)
 export const canonicalUrl = (path: string) => absolute(path)
 export const outputDir = (path: string) => path.replace(/^\/|\/$/g, "")
 export const ROUTE_META = ROUTES.map(({ path, title, description }) => ({ path, title, description }))
