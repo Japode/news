@@ -10,3 +10,5 @@
 - ⏸ **JN8** (deps: JN5 ✅, JN6 ✅) **The Docker video has no page, though "o que é Docker" is a search that does not go away** — set aside (Waits for the Alexandre's sources.): The Docker video cites no sources, so its article's numbers link nowhere: the Alexandre names them, then writes approved: <date>. → §JN8
 
 ## Block C — Found, measured and linked
+
+- ⏸ **JN10** (deps: JN2 ✅) **No number says whether the site brings anyone: which page was found, from which search, is unknown** — set aside (Waits for the Search Console.): visibility measures every product through the Search Console, so japode.com.br needs a verified property that visibility can read. → §JN10
