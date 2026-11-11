@@ -66,3 +66,271 @@ takes an article better than a YouTube link, which reads as self-promotion.
 
 Done when: every published video's description has its page's link, and `actions.json`
 records each change with its date.
+
+## Block D — The site drawn in the artboard, pixel for pixel
+
+### §JN13 JN13 — The artboard as a reference in the repo
+
+The design is the claude.ai Design canvas "Japode news — proposta de site" (the
+Alexandre has the link; it is private, so the URL stays out of this public repo). It
+holds four artboards: Início (1280 wide), Página do vídeo (1280), Como fazemos (1280)
+and Página do vídeo — celular (390).
+
+Copy each artboard into `design/` as a plain static HTML page: the `x-dc` wrapper and
+`support.js` removed, the markup and inline styles kept byte for byte, the uploaded
+images pointed at local files (`content/videos/*/thumbnail.jpg`, `public/logo.svg`, and
+Viglet's mark from visibility's `marca/logo/viglet.svg`). Fonts load from a local copy
+of Plus Jakarta Sans, never Google Fonts, so a render does not depend on the network.
+
+Then render each page headless at its frame width, full height, into
+`design/baseline/<page>-<width>.png`. Those PNGs are the reference every later task in
+this block is measured against, and they change only when the canvas changes: a design
+change is a new export plus new baselines in one commit, never a baseline regenerated to
+make a failing page pass.
+
+Done when `design/` holds the four pages and their baselines, and `design/README.md`
+says where the canvas is, how to re-export it and how to regenerate the baselines.
+
+On ship: --recorded-in design/README.md
+
+### §JN14 JN14 — The visual gate
+
+A whole-page pixel diff cannot be the only check: the artboard's copy is a mock-up of
+the Scion page, and the built page renders the approved article, so the screenshots
+differ wherever the text does. The gate therefore has two tiers, both in
+`scripts/visual.mjs` and run by `npm run visual` after `npm run build`.
+
+Tier 1, pixels. The chrome and the fixed blocks hold the same content on both sides:
+header, footer, the sponsor band, the sources box and the "Anúncio da casa" frame (never
+the banner inside it, which Japode Ads draws at random). Each is screenshotted by its
+`data-design="<name>"` attribute, on the reference and on `dist/`, and compared with
+pixelmatch: any pixel over the anti-aliasing threshold fails, and the diff PNG is
+written to `visual-report/`.
+
+Tier 2, layout. For every `data-design` element of a page, the box (x, width, height
+when the content is fixed), the font family, size, weight, line height, colour,
+background, border and the gap to the previous sibling are read with `getComputedStyle`
+on both sides and compared within 1px. A failure names the page, the width, the element
+and the property.
+
+Both tiers run at 1280 and, where an artboard exists, 390. Playwright's Chromium is
+pinned in `package.json` so CI and the Alexandre's machine render the same fonts. The
+deploy workflow runs the gate after the build, and the skill's gate section gains `npm
+run visual`.
+
+### §JN15 JN15 — The site's own design system
+
+Decided by the Alexandre on 2026-11-11: the site gets its own small design system and
+drops `@viglet/viglet-design-system` (and Tailwind, if nothing else needs it).
+CLAUDE.md's "Built like japode.com" rule is rewritten in the same commit.
+
+`src/design/tokens.css` holds every value the artboard uses, as custom properties, and
+nothing else may spell a hex or a px size:
+
+- Ink `#111111`, body `#1C201D`, secondary `#333833`, muted `#555B57`; rules `#E3E6E4` and `#D5DAD7`, placeholder dash `#B8BEBA`, field border `#8A918D`; soft surfaces `#F4F6F5` (ficha) and `#F2F4F3` (sponsor band).
+- Green `#2BCB6B` (buttons, play mark; dark text on it), `#11904A` (large numerals only), `#0B6B37` (links and kickers, the only green that passes 4.5:1 on white), `#D4F7DF` (links on the black footer, whose text is `#C9D0CB`, rule `#2E3330`, fine print `#A9B1AC`).
+- Plus Jakarta Sans 400 to 800, still shipped from `@fontsource-variable` so JN1's font check holds; the type scale 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 24, 26, 30, 40, 48 px, with the kicker style (13px, 700, uppercase, 0.08em).
+- Container 1200px plus 24px gutters (16px under 600px); radii 4 (buttons, fields), 6 (ad frame), pill, circle.
+
+`src/design/` also holds the primitives later tasks compose: Button (solid and outline),
+Chip, Kicker, Rule, Field. The theme toggle goes, since the artboard draws no dark
+theme; a dark theme comes back only with its own artboard.
+
+Done when the build has no Viglet design system import and `scripts/verify.mjs` fails on
+a hex outside `tokens.css`.
+
+### §JN16 JN16 — One header and one footer
+
+`Layout.tsx` stops using `SiteNav` and `SiteFooter` and renders `Header` and `Footer`
+from `src/design/`, drawn from the artboard.
+
+Header: a 2px ink rule under it; the mark (36px) and "Japode" (24px, 800, -0.02em)
+linking home; the nav "Vídeos", "Termos", "Como fazemos" (15px, 600) and an outlined
+"Inscrever-se no canal" button to the channel. Under 600px the nav folds behind a 44px
+menu button, as in the mobile artboard.
+
+Footer, black: the mark and the one-line description with the author; the "Correções"
+column, whose link reads "Envie uma correção"; the links "Como fazemos", "Canal no
+YouTube", "GitHub" and "Aplicativos Japode (japode.com)" (japode.com is the apps site,
+never "the English version"); then a ruled line with "© 2026 Japode". Under 600px the
+columns stack in the same order.
+
+The current JN12 links stay, relabelled as above, so JN12's checks still hold.
+
+Done when `npm run visual` passes tier 1 for `data-design="header"` and `"footer"` on
+every route at 1280, and at 390 on the video page, and `scripts/verify.mjs` asserts that
+every prerendered page carries byte-identical header and footer HTML.
+
+### §JN17 JN17 — The "Oferecimento" band
+
+Chosen by the Alexandre on 2026-11-11: Viglet sponsors the site, and the form is this
+site's own rather than the "Built on" `SiteSponsor` block the other Japode sites use. It
+borrows the TV news "Oferecimento" card: one band, the same on every page, between the
+content and the footer, never inside an article.
+
+The band (`data-design="sponsor"`, background `#F2F4F3`, a hairline on top): the label
+"OFERECIMENTO" (12px, 700, 0.12em), a 1px divider, Viglet's mark (36px, from
+visibility's `marca/logo/viglet.svg`, never redrawn) and the name "Viglet" linking
+viglet.org; then one sentence in Portuguese, carried over from `sponsor.json`'s summary
+in the japode.github.io repo: "Busca e conteúdo em código aberto para quem publica
+muito, nos próprios servidores e sem licença por usuário: Viglet Turing e Viglet Shio",
+each product linking its site (no GitHub URLs, the same link policy); and the disclosure
+"A Viglet é do autor do Japode e não escolhe nem revisa a pauta", linking the method
+page's sponsorship section. Under 600px the three parts stack.
+
+The copy lives in `src/data/sponsor.ts`, one place, so a change to the sponsor is one
+edit. Products always by their full names.
+
+Done when the band is in every prerendered page, `scripts/verify.mjs` checks the
+disclosure sentence is present on each, and tier 1 passes for `data-design="sponsor"`.
+
+### §JN18 JN18 — The fields the artboard reads
+
+The artboard shows things `video.json` does not carry. Each gets a field in the `Video`
+type and its CHECK, filled by `scripts/import-video.mjs` from
+`marketing/japode/<video>`, and the import refuses a video without a required one rather
+than inventing it:
+
+- `kicker`: the subject line above the title ("Controle de versão", "Contêineres").
+- `facts`: the "Os números do vídeo" rows, each `{ value, measures, source }`, `source` an index into `sources`. Marketing's README already keeps a "Facts and their sources" table for the Git video; the Scion and Docker folders gain one there first (outside this repo), never here.
+- `sources[].lang`, so a page can say "Em inglês", and `sources[].published` for the date the sources box prints.
+- `production`: the narration credit, read from the line the build writes into the YouTube description ("Narração e música geradas com ElevenLabs.").
+- `sponsorTie`: `none`, `product` or `competitor`, set by the Alexandre in marketing for each video; the ficha prints it, and `product` or `competitor` puts the notice at the top of the page.
+- `upcoming`: a marketing folder with a README and no `out/` video becomes a card "Em produção" with its title and one line, and nothing else.
+
+The dek and the reading time are not fields: the dek is the approved article's summary
+(JN6), and the minutes are counted from its words.
+
+Done when both imported videos carry every field, and `scripts/verify.mjs` checks each
+fact's `source` points at an existing source.
+
+### §JN19 JN19 — The home as drawn
+
+`Home.tsx` rebuilt to the "Início" artboard, in this order, each block carrying its
+`data-design` name:
+
+1. `intro`: the channel's line, "Vídeos curtos em português sobre a história e o porquê das ferramentas que desenvolvedores usam todo dia, contados a partir de fontes reais." (18px, at most 760px wide).
+2. `lead`: the newest video. The thumbnail at 16:9 with `object-fit: contain` (never cropped: the thumbnails carry text to their edges) and "Assistir · m:ss" under it, not over it; beside it the kicker, the title (40px, 800), the dek, the byline, the first source with "Ler o original", and the buttons "Ler e assistir" and "Ver as fontes". Under 960px the two columns stack.
+3. `videos`: "Todos os vídeos" with the count, a grid of cards (thumbnail, kicker, title, date, length, number of sources), newest first, then any `upcoming` card with its dashed frame.
+4. `method`: "O que cada página traz", the four numbered columns, and the link to the method page once it exists.
+5. `terms`: every term of every video as a chip, each linking its video's `#termos`.
+
+The Japode Ads strip has its slot between `videos` and `method`, filled by its own task.
+
+JN4's checks still hold: no landing hero class, and every video listed newest first.
+Done when tier 2 passes for the home at 1280, with the Scion video imported as it is.
+
+### §JN20 JN20 — The video page as drawn
+
+`VideoPage.tsx` rebuilt to the "Página do vídeo" artboard. Main column: breadcrumb;
+kicker; title (48px, 800); dek; the byline bar (author, date, length and reading time,
+"N fonte(s) primária(s)" linking `#fontes`, and the correction state); the facade with
+the thumbnail contained, never cropped; `sources` box, ink-bordered, "De onde vêm os
+fatos", each source numbered with its date and language; the approved article, where a
+`[n]` the article writes becomes a superscript link to `#fontes`; the `facts` table,
+where the article places a `<!-- numeros -->` line, else after it; the terms as a
+definition list; "Correções" beside "Como este vídeo foi feito" (the approval, and the
+`production` credit); the credits as a table (title without emoji, channel, licence in
+the caption).
+
+Aside, 300px: the chapters, each linking the YouTube time; the ficha (author, date,
+sources, corrections, narration, images, sponsorship from `sponsorTie`); "Assistir no
+YouTube". Docker's Short, which the artboard does not draw, goes under the chapters with
+the same chip styles and is left out of tier 2.
+
+Corrections are editorial, so they live in this repo:
+`content/videos/<slug>/corrections.json`, a list of `{ date, wrong, right }`, empty
+meaning "Sem correções". A non-empty list prints in the box and turns the byline state
+into a link.
+
+Every JN5, JN6 and JN9 check keeps passing. Done when tier 1 passes for `sources` and
+tier 2 for the Scion page at 1280.
+
+### §JN21 JN21 — The video page on a phone
+
+The "Página do vídeo — celular" artboard is the same page at 390px, rearranged rather
+than shrunk, and it is reached with media queries on the JN20 markup, never with a
+second template:
+
+- the header folds the nav behind a 44px menu button (JN16);
+- the title drops to 30px, the dek to 17px, and the byline bar becomes two lines;
+- the facade runs edge to edge, past the 16px gutters;
+- the sources box keeps its ink border, right under the video;
+- the chapters become a `<details>` "Capítulos (N)", closed, between the sources and the article;
+- the facts table becomes a list of rows, the value bold over what it measures, the source link on the right;
+- the ficha moves after the article, before the "Assistir no YouTube" button, which spans the width;
+- the sponsor band and the footer stack (JN16, JN17).
+
+Every control stays at least 44px tall. The `<details>` needs no JavaScript, so the page
+still reads with scripts off (JN1).
+
+Done when tier 1 passes for header, sources, sponsor and footer at 390, and tier 2 for
+the Scion page at 390.
+
+### §JN22 JN22 — The "Como fazemos" page
+
+A new route, `/como-fazemos/`, drawn from the "Como fazemos" artboard, indexed and in
+the sitemap (JN9). The header's "Como fazemos" and the footer's correction link now
+resolve here.
+
+Its blocks, each with a `data-design` name:
+
+- `steps`: "Do documento à página", four steps. The video step says what the YouTube descriptions already say: narration and music generated with ElevenLabs, footage only under CC BY.
+- `rules`: "O que seguimos" (every number has a source, the text goes no further than the video, the voice is synthetic and the page says so, a source in English is flagged).
+- `sponsorship` (`#patrocinio`): Viglet sponsors the site and belongs to the author; its numbered rules (no say over topics or scripts, a notice at the top when a video touches a Viglet product or a direct competitor, the tie in every ficha, house ads labelled and keeping nothing about the reader). The Alexandre confirms these rules word for word before the page ships, as with an article.
+- `corrections` (`#corrigir`): the policy, plus the slot for the form, which its own task fills.
+- `author`: Alexandre Oliveira, with the bio from visibility's VS48 draft (the employer is not named), and links to alegauss.github.io and GitHub. The photo shows only once the Alexandre supplies one, never a placeholder.
+
+No house ad on this page. Done when tier 2 passes for it at 1280.
+
+### §JN23 JN23 — The correction form
+
+Decided on 2026-11-11: no e-mail address on the site; corrections arrive through a
+Cognito Forms form in Viglet's account, embedded the way viglet.org does it
+(`D:\Git\viglet\site\src\components\CognitoForm.tsx`: `seamless.js` with the account key
+and a `data-form` id).
+
+The form, created by the Alexandre (this task cannot start before it exists): "Vídeo" (a
+choice of the published videos), "O que está errado" (required), "Onde está o certo" (a
+link, optional), "Seu e-mail" (optional, only to answer). The artboard draws those four
+fields and the "Enviar correção" button; the embed is styled to match with Cognito's
+theme settings, and tier 2 is not run over it, since Cognito draws its own markup.
+
+The non-goal allows the form but no cookie before consent, so the script is not loaded
+with the page. `#corrigir` prerenders a facade in the artboard's frame, with a button
+"Abrir o formulário"; the click loads the embed in place, the reader's own act, as the
+video facade does for YouTube. With scripts off, the button is a link to the form's
+public page on cognitoforms.com.
+
+A video page's correction link carries the video's slug, which preselects it where
+Cognito's prefill allows.
+
+Done when `scripts/verify.mjs` finds no Cognito script in any prerendered HTML and the
+facade on `/como-fazemos/`, and a submission from the built site reaches the Alexandre's
+Cognito entries.
+
+### §JN24 JN24 — House ads from Japode Ads
+
+Decided on 2026-11-11: Japode Ads (ads.japode.com, the house network in
+`D:\Git\japode\ads`) shows the author's products in parts of the site, picked at random
+on each visit by the network's own weighted draw over `catalogue.json`. This site adds
+no logic of its own to the choice.
+
+Three slots, as the artboards draw them:
+
+- the home, a strip between "Todos os vídeos" and "O que cada página traz";
+- a video page, an in-content box after the article and before the terms;
+- a video page, a sidebar box under "Assistir no YouTube" (on a phone it folds away, and the in-content box stays).
+
+Each slot is the network's `div` (`data-japode-ads`, the matching `data-ad-format`, a
+`data-ad-slot` naming the page and place, `data-ad-memory="off"` so nothing is stored),
+loaded the way japode.github.io's `Layout.tsx` does, inside a frame this site draws: the
+label "Anúncio da casa · sorteado a cada visita" above it (11px, 700, 0.1em), and on the
+home a line under it saying the boxes show only the author's products and track nobody.
+The "Como fazemos" page has no slot.
+
+Tier 1 compares the frame and its label, never the banner, which changes on every load.
+With scripts off a slot collapses to nothing rather than to an empty frame.
+
+Done when the three slots are in the prerendered HTML with `data-ad-memory="off"`, and
+none sits inside the article's markup.
