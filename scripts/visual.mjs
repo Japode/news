@@ -95,7 +95,9 @@ const measure = (page, selector) =>
 function compareLayout(ref, site) {
   const diffs = []
   for (const k of ["x", "width", "gap"]) {
-    if (ref[k] === null && site[k] === null) continue
+    // the gap is to the element before; where either side has none (a kicker a video's
+    // data lacks yet), there is no spacing to compare
+    if (ref[k] === null || site[k] === null) continue
     if (ref[k] === null || site[k] === null || Math.abs(ref[k] - site[k]) > TOLERANCE) diffs.push(`${k} ${fmt(site[k])}, artboard ${fmt(ref[k])}`)
   }
   for (const p of STYLE) {

@@ -1,0 +1,410 @@
+/* A video's page (JN20), as design/video.html draws it at 1280. */
+
+.jn-video {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-24) var(--space-64);
+}
+.jn-video-crumbs {
+  margin-bottom: var(--space-28);
+  color: var(--text-muted);
+  font-size: var(--text-13);
+}
+.jn-video-crumbs a,
+.jn-video-crumbs a:hover {
+  color: var(--text-muted);
+}
+.jn-video-tie {
+  margin: 0 0 var(--space-24);
+  padding: var(--space-14) var(--space-16);
+  border: var(--line-hair) solid var(--ink);
+  font-size: var(--text-15);
+  line-height: 1.5;
+}
+/* the head ends 24px above the byline with or without a dek: the dek's margin and the
+   head's collapse into one, so a page whose article is a draft spaces as the artboard */
+.jn-video-head {
+  max-width: 860px;
+  margin-bottom: var(--space-24);
+}
+.jn-video-head .jn-kicker {
+  margin-bottom: var(--space-12);
+}
+.jn-video-head h1 {
+  margin: 0 0 var(--space-16);
+  font-size: var(--text-48);
+  line-height: 1.08;
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-display);
+}
+.jn-video-dek {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-20);
+  line-height: 1.5;
+}
+.jn-video-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-28);
+  align-items: center;
+  padding: var(--space-14) 0;
+  border-top: var(--line-hair) solid var(--rule);
+  border-bottom: var(--line-hair) solid var(--rule);
+  margin-bottom: var(--space-28);
+  color: var(--text-muted);
+  font-size: var(--text-14);
+}
+.jn-video-byline strong {
+  color: var(--ink);
+}
+.jn-video-byline a {
+  font-weight: var(--weight-semibold);
+}
+.jn-video-byline a.jn-video-byline-quiet,
+.jn-video-byline a.jn-video-byline-quiet:hover {
+  color: var(--text-muted);
+  font-weight: var(--weight-regular);
+}
+
+.jn-video-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-48);
+  align-items: flex-start;
+}
+.jn-video-main {
+  flex: 999 1 600px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.jn-video-aside {
+  flex: 1 1 300px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+/* --- the video, behind its facade (JN5): contained, never cropped */
+.jn-video-player .jn-facade {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  overflow: hidden;
+  background: var(--ink);
+}
+.jn-video-player .jn-facade img,
+.jn-video-player .jn-facade iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: contain;
+}
+.jn-video-player .jn-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 84px;
+  height: 84px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-circle);
+  background: var(--ink);
+}
+.jn-video-player .jn-play::after {
+  content: "";
+  position: absolute;
+  left: 33px;
+  top: 25px;
+  border-style: solid;
+  border-width: 17px 0 17px 28px;
+  border-color: transparent transparent transparent var(--green);
+}
+.jn-video-note {
+  margin-top: var(--space-8);
+  color: var(--text-muted);
+  font-size: var(--text-13);
+}
+.jn-video-note a,
+.jn-video-note a:hover {
+  color: var(--text-muted);
+}
+
+/* --- the sources, right under the video */
+.jn-sources {
+  margin-top: var(--space-28);
+  border: var(--line-hair) solid var(--ink);
+  padding: var(--space-20) var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+.jn-sources h2 {
+  font-size: var(--text-13);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+}
+.jn-sources p {
+  font-size: var(--text-16);
+  line-height: 1.55;
+}
+.jn-sources-n {
+  font-weight: var(--weight-bold);
+}
+.jn-sources a {
+  font-weight: var(--weight-semibold);
+}
+
+/* --- the article (JN6), at the artboard's reading measure */
+.jn-video .jn-article {
+  margin-top: var(--space-40);
+  max-width: var(--reading);
+  color: var(--text);
+  font-size: var(--text-18);
+  line-height: 1.7;
+}
+.jn-video .jn-article p {
+  margin: 0 0 var(--space-20);
+}
+.jn-video .jn-article h2 {
+  margin: var(--space-36) 0 var(--space-12);
+  font-size: var(--text-24);
+  line-height: 1.25;
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-heading);
+}
+.jn-video .jn-article sup a {
+  font-size: var(--text-12);
+  text-decoration: none;
+}
+
+/* --- the numbers the video states */
+.jn-facts {
+  margin: var(--space-32) 0;
+  max-width: var(--reading);
+}
+.jn-facts table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-15);
+  line-height: 1.4;
+}
+.jn-facts caption {
+  padding-bottom: var(--space-10);
+  color: var(--text-muted);
+  font-size: var(--text-13);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-kicker);
+  text-align: left;
+  text-transform: uppercase;
+}
+.jn-facts thead tr {
+  border-bottom: var(--line-rule) solid var(--ink);
+  text-align: left;
+}
+.jn-facts th {
+  padding: var(--space-8) var(--space-12);
+  font-weight: var(--weight-bold);
+}
+.jn-facts tbody tr {
+  border-bottom: var(--line-hair) solid var(--rule);
+}
+.jn-facts td {
+  padding: var(--space-10) var(--space-12);
+}
+.jn-facts th:first-child,
+.jn-facts td:first-child {
+  padding-left: 0;
+  font-weight: var(--weight-bold);
+}
+.jn-facts th:last-child,
+.jn-facts td:last-child {
+  padding-right: 0;
+  text-align: right;
+}
+
+/* --- the terms */
+.jn-terms {
+  margin-top: var(--space-40);
+  max-width: var(--reading);
+  padding-top: var(--space-20);
+  border-top: var(--line-rule) solid var(--ink);
+}
+.jn-terms h2 {
+  margin: 0 0 var(--space-16);
+  font-size: var(--text-22);
+  font-weight: var(--weight-extrabold);
+}
+.jn-terms dl {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: var(--space-12) var(--space-24);
+  font-size: var(--text-15);
+  line-height: 1.5;
+}
+.jn-terms dl > div {
+  display: contents;
+}
+.jn-terms dt {
+  font-weight: var(--weight-bold);
+}
+.jn-terms dd {
+  color: var(--text-secondary);
+}
+
+/* --- corrections, and how the video was made */
+.jn-video-notes {
+  margin-top: var(--space-40);
+  max-width: var(--reading);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-32);
+}
+.jn-video-notes > div {
+  flex: 1 1 280px;
+}
+.jn-video-notes h2 {
+  margin: 0 0 var(--space-8);
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+}
+.jn-video-notes p,
+.jn-video-notes ul {
+  color: var(--text-secondary);
+  font-size: var(--text-15);
+  line-height: 1.55;
+}
+.jn-video-notes ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+/* --- the credits */
+.jn-credits {
+  margin-top: var(--space-40);
+  padding-top: var(--space-20);
+  border-top: var(--line-hair) solid var(--rule);
+}
+.jn-credits h2 {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+}
+.jn-credits > p {
+  margin: 0 0 var(--space-14);
+  color: var(--text-muted);
+  font-size: var(--text-14);
+}
+.jn-credits-scroll {
+  overflow-x: auto;
+}
+.jn-credits table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: var(--text-13);
+  line-height: 1.4;
+}
+.jn-credits thead tr {
+  border-bottom: var(--line-hair) solid var(--ink);
+  text-align: left;
+}
+.jn-credits th {
+  padding: var(--space-6) var(--space-12) var(--space-6) 0;
+  font-weight: var(--weight-bold);
+}
+.jn-credits tbody tr {
+  border-bottom: var(--line-hair) solid var(--rule);
+}
+.jn-credits td {
+  padding: var(--space-6) var(--space-12) var(--space-6) 0;
+}
+.jn-credits td:last-child,
+.jn-credits th:last-child {
+  padding-right: 0;
+}
+.jn-credits td:last-child a,
+.jn-credits td:last-child a:hover {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+/* --- the aside: chapters, the Short, the ficha, YouTube */
+.jn-video-label {
+  margin: 0 0 var(--space-12);
+  color: var(--text-muted);
+  font-size: var(--text-13);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+}
+.jn-video .jn-chapters {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--line-hair) solid var(--rule);
+  font-size: var(--text-15);
+}
+.jn-video .jn-chapters li {
+  padding: 0;
+  border-bottom: var(--line-hair) solid var(--rule);
+}
+.jn-video .jn-chapters a,
+.jn-video .jn-chapters a:hover {
+  display: flex;
+  gap: var(--space-14);
+  min-height: var(--target);
+  align-items: center;
+  color: var(--ink);
+  text-decoration: none;
+}
+.jn-video .jn-time {
+  display: inline;
+  min-width: 0;
+  width: 40px;
+  color: var(--green-text);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--weight-bold);
+}
+.jn-video-aside .jn-short-title {
+  margin: 0 0 var(--space-12);
+  color: var(--text-muted);
+  font-size: var(--text-15);
+}
+.jn-video-aside .jn-facade-short {
+  position: relative;
+  display: block;
+  aspect-ratio: 9 / 16;
+  max-width: 300px;
+  overflow: hidden;
+  background: var(--ink);
+}
+.jn-video-aside .jn-facade-short img,
+.jn-video-aside .jn-facade-short iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: contain;
+}
+.jn-ficha {
+  background: var(--surface-soft);
+  padding: var(--space-20);
+}
+.jn-ficha dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-8) var(--space-16);
+  font-size: var(--text-14);
+  line-height: 1.45;
+}
+.jn-ficha dt {
+  color: var(--text-muted);
+}
+.jn-video-watch {
+  min-height: 48px;
+}

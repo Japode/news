@@ -99,7 +99,9 @@ for (const v of app.VIDEOS) {
     continue
   }
   const text = page(path)
-  check("JN5", text.includes(`<h1>${html(v.title)}</h1>`), `${path} lacks its h1`)
+  // the h1 may carry attributes (JN20's data-design); its text is the title
+  const h1 = text.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1]
+  check("JN5", h1 === html(v.title), `${path} lacks its h1`)
   check("JN5", text.includes(`data-facade="${v.youtube}"`) && text.includes(`href="https://youtu.be/${v.youtube}"`), `${path} lacks the video's facade`)
   // an iframe or a script fetched from YouTube; the JSON-LD's embedUrl (JN9) is text, not a load
   check("JN5", !/<iframe|<script[^>]*\ssrc="[^"]*youtube/.test(text), `${path} loads YouTube before a click`)

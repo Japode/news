@@ -69,32 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN20 JN20 — The video page as drawn
-
-`VideoPage.tsx` rebuilt to the "Página do vídeo" artboard. Main column: breadcrumb;
-kicker; title (48px, 800); dek; the byline bar (author, date, length and reading time,
-"N fonte(s) primária(s)" linking `#fontes`, and the correction state); the facade with
-the thumbnail contained, never cropped; `sources` box, ink-bordered, "De onde vêm os
-fatos", each source numbered with its date and language; the approved article, where a
-`[n]` the article writes becomes a superscript link to `#fontes`; the `facts` table,
-where the article places a `<!-- numeros -->` line, else after it; the terms as a
-definition list; "Correções" beside "Como este vídeo foi feito" (the approval, and the
-`production` credit); the credits as a table (title without emoji, channel, licence in
-the caption).
-
-Aside, 300px: the chapters, each linking the YouTube time; the ficha (author, date,
-sources, corrections, narration, images, sponsorship from `sponsorTie`); "Assistir no
-YouTube". Docker's Short, which the artboard does not draw, goes under the chapters with
-the same chip styles and is left out of tier 2.
-
-Corrections are editorial, so they live in this repo:
-`content/videos/<slug>/corrections.json`, a list of `{ date, wrong, right }`, empty
-meaning "Sem correções". A non-empty list prints in the box and turns the byline state
-into a link.
-
-Every JN5, JN6 and JN9 check keeps passing. Done when tier 1 passes for `sources` and
-tier 2 for the Scion page at 1280.
-
 ### §JN21 JN21 — The video page on a phone
 
 The "Página do vídeo — celular" artboard is the same page at 390px, rearranged rather
