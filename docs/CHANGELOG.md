@@ -10,6 +10,7 @@
 
 - ✅ **JN3** **A video's facts (YouTube id, date, chapters, terms, sources) live only in the private marketing repository** — scripts/import-video.mjs copies a video's facts and thumbnail from marketing into content/videos/<slug>/, idempotently, and the build refuses a video.json that misfits its type.
 - ✅ **JN5** **There is no page for a video, so nothing outside YouTube can be searched for, linked to or quoted** — Each imported video has a prerendered blog-post page: title, a click-to-load nocookie facade, chapter links to their second, terms, sources and every CC BY credit.
+- ✅ **JN6** **The narration is speech, with filler words and lines cut for the voice, so as an article it reads badly** — An approved article.md renders on its page, an h2 per chapter; its first sentence is the home summary and meta description; a draft stays off the site (design recorded in `src/data/articles.ts`).
 
 ## Block C — Found, measured and linked
 

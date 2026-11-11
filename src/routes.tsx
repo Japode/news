@@ -5,6 +5,7 @@ import { Home } from "./pages/Home.tsx"
 import { NotFound } from "./pages/NotFound.tsx"
 import { VideoPage } from "./pages/VideoPage.tsx"
 import { minutes } from "./data/format.ts"
+import { articleFor } from "./data/articles.ts"
 
 /* The route table: every page the site serves. prerender.mjs writes one page per row,
    and a video's page joins it as a row built from content/videos/ (JN5). */
@@ -30,7 +31,10 @@ export const ROUTES: Route[] = [
   ...VIDEOS.map<Route>((video) => ({
     path: `/${video.slug}/`,
     title: `${video.title} — Japode`,
-    description: `${video.title}: o vídeo de ${minutes(video.duration)} do canal Japode, com os capítulos, ${video.terms.length ? "os termos, " : ""}as fontes e os créditos das imagens.`,
+    // the approved article's opening sentence, once there is one (JN6)
+    description:
+      articleFor(video.slug)?.summary ??
+      `${video.title}: o vídeo de ${minutes(video.duration)} do canal Japode, com os capítulos, ${video.terms.length ? "os termos, " : ""}as fontes e os créditos das imagens.`,
     index: true,
     render: () => <VideoPage video={video} />,
   })),

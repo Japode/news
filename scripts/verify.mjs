@@ -109,6 +109,26 @@ for (const v of app.VIDEOS) {
   for (const s of v.sources) check("JN5", text.includes(`href="${html(s.url)}"`), `${path} lacks the source ${s.url}`)
 }
 
+// JN6 — an approved article is on its page with every chapter after the introduction as
+// an h2, in the video's order, and every paragraph that states a number links where the
+// number came from. A draft (no `approved:` date) is on no page.
+for (const v of app.VIDEOS) {
+  if (!existsSync(join(VIDEOS_DIR, v.slug, "article.md")) || !existsSync(join(DIST, v.slug, "index.html"))) continue
+  const text = page(`/${v.slug}/`)
+  const article = app.articleFor(v.slug)
+  if (!article) {
+    check("JN6", !text.includes('class="jn-article"'), `${v.slug}'s article is a draft and is on its page`)
+    continue
+  }
+  const titles = v.chapters.slice(1).map((c) => c.title)
+  check("JN6", article.headings.join(" | ") === titles.join(" | "), `${v.slug}'s article headings are "${article.headings.join(" | ")}", not the chapters "${titles.join(" | ")}"`)
+  for (const t of titles) check("JN6", text.includes(`<h2>${html(t)}</h2>`), `${v.slug}'s page lacks the h2 "${t}"`)
+  for (const p of article.html.match(/<p>[\s\S]*?<\/p>/g) ?? []) {
+    check("JN6", !/\d/.test(p.replace(/<a [^>]*>[\s\S]*?<\/a>/g, "")) || /<a href="https?:/.test(p), `${v.slug}: a paragraph states a number with no link to its source: ${p.replace(/<[^>]+>/g, "").slice(0, 80)}…`)
+  }
+  check("JN6", page("/").includes(html(article.summary)), `the home row for ${v.slug} lacks the article's summary`)
+}
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

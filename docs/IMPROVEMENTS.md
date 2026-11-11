@@ -20,24 +20,6 @@ and www addresses redirect to it.
 
 ## Block B — One page per video
 
-### §JN6 The article
-
-Each video has `content/videos/<slug>/article.md`. Claude writes it from `script.json`
-and the sources, and the Alexandre approves it before the task that adds the video
-ships. It tells the same story in paragraphs: the filler words go, each chapter is a
-section under its title, and every number and quote links to the source it came from.
-The first paragraph answers the search the video targets ("o que é Docker" for Docker,
-"Scion Anthropic" for Scion). That paragraph's first sentence is also the one-line
-summary under the post's title on the home (JN4 shipped its rows without one, since
-nothing imported carries a summary), and the page's meta description.
-
-The rule the videos keep holds here: nothing is made up, and no sentence goes beyond
-what the video and its cited sources say. The Markdown is rendered at build time; one
-small dependency is enough, with the design system's text styles.
-
-Done when: a page shows its article with each chapter title as an `h2` and every number
-linked to its source. `verify.mjs` checks the headings under JN6.
-
 ### §JN7 The Scion page
 
 Import `marketing/japode/scion`: YouTube `pffFIAU9uos`, published 2026-11-11, 5 min 15

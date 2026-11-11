@@ -47,8 +47,19 @@ lê; por isso são copiados para `content/videos/<slug>/`, nunca redigitados.
    marketing não muda nenhum arquivo.
 4. `npm run build`: um `video.json` que não cabe no tipo `Video` (`src/data/videos.ts`) para o
    build, com o campo que falhou.
-5. O artigo (`article.md`) é escrito a partir do vídeo e das fontes, e o Alexandre o aprova
-   antes de a página ir ao ar.
+5. O artigo (`content/videos/<slug>/article.md`) é escrito a partir do vídeo e das fontes: um
+   parágrafo de abertura que responde à busca do vídeo (sua primeira frase vira o resumo na
+   home e a descrição da página), depois uma seção `##` por capítulo, com o título do
+   capítulo, e todo número com link para a fonte. Ele abre com front matter, e só entra na
+   página depois que o Alexandre o aprova escrevendo a data:
+
+   ```
+   ---
+   approved: AAAA-MM-DD
+   ---
+   ```
+
+   Sem `approved:`, o artigo é um rascunho: fica no repositório e em nenhuma página.
 6. Commit, e o Alexandre faz o push: o workflow publica o site.
 
 O plano está em [docs/ROADMAP.md](docs/ROADMAP.md), e o desenho de cada tarefa em
