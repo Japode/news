@@ -170,6 +170,13 @@ for (const v of app.VIDEOS) {
   check("JN9", llms.includes(`(${SITE.origin}${path})`), `llms.txt lacks ${path}`)
 }
 
+// JN12 — every page's footer links japode.com, the English catalogue, which links back.
+for (const r of ROUTES) {
+  const text = page(r.path)
+  const footer = text.slice(text.lastIndexOf("<footer"))
+  check("JN12", footer.includes(`href="${SITE.catalogue}"`) && footer.includes("Os produtos da Japode"), `${r.path}'s footer does not link japode.com`)
+}
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

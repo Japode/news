@@ -82,14 +82,3 @@ takes an article better than a YouTube link, which reads as self-promotion.
 
 Done when: every published video's description has its page's link, and `actions.json`
 records each change with its date.
-
-### §JN12 japode.com and japode.com.br
-
-japode.com stays the English catalogue of the Japode products (decided on 2026-10-20 in
-visibility), and japode.com.br is the channel's home in Portuguese. Here, the footer
-links japode.com as "Os produtos da Japode". There, a task in Japode/japode.github.io's
-roadmap (prefix JP), filed with `roadkeep -C`, adds a link to the channel and to
-japode.com.br in its footer, in English. A video page links a product only when the
-video is about it.
-
-Done when: both footers link the other, and `verify.mjs` checks this side under JN12.
