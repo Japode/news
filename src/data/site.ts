@@ -10,7 +10,7 @@ export const SITE = {
   description:
     "Vídeos curtos, em português, sobre a história e os porquês das ferramentas que quem programa usa todo dia, contados a partir de fontes reais.",
   /** The channel, which the home asks the reader to subscribe to (JN4). */
-  youtube: "https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg",
+  youtube: "https://www.youtube.com/@japode",
   /** The English catalogue of the Japode products, which this site links and is linked from. */
   catalogue: "https://japode.com",
   github: "https://github.com/Japode",

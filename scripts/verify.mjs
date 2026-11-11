@@ -87,7 +87,7 @@ for (const v of app.VIDEOS) {
   check("JN4", row.includes(`href="${href}"`), `the home row for ${v.slug} does not link ${href}`)
   check("JN4", existsSync(join(DIST, v.slug, "thumbnail.jpg")), `${v.slug}'s thumbnail is not served`)
 }
-check("JN4", SITE.youtube === "https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg" && home.includes(`href="${SITE.youtube}"`), "the home does not link the channel's address to subscribe")
+check("JN4", SITE.youtube === "https://www.youtube.com/@japode" && home.includes(`href="${SITE.youtube}"`), "the home does not link the channel's address to subscribe")
 
 // JN5 — every imported video has its page: the title as h1, the facade (a link to the
 // video, and no YouTube iframe or script in the HTML, so nothing loads before a click),
