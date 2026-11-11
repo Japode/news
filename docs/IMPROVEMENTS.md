@@ -69,27 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN21 JN21 — The video page on a phone
-
-The "Página do vídeo — celular" artboard is the same page at 390px, rearranged rather
-than shrunk, and it is reached with media queries on the JN20 markup, never with a
-second template:
-
-- the header folds the nav behind a 44px menu button (JN16);
-- the title drops to 30px, the dek to 17px, and the byline bar becomes two lines;
-- the facade runs edge to edge, past the 16px gutters;
-- the sources box keeps its ink border, right under the video;
-- the chapters become a `<details>` "Capítulos (N)", closed, between the sources and the article;
-- the facts table becomes a list of rows, the value bold over what it measures, the source link on the right;
-- the ficha moves after the article, before the "Assistir no YouTube" button, which spans the width;
-- the sponsor band and the footer stack (JN16, JN17).
-
-Every control stays at least 44px tall. The `<details>` needs no JavaScript, so the page
-still reads with scripts off (JN1).
-
-Done when tier 1 passes for header, sources, sponsor and footer at 390, and tier 2 for
-the Scion page at 390.
-
 ### §JN22 JN22 — The "Como fazemos" page
 
 A new route, `/como-fazemos/`, drawn from the "Como fazemos" artboard, indexed and in

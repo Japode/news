@@ -70,10 +70,10 @@
       "width": 390,
       "regions": [
         { "name": "header", "ref": "body > div > header", "tier": "pixels", "task": "JN16", "enforced": true },
-        { "name": "title", "ref": "main h1", "tier": "layout", "task": "JN21", "enforced": false },
-        { "name": "sources", "ref": "#fontes", "tier": "layout", "task": "JN21", "enforced": false },
-        { "name": "chapters", "ref": "main details", "tier": "layout", "task": "JN21", "enforced": false },
-        { "name": "ficha", "ref": "section[aria-labelledby=ficha-m]", "tier": "layout", "task": "JN21", "enforced": false },
+        { "name": "title", "ref": "main h1", "tier": "layout", "task": "JN21", "enforced": true },
+        { "name": "sources", "ref": "#fontes", "tier": "layout", "task": "JN21", "enforced": true },
+        { "name": "chapters.fold", "ref": "main details", "tier": "layout", "task": "JN21", "enforced": true },
+        { "name": "ficha", "ref": "section[aria-labelledby=ficha-m]", "tier": "layout", "task": "JN21", "enforced": true },
         { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento-m]", "tier": "pixels", "task": "JN17", "enforced": true },
         { "name": "footer", "ref": "footer", "tier": "pixels", "task": "JN16", "enforced": true }
       ]

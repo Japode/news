@@ -78,7 +78,9 @@ const measure = (page, selector) =>
       const el = document.querySelector(selector)
       if (!el) return null
       const box = el.getBoundingClientRect()
-      const prev = el.previousElementSibling
+      // the nearest sibling before it that renders: a <script>, or a block a width hides, has no box
+      let prev = el.previousElementSibling
+      while (prev && prev.getClientRects().length === 0) prev = prev.previousElementSibling
       const cs = getComputedStyle(el)
       const style = Object.fromEntries(STYLE.map((p) => [p, cs[p]]))
       style.fontFamily = cs.fontFamily.split(",")[0].replace(/["']/g, "").trim().toLowerCase()

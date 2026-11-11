@@ -408,3 +408,160 @@
 .jn-video-watch {
   min-height: 48px;
 }
+
+/* --- a phone (JN21): the same markup rearranged to design/video-mobile.html */
+.jn-chapters-fold {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .jn-video {
+    padding: var(--space-20) var(--space-16) var(--space-40);
+  }
+  .jn-video-crumbs {
+    display: none;
+  }
+  .jn-video-head {
+    margin-bottom: var(--space-16);
+  }
+  .jn-video-head .jn-kicker {
+    margin-bottom: var(--space-10);
+    font-size: var(--text-12);
+  }
+  .jn-video-head h1 {
+    margin-bottom: var(--space-12);
+    font-size: var(--text-30);
+    line-height: 1.12;
+    letter-spacing: var(--tracking-title);
+  }
+  .jn-video-dek {
+    font-size: var(--text-17);
+  }
+  .jn-video-byline {
+    gap: var(--space-2) var(--space-12);
+    padding: var(--space-10) 0;
+    margin-bottom: var(--space-16);
+    font-size: var(--text-13);
+    line-height: 1.5;
+  }
+  .jn-video-columns {
+    display: block;
+  }
+  .jn-video-player {
+    margin: 0 calc(-1 * var(--space-16));
+  }
+  .jn-video-player .jn-play {
+    width: 64px;
+    height: 64px;
+  }
+  .jn-video-player .jn-play::after {
+    left: 25px;
+    top: 19px;
+    border-width: 13px 0 13px 21px;
+  }
+  .jn-video-note {
+    display: none;
+  }
+  .jn-sources {
+    margin-top: var(--space-20);
+    padding: var(--space-16);
+    gap: var(--space-8);
+  }
+  .jn-sources h2 {
+    font-size: var(--text-12);
+  }
+  .jn-sources p {
+    font-size: var(--text-15);
+    line-height: 1.5;
+  }
+
+  .jn-chapters-fold {
+    display: block;
+    margin-top: var(--space-20);
+    border-top: var(--line-hair) solid var(--rule);
+    border-bottom: var(--line-hair) solid var(--rule);
+  }
+  .jn-chapters-fold summary {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--text-15);
+    font-weight: var(--weight-bold);
+    cursor: pointer;
+    list-style: none;
+  }
+  .jn-chapters-fold summary::-webkit-details-marker {
+    display: none;
+  }
+  .jn-chapters-fold[open] summary svg {
+    transform: rotate(180deg);
+  }
+  .jn-chapters-fold .jn-chapters {
+    margin-bottom: var(--space-8);
+  }
+  .jn-video-chapters {
+    display: none;
+  }
+
+  .jn-video .jn-article {
+    margin-top: var(--space-24);
+    font-size: var(--text-17);
+  }
+  .jn-video .jn-article p {
+    margin-bottom: var(--space-18);
+  }
+  .jn-video .jn-article h2 {
+    margin: var(--space-28) 0 var(--space-10);
+    font-size: var(--text-21);
+  }
+
+  /* the numbers as rows: the value bold over what it measures, the source on the right */
+  .jn-facts table,
+  .jn-facts tbody {
+    display: block;
+  }
+  .jn-facts thead {
+    display: none;
+  }
+  .jn-facts tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: var(--space-10) 0;
+  }
+  .jn-facts td {
+    padding: 0;
+  }
+  .jn-facts td:nth-child(2) {
+    grid-row: 2;
+    color: var(--text-muted);
+    font-size: var(--text-14);
+  }
+  .jn-facts td:last-child {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+  }
+
+  .jn-terms dl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2) 0;
+  }
+  .jn-terms dd {
+    margin-bottom: var(--space-10);
+  }
+
+  .jn-video-aside {
+    margin-top: var(--space-24);
+    gap: var(--space-24);
+  }
+  .jn-ficha {
+    padding: var(--space-16);
+  }
+  .jn-ficha .jn-video-label {
+    margin-bottom: var(--space-10);
+    font-size: var(--text-12);
+  }
+  .jn-ficha dl {
+    gap: var(--space-6) var(--space-14);
+  }
+}

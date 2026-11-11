@@ -146,6 +146,27 @@ export function VideoPage({ video, description }: { video: Video; description: s
             )}
           </section>
 
+          {/* on a phone the chapters fold here, closed, between the sources and the article
+              (JN21); on a wide screen the aside shows them and this stays hidden */}
+          <details className="jn-chapters-fold" data-design="chapters.fold">
+            <summary>
+              {`Capítulos (${video.chapters.length})`}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+            </summary>
+            <ol className="jn-chapters">
+              {video.chapters.map((c) => (
+                <li key={c.start}>
+                  <a href={`${watch}?t=${c.start}`}>
+                    <span className="jn-time">{clock(c.start)}</span>
+                    {c.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </details>
+
           {article && <article className="jn-article" data-design="article" dangerouslySetInnerHTML={{ __html: articleHtml(article.html, factsHtml) }} />}
           {facts && !inline && <FactsTable facts={facts} />}
 
@@ -221,7 +242,7 @@ export function VideoPage({ video, description }: { video: Video; description: s
         </div>
 
         <aside className="jn-video-aside" aria-label="Neste vídeo">
-          <section aria-labelledby="capitulos-t" data-design="chapters">
+          <section className="jn-video-chapters" aria-labelledby="capitulos-t" data-design="chapters">
             <h2 id="capitulos-t" className="jn-video-label">
               Capítulos
             </h2>

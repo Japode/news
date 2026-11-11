@@ -8,7 +8,6 @@
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-- 📋 **JN21** (deps: JN20 ✅) **At 390px a video page does not follow its mobile artboard: the aside is not folded into the column** — The link in a YouTube description is often opened on a phone, and only this page has a phone artboard to be held to. → §JN21
 - 📋 **JN22** (deps: JN17 ✅) **No page explains how a video is made, how the sponsorship works, how corrections are handled or who makes the videos** — Readers who doubt a page can check the method, the sponsor and the author for themselves, and the header and footer already link this page. → §JN22
 - 📋 **JN23** (deps: JN22, the corrections form created by the Alexandre in Viglet's Cognito Forms account) **A reader who spots an error has no way to report it without hunting for an e-mail address** — A correction policy needs a way in, and the Alexandre chose a Cognito form over an address. → §JN23
 - 📋 **JN24** (deps: JN19 ✅, JN20 ✅) **The site never shows the author's other products, which every other Japode site cross-promotes** — The Alexandre chose Japode Ads, at random per visit, in labelled boxes apart from the article. → §JN24
