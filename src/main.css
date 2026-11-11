@@ -121,6 +121,14 @@
     border: 0;
     object-fit: cover;
   }
+  .jn-facade-short {
+    aspect-ratio: 9 / 16;
+    max-width: 300px;
+    margin-top: 12px;
+  }
+  .jn-short-title {
+    color: var(--vg-muted-foreground);
+  }
   .jn-play {
     position: absolute;
     left: 50%;

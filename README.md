@@ -43,8 +43,10 @@ lê; por isso são copiados para `content/videos/<slug>/`, nunca redigitados.
 
    Escreve `video.json` (capítulos com os tempos, a narração sem as marcas da voz, os termos
    com a definição, as fontes e os créditos das imagens) e `thumbnail.jpg`. O `--title` só é
-   preciso quando o título no YouTube difere do de `shots.json`. Rodar de novo sem mudança no
-   marketing não muda nenhum arquivo.
+   preciso quando o título no YouTube difere do de `shots.json`. Se o vídeo também virou um
+   Short, `--short <id> --short-title "<título>"` o põe na mesma página, com um quadro de
+   `out/<vídeo>-short-pt-BR.mp4` (tirado com ffmpeg) como `short.jpg`. Rodar de novo sem
+   mudança no marketing não muda nenhum arquivo.
 4. `npm run build`: um `video.json` que não cabe no tipo `Video` (`src/data/videos.ts`) para o
    build, com o campo que falhou.
 5. O artigo (`content/videos/<slug>/article.md`) é escrito a partir do vídeo e das fontes: um

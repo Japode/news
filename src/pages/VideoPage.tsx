@@ -42,6 +42,14 @@ export function VideoPage({ video }: { video: Video }) {
         </ol>
       </section>
 
+      {video.short && (
+        <section aria-labelledby="short">
+          <h2 id="short">O Short</h2>
+          <p className="jn-short-title">{video.short.title}</p>
+          <Island name="video-facade" props={{ youtube: video.short.youtube, title: video.short.title, thumb: `/${video.slug}/short.jpg`, short: "yes" }} />
+        </section>
+      )}
+
       {video.terms.length > 0 && (
         <section className="jn-box" aria-labelledby="termos">
           <h2 id="termos">Termos</h2>

@@ -50,11 +50,13 @@ export interface Video {
   terms: Term[]
   sources: Source[]
   credits: Credit[]
+  /** The Short cut from the same video, shown on this page and never on one of its own. */
+  short?: { youtube: string; title: string }
 }
 
 type Shape = "string" | "number" | { [field: string]: Shape } | [Shape]
 
-const CHECK: { [K in keyof Video]: Shape } = {
+const CHECK: { [K in Exclude<keyof Video, "short">]: Shape } = {
   slug: "string",
   title: "string",
   youtube: "string",
@@ -89,6 +91,7 @@ function fits(value: unknown, shape: Shape, at: string): string | null {
 export function toVideo(file: string, data: unknown): Video {
   const why =
     fits(data, CHECK, "") ??
+    ((data as Video).short === undefined ? null : fits((data as Video).short, { youtube: "string", title: "string" }, "short")) ??
     (/^\d{4}-\d{2}-\d{2}$/.test((data as Video).published) ? null : "published is not YYYY-MM-DD") ??
     (file.split("/").at(-2) === (data as Video).slug ? null : `slug is not its folder's name`)
   if (why) throw new Error(`${file}: ${why}; run scripts/import-video.mjs again rather than editing it`)

@@ -1,0 +1,304 @@
+{
+  "$comment": "Imported by scripts/import-video.mjs from marketing/japode/docker; never edited by hand.",
+  "slug": "o-que-e-docker",
+  "title": "Docker: a caixa de navio que mudou o software",
+  "youtube": "gZEP6b_Fs00",
+  "published": "2026-11-10",
+  "duration": 272,
+  "chapters": [
+    {
+      "start": 0,
+      "title": "Introdução"
+    },
+    {
+      "start": 17,
+      "title": "A caixa que mudou o mundo"
+    },
+    {
+      "start": 63,
+      "title": "Na minha máquina funciona"
+    },
+    {
+      "start": 95,
+      "title": "As peças já existiam"
+    },
+    {
+      "start": 140,
+      "title": "Cinco minutos em 2013"
+    },
+    {
+      "start": 180,
+      "title": "A receita, a caixa e o contêiner"
+    },
+    {
+      "start": 218,
+      "title": "De uma caixa a milhões"
+    }
+  ],
+  "narration": [
+    {
+      "chapter": 0,
+      "text": "Sabe aquela frase, \"mas na minha máquina funciona\"? Quem trabalha com software já ouviu, ou já disse. Hoje eu quero te contar, com calma, como uma simples caixa de metal, dessas de navio, ajudou a resolver esse problema. É uma história bonita. Vem comigo."
+    },
+    {
+      "chapter": 1,
+      "text": "Até os anos cinquenta, carregar um navio era um trabalho lento. Saco por saco, caixote por caixote, tudo feito à mão. Um navio podia ficar uma semana parado no porto. Aí, em mil novecentos e cinquenta e seis, um empresário de caminhões chamado Malcom McLean teve uma ideia simples: e se tudo fosse numa caixa de metal, sempre do mesmo tamanho?"
+    },
+    {
+      "chapter": 1,
+      "text": "O navio Ideal X saiu de Nova Jersey com cinquenta e oito dessas caixas, e o custo de carregar caiu muito. E repara no mais bonito: o guindaste não precisa saber o que tem dentro. Pode ser banana, pode ser televisão. A caixa é sempre igual, então o mundo inteiro aprendeu a mover a mesma caixa."
+    },
+    {
+      "chapter": 2,
+      "text": "Agora pensa no software. Durante décadas, colocar um programa no ar era como o porto antes do contêiner. O programador escrevia o código no computador dele, com uma versão de cada coisa, e o servidor tinha outra versão, outra biblioteca, outra configuração."
+    },
+    {
+      "chapter": 2,
+      "text": "E aí começava a conversa difícil. O desenvolvedor dizendo que funcionava, a equipe de operação dizendo que não. E, no fundo, os dois tinham razão. O que faltava era uma caixa padrão para o software."
+    },
+    {
+      "chapter": 3,
+      "text": "O curioso é que as peças já existiam havia muito tempo. Em mil novecentos e setenta e nove, o Unix ganhou o chroot, que prendia um programa numa pasta só dele. Em dois mil, o FreeBSD criou as jails. E por volta de dois mil e oito, o Linux reuniu os namespaces, que isolam o que cada processo enxerga, e os cgroups, criados por engenheiros do Google para limitar a memória e o processador de cada um."
+    },
+    {
+      "chapter": 3,
+      "text": "Daí nasceu o LXC, os contêineres do Linux. Funcionava, mas era coisa de especialista: comandos longos, configuração trabalhosa, e nada que você pudesse empacotar e entregar para outra pessoa."
+    },
+    {
+      "chapter": 4,
+      "text": "É aqui que entra a dotCloud, uma pequena empresa de hospedagem que passava por um momento difícil. Para rodar os clientes, eles tinham criado uma ferramenta interna que tornava os contêineres fáceis. E em março de dois mil e treze, o fundador, Solomon Hykes, subiu ao palco da PyCon para uma palestra relâmpago de cinco minutos."
+    },
+    {
+      "chapter": 4,
+      "text": "Cinco minutos. E foram suficientes. Eles abriram o código do Docker, a comunidade abraçou a ideia, e poucos meses depois a empresa mudou de nome e passou a se chamar Docker. Às vezes, uma boa ideia só precisa ser mostrada do jeito certo."
+    },
+    {
+      "chapter": 5,
+      "text": "E o que o Docker trouxe de novo? Três ideias simples. O Dockerfile é a receita: um pequeno arquivo de texto dizendo o que vai dentro. A imagem é a caixa já fechada, com o programa e tudo de que ele precisa. E o contêiner é essa caixa rodando, isolada, em qualquer máquina."
+    },
+    {
+      "chapter": 5,
+      "text": "Como o contêiner compartilha o núcleo do sistema, ele é bem mais leve que uma máquina virtual inteira, e sobe em segundos. Com o Docker Hub, você baixa a imagem de um banco de dados ou de um site com um único comando. Como o guindaste: não precisa saber o que tem dentro."
+    },
+    {
+      "chapter": 6,
+      "text": "Só que, quando são milhares de caixas, alguém precisa organizar o porto. Em dois mil e catorze, o Google lançou o Kubernetes, que distribui e cuida dos contêineres em muitas máquinas. E em dois mil e quinze, várias empresas criaram juntas a Open Container Initiative, um padrão aberto para o formato da caixa."
+    },
+    {
+      "chapter": 6,
+      "text": "Foi o mesmo caminho dos navios: primeiro a caixa, depois o padrão. Hoje, da loja virtual ao aplicativo do banco, muito do que você usa no dia a dia está rodando dentro de um contêiner."
+    },
+    {
+      "chapter": 6,
+      "text": "Então, da próxima vez que você vir um navio cheio de caixas coloridas, lembra que foi dali que veio a ideia que mudou o jeito de colocar software no ar. Se essa história te ajudou, deixa o seu like e se inscreve no canal. Até a próxima."
+    }
+  ],
+  "terms": [],
+  "sources": [],
+  "credits": [
+    {
+      "id": "OC84EWSJ-Fc",
+      "title": "Male Hands Typing On Notebook - Free HD Stock Footage - No Copyright - Office Work Working",
+      "channel": "Free Stock Footage 4K",
+      "channelUrl": "https://www.youtube.com/@freestockfootage4kUHD",
+      "url": "https://www.youtube.com/watch?v=OC84EWSJ-Fc",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "RVFne4M9bwQ",
+      "title": "Woman in Office | Copyright Free Video Footage",
+      "channel": "Copyright Free Video Footage",
+      "channelUrl": "https://www.youtube.com/@copyrightfreevideofootage3249",
+      "url": "https://www.youtube.com/watch?v=RVFne4M9bwQ",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "qBpY4MJt6lc",
+      "title": "Coding Free Stock Video Footage | Code Stock Footage | Coding No Copyright Video",
+      "channel": "PexBell",
+      "channelUrl": "https://www.youtube.com/@PexBell",
+      "url": "https://www.youtube.com/watch?v=qBpY4MJt6lc",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "gySOIsao8jA",
+      "title": "Container Port Time-lapse | Container Terminal | Free Footage - Videos for content creators",
+      "channel": "Free Footage - Videos for content creators",
+      "channelUrl": "https://www.youtube.com/@freefootage-videosforcontentcr",
+      "url": "https://www.youtube.com/watch?v=gySOIsao8jA",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "z41pdRS3LPs",
+      "title": "Safe Cargo Handling (1957)",
+      "channel": "Archives New Zealand",
+      "channelUrl": "https://www.youtube.com/@archivesnz",
+      "url": "https://www.youtube.com/watch?v=z41pdRS3LPs",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "PRKC8i4doMo",
+      "title": "Industry on Parade: Outgoing Cargo, Workhorses of the Harbor, Refresher Course",
+      "channel": "Mai Armstrong",
+      "channelUrl": "https://www.youtube.com/@maiarmstrong",
+      "url": "https://www.youtube.com/watch?v=PRKC8i4doMo",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "sNd4nTmhjmg",
+      "title": "Onboard a Large Maersk Container Ship in The Port of Houston During Cargo Operations",
+      "channel": "What The Ship",
+      "channelUrl": "https://www.youtube.com/@WhatTheShip",
+      "url": "https://www.youtube.com/watch?v=sNd4nTmhjmg",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "Y_GaQ9xFUZo",
+      "title": "Container Cargo Ship | Free Footage - Videos for content creators",
+      "channel": "Free Footage - Videos for content creators",
+      "channelUrl": "https://www.youtube.com/@freefootage-videosforcontentcr",
+      "url": "https://www.youtube.com/watch?v=Y_GaQ9xFUZo",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "Bi258krr3kQ",
+      "title": "Container Port | Container Terminal | Free Footage - Videos for content creators",
+      "channel": "Free Footage - Videos for content creators",
+      "channelUrl": "https://www.youtube.com/@freefootage-videosforcontentcr",
+      "url": "https://www.youtube.com/watch?v=Bi258krr3kQ",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "hliuBf23yTQ",
+      "title": "Commercial Port dock with Containers ships unloaded by cranes #stockfootage",
+      "channel": "Free Stock Footage",
+      "channelUrl": "https://www.youtube.com/@FreeStockFootage2.0",
+      "url": "https://www.youtube.com/watch?v=hliuBf23yTQ",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "HTb-sJkjUGI",
+      "title": "Life of Programmer| Programming Language| Copyright - Free HD Videos",
+      "channel": "Nhod Airatnap",
+      "channelUrl": "https://www.youtube.com/@donpantaria18",
+      "url": "https://www.youtube.com/watch?v=HTb-sJkjUGI",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "fGsQnuc65Qg",
+      "title": "Data processing and storage center  Big Server room",
+      "channel": "Free Stock Footage",
+      "channelUrl": "https://www.youtube.com/@FreeStockFootage2.0",
+      "url": "https://www.youtube.com/watch?v=fGsQnuc65Qg",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "c6m_PzNZtIM",
+      "title": "Explaining something by movement of hand | Discussion | Office | non copyrighted footage | NCF",
+      "channel": "NCF",
+      "channelUrl": "https://www.youtube.com/@ncf2801",
+      "url": "https://www.youtube.com/watch?v=c6m_PzNZtIM",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "3N3n9FzebAA",
+      "title": "dotScale 2013 - Solomon Hykes - Why we built Docker",
+      "channel": "dotconferences",
+      "channelUrl": "https://www.youtube.com/@dotconferences",
+      "url": "https://www.youtube.com/watch?v=3N3n9FzebAA",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "phG_o--YyD8",
+      "title": "Overview of the MicroPDP-11 w/ VT100 Terminal (booting BSD 2.11)",
+      "channel": "derelictronics",
+      "channelUrl": "https://www.youtube.com/@derelictronics",
+      "url": "https://www.youtube.com/watch?v=phG_o--YyD8",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "PeCBpI1hT2Q",
+      "title": "Learn The Linux Terminal In 30 Minutes",
+      "channel": "DistroTube",
+      "channelUrl": "https://www.youtube.com/@DistroTube",
+      "url": "https://www.youtube.com/watch?v=PeCBpI1hT2Q",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "gsN_CJJDy_o",
+      "title": "Inside a 36 Megawatt Data Center: The Power, Cooling and Fiber",
+      "channel": "Lawrence Systems",
+      "channelUrl": "https://www.youtube.com/@LAWRENCESYSTEMS",
+      "url": "https://www.youtube.com/watch?v=gsN_CJJDy_o",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "NABLmvEHzeY",
+      "title": "AI Servers Under Liquid | Immersion-Cooled Data Center | No Copyright | CC BY 4.0",
+      "channel": "Hooshiar Zolfagharnasab",
+      "channelUrl": "https://www.youtube.com/@hozo19",
+      "url": "https://www.youtube.com/watch?v=NABLmvEHzeY",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "RB4ZEZ3I3tA",
+      "title": "Virtual Machines vs LXC vs Docker: What’s the Real Difference?",
+      "channel": "Lawrence Systems",
+      "channelUrl": "https://www.youtube.com/@LAWRENCESYSTEMS",
+      "url": "https://www.youtube.com/watch?v=RB4ZEZ3I3tA",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "4XWJy093Sns",
+      "title": "Docker: the future of Linux (LXC) Containers",
+      "channel": "Andy Rothfusz",
+      "channelUrl": "https://www.youtube.com/@AndyRothfusz",
+      "url": "https://www.youtube.com/watch?v=4XWJy093Sns",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "Lmb63WGobaw",
+      "title": "DockerCon 2016 Highlight Reel",
+      "channel": "Docker",
+      "channelUrl": "https://www.youtube.com/@DockerInc",
+      "url": "https://www.youtube.com/watch?v=Lmb63WGobaw",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "oGPjzCBZGzg",
+      "title": "Docker vs. Kubernetes: The ONLY Video You Need to Finally Understand Containers!",
+      "channel": "The Coding Gopher",
+      "channelUrl": "https://www.youtube.com/@TheCodingGopher",
+      "url": "https://www.youtube.com/watch?v=oGPjzCBZGzg",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "Bo-5DkXzBLc",
+      "title": "Virtual Machines vs Containers - Simply Explained",
+      "channel": "TechPrep",
+      "channelUrl": "https://www.youtube.com/@TechPrepYT",
+      "url": "https://www.youtube.com/watch?v=Bo-5DkXzBLc",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "rt7ppwjtwpo",
+      "title": "Kubernetes Explained in 5 Minutes",
+      "channel": "The Coding Gopher",
+      "channelUrl": "https://www.youtube.com/@TheCodingGopher",
+      "url": "https://www.youtube.com/watch?v=rt7ppwjtwpo",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "TR3aXzVJTO0",
+      "title": "Evergreen Container Ship Dashcam | Around The World In 70 Days (Timelapse, 4k, 60fps)",
+      "channel": "Jonathan Fielding",
+      "channelUrl": "https://www.youtube.com/@jonathanfielding4084",
+      "url": "https://www.youtube.com/watch?v=TR3aXzVJTO0",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    }
+  ],
+  "short": {
+    "youtube": "uMa5PYAAtcg",
+    "title": "O Docker nasceu numa palestra de 5 minutos"
+  }
+}

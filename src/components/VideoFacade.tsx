@@ -5,11 +5,14 @@ import { useState } from "react"
    page sets no YouTube cookie and stays light. Without JavaScript the facade is a plain
    link to the video on YouTube. Hydrated as an island, so its props are strings. */
 
-export function VideoFacade({ youtube, title, thumb }: { youtube: string; title: string; thumb: string }) {
+export function VideoFacade({ youtube, title, thumb, short }: { youtube: string; title: string; thumb: string; short?: string }) {
   const [playing, setPlaying] = useState(false)
+  // a Short (JN8) is vertical, and its address on YouTube is /shorts/<id>
+  const vertical = short === "yes"
+  const className = vertical ? "jn-facade jn-facade-short" : "jn-facade"
   if (playing)
     return (
-      <div className="jn-facade">
+      <div className={className}>
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${youtube}?autoplay=1`}
           title={title}
@@ -20,15 +23,15 @@ export function VideoFacade({ youtube, title, thumb }: { youtube: string; title:
     )
   return (
     <a
-      className="jn-facade"
-      href={`https://youtu.be/${youtube}`}
+      className={className}
+      href={vertical ? `https://www.youtube.com/shorts/${youtube}` : `https://youtu.be/${youtube}`}
       data-facade={youtube}
       onClick={(e) => {
         e.preventDefault()
         setPlaying(true)
       }}
     >
-      <img src={thumb} alt="" width={1280} height={720} />
+      <img src={thumb} alt="" width={vertical ? 405 : 1280} height={720} />
       <span className="jn-play" aria-hidden="true" />
       <span className="jn-skip-text">Assistir: {title}</span>
     </a>

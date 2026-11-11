@@ -129,6 +129,15 @@ for (const v of app.VIDEOS) {
   check("JN6", page("/").includes(html(article.summary)), `the home row for ${v.slug} lacks the article's summary`)
 }
 
+// JN8 — a video cut into a Short as well shows it on the same page, as a facade that
+// links the Short on YouTube, with its frame served; the Short has no page of its own.
+for (const v of app.VIDEOS.filter((x) => x.short)) {
+  const text = page(`/${v.slug}/`)
+  check("JN8", text.includes(`data-facade="${v.short.youtube}"`) && text.includes(`href="https://www.youtube.com/shorts/${v.short.youtube}"`), `/${v.slug}/ lacks the Short's facade`)
+  check("JN8", existsSync(join(DIST, v.slug, "short.jpg")), `${v.slug}'s Short frame is not served`)
+  check("JN8", !ROUTES.some((r) => r.path.includes(v.short.youtube)), `the Short ${v.short.youtube} has a page of its own`)
+}
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

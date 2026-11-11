@@ -3,6 +3,7 @@
 // read marketing, so what it builds from is the copy this writes, never a retyped one.
 //
 //   node scripts/import-video.mjs <marketing video folder> <slug> --youtube <id> --published <YYYY-MM-DD> [--title "<YouTube title>"]
+//                                 [--short <id> --short-title "<the Short's title>"]
 //
 // It reads what the video's own build already wrote, and nothing it would have to guess:
 //   narration/script.json            the lines in their written words (the voice's tags such as
@@ -17,6 +18,10 @@
 // What the build cannot know is a flag: the YouTube id, the date it was published, and
 // the title when YouTube's differs from shots.json's.
 //
+// A video cut into a Short as well (JN8) names it with --short and --short-title: the
+// Short goes on the same page, not on one of its own. Its facade image is a frame of
+// out/<name>-short-pt-BR.mp4, taken with ffmpeg as short.jpg.
+//
 // A second run with nothing changed changes no file: video.json is written only when its
 // text differs, and the thumbnail only when its bytes do.
 
@@ -24,6 +29,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { basename, dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { parseArgs } from "node:util"
+import { spawnSync } from "node:child_process"
 
 const REPO = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const fail = (why) => {
@@ -33,13 +39,21 @@ const fail = (why) => {
 
 const { values: flags, positionals } = parseArgs({
   allowPositionals: true,
-  options: { youtube: { type: "string" }, published: { type: "string" }, title: { type: "string" } },
+  options: {
+    youtube: { type: "string" },
+    published: { type: "string" },
+    title: { type: "string" },
+    short: { type: "string" },
+    "short-title": { type: "string" },
+  },
 })
 const [folder, slug] = positionals
 if (!folder || !slug) fail("usage: import-video.mjs <marketing video folder> <slug> --youtube <id> --published <YYYY-MM-DD> [--title <title>]")
 if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) fail(`the slug "${slug}" is not lowercase words joined by hyphens`)
 if (!flags.youtube || !/^[\w-]{11}$/.test(flags.youtube)) fail("--youtube <id> is the 11-character id from youtu.be/<id>")
 if (!flags.published || !/^\d{4}-\d{2}-\d{2}$/.test(flags.published)) fail("--published <YYYY-MM-DD> is the day the video went public")
+if (Boolean(flags.short) !== Boolean(flags["short-title"])) fail("--short <id> and --short-title <title> go together")
+if (flags.short && !/^[\w-]{11}$/.test(flags.short)) fail("--short <id> is the 11-character id from youtube.com/shorts/<id>")
 
 const SRC = resolve(folder)
 const name = basename(SRC)
@@ -122,6 +136,7 @@ const video = {
   terms,
   sources,
   credits,
+  ...(flags.short ? { short: { youtube: flags.short, title: flags["short-title"] } } : {}),
 }
 
 const OUT = join(REPO, "content", "videos", slug)
@@ -135,8 +150,15 @@ const put = (file, data) => {
 }
 put("video.json", JSON.stringify(video, null, 2) + "\n")
 put("thumbnail.jpg", readFileSync(need("out/thumbnail.pt-BR.jpg")))
+if (flags.short) {
+  // one frame of the Short, a second in, scaled to 720 px tall, written to stdout so `put`
+  // compares it before anything on disk changes
+  const frame = spawnSync("ffmpeg", ["-v", "error", "-ss", "1", "-i", need(`out/${name}-short-pt-BR.mp4`), "-frames:v", "1", "-vf", "scale=-2:720", "-q:v", "3", "-f", "mjpeg", "-"], { maxBuffer: 1 << 26 })
+  if (frame.error || frame.status !== 0 || !frame.stdout.length) fail(`ffmpeg could not take a frame of the Short: ${frame.error?.message ?? frame.stderr}`)
+  put("short.jpg", frame.stdout)
+}
 
-const others = readdirSync(OUT).filter((f) => !["video.json", "thumbnail.jpg", "article.md"].includes(f))
+const others = readdirSync(OUT).filter((f) => !["video.json", "thumbnail.jpg", "short.jpg", "article.md"].includes(f))
 if (others.length) console.warn(`import-video: content/videos/${slug}/ also holds ${others.join(", ")}, which no import writes`)
 console.log(
   `import-video: ${slug} — ${timed.length} chapters, ${terms.length} terms, ${sources.length} sources, ${credits.length} credits; ` +

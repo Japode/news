@@ -12,6 +12,7 @@
 - ✅ **JN5** **There is no page for a video, so nothing outside YouTube can be searched for, linked to or quoted** — Each imported video has a prerendered blog-post page: title, a click-to-load nocookie facade, chapter links to their second, terms, sources and every CC BY credit.
 - ✅ **JN6** **The narration is speech, with filler words and lines cut for the voice, so as an article it reads badly** — An approved article.md renders on its page, an h2 per chapter; its first sentence is the home summary and meta description; a draft stays off the site (design recorded in `src/data/articles.ts`).
 - ✅ **JN7 (page and draft article)** **The Scion video has no page, though its subject is new and few texts in Portuguese explain it** — The Scion page builds with its 12 terms and 33 credits, and its article is drafted from the narration with every number linked to Anthropic's post.
+- ✅ **JN8 (page, Short and draft article)** **The Docker video has no page, though "o que é Docker" is a search that does not go away** — The Docker page builds with its chapters, 25 credits and the Short as a vertical facade, and its article is drafted from the narration.
 
 ## Block C — Found, measured and linked
 
