@@ -2,28 +2,6 @@
 
 ## Block A — The site at japode.com.br
 
-### §JN1 The site skeleton
-
-Japode/japode.github.io already solved this, so this site copies it: Vite and React 19,
-prerendered by an SSR entry and `scripts/prerender.mjs`, `@viglet/viglet-design-system`
-with the green tone (`src/tone.css` taken as it is), Tailwind 4, `tsc --noEmit`, and
-`scripts/verify.mjs`, which checks `dist/` against every shipped task and names the task
-a failure belongs to. Two Japode sites that build alike are one thing to maintain.
-
-What differs is the language and the type. The page is `lang="pt-BR"`, `SITE.origin` is
-`https://japode.com.br` from day one, and the theme key is `japode-news-theme`. Titles
-use Plus Jakarta Sans ExtraBold and highlighted terms SemiBold, the type the videos draw
-their keywords in (`marketing/japode/brand`), so a viewer who opens the site sees the
-video's green and its type. The mark is copied from visibility's
-`marca/logo/japode.svg`, the source of the three parent brands, and never redrawn; the
-favicon and the manifest come from it.
-
-Done when: `npm run build` passes, every route has a non-empty `#root`, every page is
-canonical on `https://japode.com.br` with `<html lang="pt-BR">`, and the mark is the
-favicon. `verify.mjs` holds each of these under JN1.
-
-On ship: --recorded-in README.md
-
 ### §JN2 Serving japode.com.br
 
 Copy `.github/workflows/deploy.yml` from japode.github.io: install, `npm run build`

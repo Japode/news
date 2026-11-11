@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "@viglet/viglet-design-system/preset";
+@import "@viglet/viglet-design-system/fonts";
+@import "@viglet/viglet-design-system/site.css";
+@import "./tone.css";
+
+/* The site's own pieces, on the design system's tokens only: no colour and no radius
+   is declared here (tone.css holds the ground). The type is the videos' type
+   (marketing/japode/brand): titles in Plus Jakarta Sans ExtraBold, and a highlighted
+   term in SemiBold, in the brand green. */
+
+@layer components {
+  .jn-term {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    color: var(--vg-brand);
+  }
+
+  .jn-skip {
+    position: absolute;
+    left: -9999px;
+  }
+  .jn-skip:focus {
+    left: 16px;
+    top: 12px;
+    z-index: 100;
+    padding: 8px 14px;
+    border-radius: var(--vg-radius-control);
+    background: var(--vg-popover);
+  }
+}
+
+/* Outside the layer, to win over site.css: the hero title in ExtraBold (site.css draws
+   it Black), and the mark is a circle, so its frame is too. */
+.vg-site-hero h1 {
+  font-weight: 800;
+}
+.vg-site-hero-icon {
+  border-radius: 50%;
+}

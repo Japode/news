@@ -1,0 +1,138 @@
+/* ---------------------------------------------------------------
+   The green tone: the one place the site declares colours. The design
+   system ships `cool` and `warm`, and neither matches the green mark, so
+   this restates the `warm` tone's token set, block for block, on a green
+   ground with the mark's green as the brand (the same move alegauss makes
+   with its navy). Selected by data-tone="green" on <html>. When the
+   design system gains a green tone, this file goes and the attribute
+   changes.
+
+   Copied from japode.github.io with one line left out: japode.com sets
+   --font-brand to the sans, while this site keeps the design system's
+   Plus Jakarta Sans, the type the videos draw their titles in.
+   --------------------------------------------------------------- */
+
+[data-tone="green"] {
+  --vg-background: #f5faf7;
+  --vg-foreground: #0b1a12;
+  --vg-card: #ffffff;
+  --vg-card-foreground: #0b1a12;
+  --vg-popover: #ffffff;
+  --vg-popover-foreground: #0b1a12;
+  --vg-primary-base: #0b1a12;
+  --vg-primary-base-dark: #e4f3ea;
+  --vg-primary-foreground-base: #f5faf7;
+  --vg-primary-foreground-base-dark: #0b1a12;
+  --vg-primary: var(--vg-primary-base);
+  --vg-primary-foreground: var(--vg-primary-foreground-base);
+  --vg-secondary: #e8f3ec;
+  --vg-secondary-foreground: #0b1a12;
+  --vg-muted: #e8f3ec;
+  --vg-muted-foreground: #44584c;
+  --vg-accent: #e8f3ec;
+  --vg-accent-foreground: #0b1a12;
+  --vg-border: #d2e4d8;
+  --vg-input: #d2e4d8;
+  --vg-ring: #8fae9a;
+  --vg-sidebar: #eef6f1;
+  --vg-sidebar-foreground: #0b1a12;
+  --vg-sidebar-primary: #0b1a12;
+  --vg-sidebar-primary-foreground: #f5faf7;
+  --vg-sidebar-accent: #e0eee5;
+  --vg-sidebar-accent-foreground: #0b1a12;
+  --vg-sidebar-border: #d2e4d8;
+  --vg-sidebar-ring: #8fae9a;
+
+  --vg-brand: #0f7a3f;
+  --vg-brand-dark: #0b6534;
+  --vg-brand-light: #11904a;
+  --vg-brand-lighter: #2bcb6b;
+  --vg-brand-bg: #ecf8f0;
+  --vg-brand-mid: #d4f7df;
+  --vg-brand-border: #a9e6bf;
+  --vg-brand-on: #d4f7df;
+  --vg-gradient: linear-gradient(135deg, #11904a 0%, #2bcb6b 100%);
+
+  --vg-footer-bg: #0b1a12;
+  --vg-footer-fg: #e4f3ea;
+  --vg-footer-muted: #8fae9a;
+  --vg-footer-dim: #66806f;
+  --vg-footer-border: rgba(228, 243, 234, 0.08);
+
+  --background: var(--vg-background);
+  --foreground: var(--vg-foreground);
+  --card: var(--vg-card);
+  --card-foreground: var(--vg-card-foreground);
+  --popover: var(--vg-popover);
+  --popover-foreground: var(--vg-popover-foreground);
+  --primary: var(--vg-primary);
+  --primary-foreground: var(--vg-primary-foreground);
+  --secondary: var(--vg-secondary);
+  --secondary-foreground: var(--vg-secondary-foreground);
+  --muted: var(--vg-muted);
+  --muted-foreground: var(--vg-muted-foreground);
+  --accent: var(--vg-accent);
+  --accent-foreground: var(--vg-accent-foreground);
+  --border: var(--vg-border);
+  --input: var(--vg-input);
+  --ring: var(--vg-ring);
+  --sidebar: var(--vg-sidebar);
+  --sidebar-foreground: var(--vg-sidebar-foreground);
+  --sidebar-primary: var(--vg-sidebar-primary);
+  --sidebar-primary-foreground: var(--vg-sidebar-primary-foreground);
+  --sidebar-accent: var(--vg-sidebar-accent);
+  --sidebar-accent-foreground: var(--vg-sidebar-accent-foreground);
+  --sidebar-border: var(--vg-sidebar-border);
+  --sidebar-ring: var(--vg-sidebar-ring);
+}
+
+/* site.css sets the primary button's text to white, but its own `.vg-site a { color:
+   inherit }` is more specific and wins, so on the light ground the label came out in the
+   page's dark foreground. Restated with the anchor in the selector until the design
+   system fixes the order. */
+.vg-site a.vg-site-btn-primary {
+  color: #fff;
+}
+
+/* the dark ground, with the same selector set the design system gives `warm` */
+.dark[data-tone="green"],
+.dark [data-tone="green"],
+[data-theme="dark"][data-tone="green"],
+[data-theme="dark"] [data-tone="green"],
+[data-tone="green"] .dark,
+[data-tone="green"] [data-theme="dark"] {
+  --vg-background: #0b140f;
+  --vg-foreground: #e4f3ea;
+  --vg-card: #111f17;
+  --vg-card-foreground: #e4f3ea;
+  --vg-popover: #17291f;
+  --vg-popover-foreground: #e4f3ea;
+  --vg-primary: var(--vg-primary-base-dark);
+  --vg-primary-foreground: var(--vg-primary-foreground-base-dark);
+  --vg-secondary: #17291f;
+  --vg-secondary-foreground: #e4f3ea;
+  --vg-muted: #17291f;
+  --vg-muted-foreground: #8fae9a;
+  --vg-accent: #17291f;
+  --vg-accent-foreground: #e4f3ea;
+  --vg-border: rgba(228, 243, 234, 0.14);
+  --vg-input: rgba(228, 243, 234, 0.34);
+  --vg-ring: var(--vg-accent-text-dark);
+  --vg-sidebar: #111f17;
+  --vg-sidebar-foreground: #e4f3ea;
+  --vg-sidebar-primary: #2bcb6b;
+  --vg-sidebar-primary-foreground: #0b140f;
+  --vg-sidebar-accent: #17291f;
+  --vg-sidebar-accent-foreground: #e4f3ea;
+  --vg-sidebar-border: rgba(228, 243, 234, 0.14);
+  --vg-sidebar-ring: var(--vg-accent-text-dark);
+
+  --vg-brand: #3ddc7f;
+  --vg-brand-dark: #2bcb6b;
+  --vg-brand-light: #5fe397;
+  --vg-brand-lighter: #8eecb5;
+  --vg-brand-bg: rgba(43, 203, 107, 0.1);
+  --vg-brand-mid: rgba(43, 203, 107, 0.15);
+  --vg-brand-border: rgba(43, 203, 107, 0.3);
+  --vg-gradient: linear-gradient(135deg, #2bcb6b 0%, #a7f3c4 100%);
+}

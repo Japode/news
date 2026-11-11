@@ -1,0 +1,64 @@
+// Checks the built site against the roadmap's "done when" lines, so a regression fails
+// the build instead of shipping. Run after scripts/prerender.mjs:
+//
+//   node scripts/verify.mjs
+//
+// Each check names the task it holds. It reads dist/ and the sources, nothing else.
+
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
+import { dirname, join, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
+import * as app from "../dist-server/entry-server.js"
+
+const REPO = resolve(dirname(fileURLToPath(import.meta.url)), "..")
+const DIST = join(REPO, "dist")
+const { SITE, ROUTES } = app
+const failures = []
+const check = (task, ok, what) => {
+  if (!ok) failures.push(`${task}: ${what}`)
+}
+
+const read = (path) => readFileSync(join(DIST, path), "utf8")
+// React separates adjacent text with <!-- -->; a check reads the text a visitor sees
+const page = (route) => read(join(app.outputDir(route), "index.html")).replaceAll("<!-- -->", "")
+// React's escaping, apostrophe included
+const html = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;")
+const walk = (dir) => readdirSync(dir).flatMap((f) => (statSync(join(dir, f)).isDirectory() ? walk(join(dir, f)) : [join(dir, f)]))
+
+// JN1 — every route is static HTML that reads without JavaScript, in Portuguese, born on
+// the final origin, with the channel's mark (visibility's japode.svg, unchanged) as favicon.
+check("JN1", SITE.origin === "https://japode.com.br", `the canonical origin is ${SITE.origin}, not https://japode.com.br`)
+for (const r of ROUTES) {
+  const file = join(app.outputDir(r.path), "index.html")
+  check("JN1", existsSync(join(DIST, file)), `${r.path} was not prerendered`)
+  if (!existsSync(join(DIST, file))) continue
+  const text = page(r.path)
+  check("JN1", /<div id="root">\s*\S/.test(text), `${r.path} has an empty #root, so it needs JavaScript to read`)
+  check("JN1", text.includes(`<link rel="canonical" href="${SITE.origin}${r.path}" />`), `${r.path} is not canonical on ${SITE.origin}`)
+  check("JN1", /<html lang="pt-BR"/.test(text), `${r.path} is not <html lang="pt-BR">`)
+  check("JN1", text.includes(`<title>${html(r.title)}</title>`), `${r.path} lacks its own title`)
+  check("JN1", text.includes('<link rel="icon" type="image/svg+xml" href="/logo.svg" />'), `${r.path} does not use the mark as favicon`)
+}
+check("JN1", page("/").includes(html(SITE.description)), "the home page HTML lacks the site's description")
+check("JN1", page("/404/").includes('<meta name="robots" content="noindex" />'), "the 404 page can be indexed")
+check("JN1", existsSync(join(DIST, "404.html")), "404.html is missing, so GitHub Pages serves its own")
+for (const keep of ["logo.svg", "site.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"]) {
+  check("JN1", existsSync(join(DIST, keep)), `${keep} is not served`)
+}
+const manifest = JSON.parse(read("site.webmanifest"))
+for (const icon of manifest.icons) check("JN1", existsSync(join(DIST, icon.src.replace(/^\//, ""))), `the manifest names ${icon.src}, which is not built`)
+// The mark is copied, never redrawn: where the visibility repository is on this machine,
+// the copy must still be byte for byte its japode.svg. The CI has no such checkout.
+const MARK = resolve(REPO, "..", "..", "alegauss", "visibility", "marca", "logo", "japode.svg")
+if (existsSync(MARK)) check("JN1", readFileSync(MARK, "utf8") === readFileSync(join(REPO, "public", "logo.svg"), "utf8"), "public/logo.svg differs from visibility's marca/logo/japode.svg")
+check("JN1", !existsSync(join(DIST, "docs")) && !existsSync(join(DIST, "scripts")), "docs/ or scripts/ is published")
+// The site's theme key is its own, so a choice made on japode.com does not leak here, and
+// the titles' type (Plus Jakarta Sans, as the videos draw it) is served, not fallen back.
+check("JN1", SITE.themeKey === "japode-news-theme", `the theme key is ${SITE.themeKey}, not japode-news-theme`)
+check("JN1", walk(join(DIST, "assets")).some((f) => /plus-jakarta-sans-latin-wght-normal-.*\.woff2$/.test(f)), "Plus Jakarta Sans is not shipped")
+
+if (failures.length) {
+  console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
+  process.exit(1)
+}
+console.log("verify: every check passed")
