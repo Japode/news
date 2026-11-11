@@ -8,8 +8,7 @@
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-- 📋 **JN13** (deps: —) **The artboard the site must match lives only in a private canvas, so no build can be compared against it** — Pixel-perfect needs a reference that sits in the repo and renders the same way on every machine. → §JN13
-- 📋 **JN14** (deps: JN13) **Nothing measures how far a built page is from its artboard, so "pixel perfect" is a judgement by eye** — Every page task in this block needs a check that fails on a 1px drift and names the element that moved. → §JN14
+- 📋 **JN14** (deps: JN13 ✅) **Nothing measures how far a built page is from its artboard, so "pixel perfect" is a judgement by eye** — Every page task in this block needs a check that fails on a 1px drift and names the element that moved. → §JN14
 - 📋 **JN15** (deps: JN14) **The pages are drawn by the Viglet design system, whose type, colours and spacing are not the artboard's** — The artboard has its own look, and matching it through another system's overrides would break on every upgrade. → §JN15
 - 📋 **JN16** (deps: JN15) **Header and footer are generic site chrome, not the artboard's, and nothing keeps them identical on every page** — The Alexandre saw the footer differ between pages in the artboard; one component per region is what stops that on the site. → §JN16
 - 📋 **JN17** (deps: JN16) **No page says the site is sponsored by Viglet, nor that Viglet belongs to the author** — A sponsor shown openly, with the tie and the rule beside it, is what lets a reader trust the rest of the page. → §JN17

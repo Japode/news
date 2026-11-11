@@ -177,6 +177,17 @@ for (const r of ROUTES) {
   check("JN12", footer.includes(`href="${SITE.catalogue}"`) && footer.includes("Os produtos da Japode"), `${r.path}'s footer does not link japode.com`)
 }
 
+// JN13 — the artboards are in the repo as the reference, each with its baseline, and the
+// reference is never published with the site.
+const DESIGN = join(REPO, "design")
+const designPages = JSON.parse(readFileSync(join(DESIGN, "pages.json"), "utf8")).pages
+for (const p of designPages) {
+  check("JN13", existsSync(join(DESIGN, `${p.page}.html`)), `design/${p.page}.html is missing`)
+  check("JN13", existsSync(join(DESIGN, "baseline", `${p.page}-${p.width}.png`)), `design/baseline/${p.page}-${p.width}.png is missing`)
+}
+check("JN13", designPages.length === 4, `design/pages.json lists ${designPages.length} artboards, not the canvas's 4`)
+check("JN13", !existsSync(join(DIST, "design")) && !walk(DIST).some((f) => f.endsWith(".png") && f.includes("baseline")), "the design reference is published with the site")
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

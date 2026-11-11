@@ -69,30 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN13 JN13 — The artboard as a reference in the repo
-
-The design is the claude.ai Design canvas "Japode news — proposta de site" (the
-Alexandre has the link; it is private, so the URL stays out of this public repo). It
-holds four artboards: Início (1280 wide), Página do vídeo (1280), Como fazemos (1280)
-and Página do vídeo — celular (390).
-
-Copy each artboard into `design/` as a plain static HTML page: the `x-dc` wrapper and
-`support.js` removed, the markup and inline styles kept byte for byte, the uploaded
-images pointed at local files (`content/videos/*/thumbnail.jpg`, `public/logo.svg`, and
-Viglet's mark from visibility's `marca/logo/viglet.svg`). Fonts load from a local copy
-of Plus Jakarta Sans, never Google Fonts, so a render does not depend on the network.
-
-Then render each page headless at its frame width, full height, into
-`design/baseline/<page>-<width>.png`. Those PNGs are the reference every later task in
-this block is measured against, and they change only when the canvas changes: a design
-change is a new export plus new baselines in one commit, never a baseline regenerated to
-make a failing page pass.
-
-Done when `design/` holds the four pages and their baselines, and `design/README.md`
-says where the canvas is, how to re-export it and how to regenerate the baselines.
-
-On ship: --recorded-in design/README.md
-
 ### §JN14 JN14 — The visual gate
 
 A whole-page pixel diff cannot be the only check: the artboard's copy is a mock-up of

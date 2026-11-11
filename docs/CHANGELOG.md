@@ -21,3 +21,4 @@
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
+- ✅ **JN13** **The artboard the site must match lives only in a private canvas, so no build can be compared against it** — The four artboards are static pages in design/ with PNG baselines from the pinned Playwright; verify checks each baseline and that none is published (design recorded in `design/README.md`).

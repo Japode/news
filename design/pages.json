@@ -1,0 +1,33 @@
+{
+  "canvas": "Japode news — proposta de site",
+  "pages": [
+    {
+      "page": "home",
+      "artboard": "Main.dc.html",
+      "title": "Início",
+      "width": 1280,
+      "height": 2900
+    },
+    {
+      "page": "video",
+      "artboard": "Video.dc.html",
+      "title": "Página do vídeo",
+      "width": 1280,
+      "height": 5200
+    },
+    {
+      "page": "como-fazemos",
+      "artboard": "ComoFazemos.dc.html",
+      "title": "Como fazemos",
+      "width": 1280,
+      "height": 2900
+    },
+    {
+      "page": "video-mobile",
+      "artboard": "VideoMobile.dc.html",
+      "title": "Página do vídeo — celular",
+      "width": 390,
+      "height": 3000
+    }
+  ]
+}
