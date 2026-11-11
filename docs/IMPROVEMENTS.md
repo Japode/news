@@ -4,22 +4,6 @@
 
 ## Block B — One page per video
 
-### §JN8 The Docker page
-
-Import `marketing/japode/docker`: the long video `gZEP6b_Fs00` (2026-11-10, 4 min 32 s,
-titled "O que é Docker? A caixa de navio que mudou o software" once the Alexandre
-applies the new title) and the Short `uMa5PYAAtcg` ("O Docker nasceu numa palestra de 5
-minutos"), which goes on the same page as a vertical facade, not on a page of its own.
-The Docker video defines no keyword on screen (no callout in its `shots.json` has a
-`def`), so its import brings no terms and the "Termos" box stays out of this page.
-
-The article opens by answering what Docker is, then tells the story the video tells: the
-1956 shipping container, chroot, FreeBSD jails, Linux namespaces and cgroups, the five-
-minute talk at PyCon 2013, Kubernetes and the Open Container Initiative.
-
-Done when: the page is in the build with both videos, the chapters and every credit, and
-the Alexandre has approved the article.
-
 ## Block C — Found, measured and linked
 
 ### §JN10 Measuring the site

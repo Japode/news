@@ -1,5 +1,5 @@
 ---
-status: rascunho com fontes, aguardando o Alexandre conferir as fontes e aprovar o texto
+approved: 2026-11-11
 ---
 O Docker é uma ferramenta que empacota um programa com tudo de que ele precisa numa imagem e a roda como um contêiner, isolado, em qualquer máquina. É a resposta a uma frase que quem trabalha com software já ouviu, ou já disse: "mas na minha máquina funciona". A ideia veio de outro lugar, das caixas de metal dos navios.
 
