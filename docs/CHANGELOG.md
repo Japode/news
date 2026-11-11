@@ -16,3 +16,4 @@
 
 ## Block C — Found, measured and linked
 
+- ✅ **JN9** **Search engines and AI assistants see an embed but no structured facts about the video or the article** — Each video page carries VideoObject JSON-LD with a Clip per chapter, an Article once approved, and its thumbnail as card; sitemap.xml with video tags, robots.txt and llms.txt are built.

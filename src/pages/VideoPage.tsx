@@ -3,6 +3,7 @@ import type { Video } from "../data/videos.ts"
 import { longDate, minutes } from "../data/format.ts"
 import { Island } from "../islands.tsx"
 import { articleFor } from "../data/articles.ts"
+import { articleLd, ldJson, videoLd } from "../data/structured.ts"
 
 /* A video's page, as a blog post (JN5): the title, the date and the length, the video
    behind a facade, the chapters, then the terms, the sources and the image credits. CC
@@ -12,11 +13,14 @@ import { articleFor } from "../data/articles.ts"
 const clock = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`
 const LICENSE = (license: string) => (/Creative Commons Attribution/i.test(license) ? "CC BY" : license)
 
-export function VideoPage({ video }: { video: Video }) {
+export function VideoPage({ video, description }: { video: Video; description: string }) {
   const watch = `https://youtu.be/${video.youtube}`
   const article = articleFor(video.slug)
   return (
     <article className="jn-column jn-video">
+      {/* the page's facts as data (JN9): the video with its chapters, and the approved article */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(videoLd(video, description)) }} />
+      {article && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(articleLd(video, article)) }} />}
       <header className="jn-intro">
         <p className="jn-post-meta">
           <time dateTime={video.published}>{longDate(video.published)}</time>

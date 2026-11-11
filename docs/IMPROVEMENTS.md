@@ -53,21 +53,6 @@ the Alexandre has approved the article.
 
 ## Block C — Found, measured and linked
 
-### §JN9 Structured data, sitemap and llms.txt
-
-Each video page carries JSON-LD. A `VideoObject`: name, description, `thumbnailUrl`,
-`uploadDate`, `duration` in ISO 8601, `embedUrl`, and one `Clip` per chapter under
-`hasPart`, so Google can show key moments. An `Article`: headline, `datePublished`, the
-author as japode.com names him, and Japode as publisher with the mark. `og:image` and
-`twitter:image` are the 1280x720 thumbnail, and `og:type` is `video.other`.
-
-`sitemap.xml` lists every route, with `lastmod` taken from the content's last commit, as
-japode.com does, plus the video sitemap tags. `robots.txt` points to it. `llms.txt`
-lists every video with its one-line summary and its page.
-
-Done when: `verify.mjs` parses each page's JSON-LD and finds every field above, and the
-sitemap lists every route.
-
 ### §JN10 Measuring the site
 
 The Alexandre adds the domain property `sc-domain:japode.com.br` to the Search Console

@@ -16,8 +16,16 @@ export interface Route {
   description: string
   /** Listed in the sitemap. The 404 page is a route and not a page to index. */
   index: boolean
+  /** The video a page is about: prerender.mjs writes its og:image, its sitemap tags and its llms.txt line (JN9). */
+  video?: Video
   render: () => ReactNode
 }
+
+/** A page's description until its article is approved: what the page holds, and only that. */
+const holds = (video: Video) =>
+  [`${video.title}: o vídeo de ${minutes(video.duration)} do canal Japode, com os capítulos`, video.terms.length && "os termos", video.sources.length && "as fontes"]
+    .filter(Boolean)
+    .join(", ") + " e os créditos das imagens."
 
 export const ROUTES: Route[] = [
   {
@@ -32,11 +40,10 @@ export const ROUTES: Route[] = [
     path: `/${video.slug}/`,
     title: `${video.title} — Japode`,
     // the approved article's opening sentence, once there is one (JN6)
-    description:
-      articleFor(video.slug)?.summary ??
-      `${video.title}: o vídeo de ${minutes(video.duration)} do canal Japode, com os capítulos, ${video.terms.length ? "os termos, " : ""}as fontes e os créditos das imagens.`,
+    description: articleFor(video.slug)?.summary ?? holds(video),
     index: true,
-    render: () => <VideoPage video={video} />,
+    video,
+    render: () => <VideoPage video={video} description={articleFor(video.slug)?.summary ?? holds(video)} />,
   })),
   {
     path: "/404/",

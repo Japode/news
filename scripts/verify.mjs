@@ -102,7 +102,8 @@ for (const v of app.VIDEOS) {
   const text = page(path)
   check("JN5", text.includes(`<h1>${html(v.title)}</h1>`), `${path} lacks its h1`)
   check("JN5", text.includes(`data-facade="${v.youtube}"`) && text.includes(`href="https://youtu.be/${v.youtube}"`), `${path} lacks the video's facade`)
-  check("JN5", !/<iframe|youtube\.com\/iframe_api|www\.youtube\.com\/embed/.test(text), `${path} loads YouTube before a click`)
+  // an iframe or a script fetched from YouTube; the JSON-LD's embedUrl (JN9) is text, not a load
+  check("JN5", !/<iframe|<script[^>]*\ssrc="[^"]*youtube/.test(text), `${path} loads YouTube before a click`)
   for (const c of v.chapters) check("JN5", text.includes(`href="https://youtu.be/${v.youtube}?t=${c.start}"`), `${path} lacks the chapter "${c.title}"`)
   for (const t of v.terms) check("JN5", text.includes(`<dt class="jn-term">${html(t.term)}</dt>`) && text.includes(html(t.def)), `${path} lacks the term "${t.term}"`)
   for (const c of v.credits) check("JN5", text.includes(`data-credit="${c.id}"`) && text.includes(html(c.channel)), `${path} lacks the credit for ${c.id}`)
@@ -136,6 +137,37 @@ for (const v of app.VIDEOS.filter((x) => x.short)) {
   check("JN8", text.includes(`data-facade="${v.short.youtube}"`) && text.includes(`href="https://www.youtube.com/shorts/${v.short.youtube}"`), `/${v.slug}/ lacks the Short's facade`)
   check("JN8", existsSync(join(DIST, v.slug, "short.jpg")), `${v.slug}'s Short frame is not served`)
   check("JN8", !ROUTES.some((r) => r.path.includes(v.short.youtube)), `the Short ${v.short.youtube} has a page of its own`)
+}
+
+// JN9 — each video's page carries a VideoObject with every field Google reads and a Clip
+// per chapter, an Article once the article is approved, its thumbnail as the social card
+// and og:type video.other; the sitemap lists every indexed route (the 404 never) with the
+// video tags, robots.txt names it, and llms.txt lists every video with its page.
+const sitemap = read("sitemap.xml")
+for (const r of ROUTES) {
+  check("JN9", sitemap.includes(`<loc>${SITE.origin}${r.path}</loc>`) === r.index, r.index ? `the sitemap lacks ${r.path}` : `the sitemap lists ${r.path}`)
+}
+check("JN9", read("robots.txt").includes(`Sitemap: ${SITE.origin}/sitemap.xml`), "robots.txt does not name the sitemap")
+const llms = read("llms.txt")
+for (const v of app.VIDEOS) {
+  const path = `/${v.slug}/`
+  if (!existsSync(join(DIST, v.slug, "index.html"))) continue
+  const text = read(join(v.slug, "index.html"))
+  const ld = [...text.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]))
+  const vo = ld.find((x) => x["@type"] === "VideoObject")
+  check("JN9", Boolean(vo), `${path} has no VideoObject`)
+  if (vo) {
+    for (const field of ["name", "description", "thumbnailUrl", "uploadDate", "duration", "embedUrl"]) check("JN9", Boolean(vo[field]?.length), `${path}'s VideoObject lacks ${field}`)
+    check("JN9", /^PT(\d+M)?(\d+S)?$/.test(vo.duration ?? "") && vo.uploadDate === v.published, `${path}'s VideoObject has a duration or date that is not the video's`)
+    check("JN9", vo.hasPart?.length === v.chapters.length && vo.hasPart.every((c, i) => c["@type"] === "Clip" && c.name === v.chapters[i].title && c.startOffset === v.chapters[i].start && c.endOffset > c.startOffset && c.url), `${path}'s VideoObject lacks a Clip per chapter`)
+  }
+  const article = app.articleFor(v.slug)
+  const al = ld.find((x) => x["@type"] === "Article")
+  check("JN9", Boolean(al) === Boolean(article), article ? `${path} has no Article JSON-LD` : `${path} has an Article JSON-LD for a draft`)
+  if (al) for (const field of ["headline", "datePublished", "author", "publisher"]) check("JN9", Boolean(al[field]), `${path}'s Article lacks ${field}`)
+  check("JN9", text.includes(`<meta property="og:image" content="${SITE.origin}/${v.slug}/thumbnail.jpg" />`) && text.includes('<meta property="og:type" content="video.other" />'), `${path}'s social card is not its thumbnail as a video`)
+  check("JN9", sitemap.includes(`<video:player_loc>https://www.youtube.com/embed/${v.youtube}</video:player_loc>`), `the sitemap lacks ${path}'s video tags`)
+  check("JN9", llms.includes(`(${SITE.origin}${path})`), `llms.txt lacks ${path}`)
 }
 
 if (failures.length) {
