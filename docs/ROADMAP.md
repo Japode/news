@@ -4,14 +4,13 @@
 
 ## Block B — One page per video
 
-- 📋 **JN5** (deps: JN1 ✅, JN3 ✅) **There is no page for a video, so nothing outside YouTube can be searched for, linked to or quoted** — One page per video is what search engines and forums link to, and each one sends its reader back to the video. → §JN5
-- 📋 **JN6** (deps: JN5) **The narration is speech, with filler words and lines cut for the voice, so as an article it reads badly** — A written article built from the same facts reads well and ranks for what people search, and it claims nothing beyond the sources. → §JN6
-- 📋 **JN7** (deps: JN5, JN6) **The Scion video has no page, though its subject is new and few texts in Portuguese explain it** — Scion is a recent subject that specialists search for, with little written in Portuguese, so its page has the best chance of ranking first. → §JN7
-- 📋 **JN8** (deps: JN5, JN6) **The Docker video has no page, though "o que é Docker" is a search that does not go away** — Docker is the channel's evergreen subject, and a page that answers "o que é Docker" can bring readers for years. → §JN8
+- 📋 **JN6** (deps: JN5 ✅) **The narration is speech, with filler words and lines cut for the voice, so as an article it reads badly** — A written article built from the same facts reads well and ranks for what people search, and it claims nothing beyond the sources. → §JN6
+- 📋 **JN7** (deps: JN5 ✅, JN6) **The Scion video has no page, though its subject is new and few texts in Portuguese explain it** — Scion is a recent subject that specialists search for, with little written in Portuguese, so its page has the best chance of ranking first. → §JN7
+- 📋 **JN8** (deps: JN5 ✅, JN6) **The Docker video has no page, though "o que é Docker" is a search that does not go away** — Docker is the channel's evergreen subject, and a page that answers "o que é Docker" can bring readers for years. → §JN8
 
 ## Block C — Found, measured and linked
 
-- 📋 **JN9** (deps: JN5) **Search engines and AI assistants see an embed but no structured facts about the video or the article** — Video data lets Google show the thumbnail and the chapters in its results, and llms.txt lets assistants cite the article. → §JN9
+- 📋 **JN9** (deps: JN5 ✅) **Search engines and AI assistants see an embed but no structured facts about the video or the article** — Video data lets Google show the thumbnail and the chapters in its results, and llms.txt lets assistants cite the article. → §JN9
 - 📋 **JN10** (deps: JN2 ✅) **No number says whether the site brings anyone: which page was found, from which search, is unknown** — visibility measures every product through the Search Console, so japode.com.br needs a verified property that visibility can read. → §JN10
 - 📋 **JN11** (deps: JN7, JN8) **The videos' descriptions do not link to their pages, so a viewer who would rather read never finds them** — The YouTube link brings a page its first visitors and Google its first signal, and only the Alexandre can change it. → §JN11
 - 📋 **JN12** (deps: JN4 ✅) **japode.com and japode.com.br do not mention each other, so neither passes a visitor to the other** — One brand on two domains reads as two strangers unless each links the other, each in its own language. → §JN12

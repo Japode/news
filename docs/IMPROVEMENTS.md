@@ -20,25 +20,6 @@ and www addresses redirect to it.
 
 ## Block B — One page per video
 
-### §JN5 The video page
-
-`/<slug>/` is a blog post, in the home's reading column and quiet header (JN4), with no
-hero. It shows the title as `h1`, the date and the duration, then the video as a
-click-to-load facade: the thumbnail with a play button, which loads the
-youtube-nocookie.com iframe only when clicked, so the page sets no YouTube cookie and
-stays light. Then the article and the chapters, each one a link to
-`youtu.be/<id>?t=<seconds>`.
-
-Under the article, three boxes. "Termos": the words the video highlights in green, each
-with its one-line definition from `shots.json`, the same words in the same green.
-"Fontes": the primary source first (for Scion, Anthropic's post), then the others.
-"Créditos das imagens": every Creative Commons clip with its author and link, which CC
-BY requires wherever the footage is shown, the page included. The page ends with
-watching it on YouTube and subscribing.
-
-Done when: for each entry in `content/videos/`, `verify.mjs` finds a prerendered page
-with its `h1`, the facade, every chapter link, every term and every credit.
-
 ### §JN6 The article
 
 Each video has `content/videos/<slug>/article.md`. Claude writes it from `script.json`

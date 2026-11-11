@@ -1,6 +1,7 @@
 import type { ComponentType } from "react"
 import { SiteThemeToggle } from "@viglet/viglet-design-system/site"
 import { SITE } from "./data/site.ts"
+import { VideoFacade } from "./components/VideoFacade.tsx"
 
 /* The page is static HTML; only these pieces run in the browser. Each interactive piece
    is an island: rendered with the page, then hydrated on its own from the props written
@@ -12,6 +13,7 @@ const ThemeToggle = () => <SiteThemeToggle storageKey={SITE.themeKey} label={(ne
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ISLANDS: Record<string, ComponentType<any>> = {
   "theme-toggle": ThemeToggle,
+  "video-facade": VideoFacade,
 }
 
 export function Island({ name, props = {} }: { name: keyof typeof ISLANDS & string; props?: Record<string, string> }) {

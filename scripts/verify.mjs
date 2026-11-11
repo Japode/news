@@ -90,6 +90,25 @@ for (const v of app.VIDEOS) {
 }
 check("JN4", SITE.youtube === "https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg" && home.includes(`href="${SITE.youtube}"`), "the home does not link the channel's address to subscribe")
 
+// JN5 — every imported video has its page: the title as h1, the facade (a link to the
+// video, and no YouTube iframe or script in the HTML, so nothing loads before a click),
+// every chapter as a link to its second, every term and every credit.
+for (const v of app.VIDEOS) {
+  const path = `/${v.slug}/`
+  if (!existsSync(join(DIST, v.slug, "index.html"))) {
+    check("JN5", false, `${path} was not prerendered`)
+    continue
+  }
+  const text = page(path)
+  check("JN5", text.includes(`<h1>${html(v.title)}</h1>`), `${path} lacks its h1`)
+  check("JN5", text.includes(`data-facade="${v.youtube}"`) && text.includes(`href="https://youtu.be/${v.youtube}"`), `${path} lacks the video's facade`)
+  check("JN5", !/<iframe|youtube\.com\/iframe_api|www\.youtube\.com\/embed/.test(text), `${path} loads YouTube before a click`)
+  for (const c of v.chapters) check("JN5", text.includes(`href="https://youtu.be/${v.youtube}?t=${c.start}"`), `${path} lacks the chapter "${c.title}"`)
+  for (const t of v.terms) check("JN5", text.includes(`<dt class="jn-term">${html(t.term)}</dt>`) && text.includes(html(t.def)), `${path} lacks the term "${t.term}"`)
+  for (const c of v.credits) check("JN5", text.includes(`data-credit="${c.id}"`) && text.includes(html(c.channel)), `${path} lacks the credit for ${c.id}`)
+  for (const s of v.sources) check("JN5", text.includes(`href="${html(s.url)}"`), `${path} lacks the source ${s.url}`)
+}
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)
