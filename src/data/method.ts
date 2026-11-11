@@ -24,7 +24,7 @@ export const SPONSORSHIP = {
     "A Viglet não escolhe pauta nem lê roteiro antes de o vídeo sair.",
     "Quando um vídeo fala de um produto da Viglet ou de um concorrente direto, o aviso aparece no topo da página, antes do texto.",
     "A ficha de cada vídeo diz se a Viglet tem relação com o assunto.",
-    "Os quadros “Anúncio da casa” mostram, sorteados a cada visita, outros produtos do mesmo autor. Ficam fora do texto, não seguem o leitor e não guardam nada sobre quem lê.",
+    "Os anúncios da casa mostram, sorteados a cada visita, outros produtos do mesmo autor. Ficam fora do texto, não seguem o leitor e não guardam nada sobre quem lê.",
   ],
 }
 

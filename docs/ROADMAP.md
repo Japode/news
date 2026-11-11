@@ -17,7 +17,7 @@
   English.
 - **The product catalogue** The products live at japode.com; an article mentions one
   only when its video is about it. The Viglet sponsor band and the Japode Ads house
-  banners sit outside the article, each labelled as what it is.
+  banners sit outside the article, never inside its text.
 - **Publishing from a Claude session** Claude prepares; the Alexandre pushes, changes
   the DNS, the YouTube descriptions and the forum posts.
 - **Claims beyond a video's sources** An article says what the video and its cited

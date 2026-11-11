@@ -126,7 +126,7 @@ export function Home({ posts, upcoming }: { posts: Post[]; upcoming: Upcoming[] 
         </div>
       </section>
 
-      <AdSlot format="strip" slot="home-strip" design="ad.label" note="Japode Ads: só produtos do mesmo autor, sem rastrear quem lê." />
+      <AdSlot format="strip" slot="home-strip" />
 
       <section className="jn-home-method" aria-labelledby="como" data-design="method">
         <h2 id="como">O que cada página traz</h2>

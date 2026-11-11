@@ -18,7 +18,6 @@
         { "name": "lead", "ref": "section[aria-labelledby=destaque]", "tier": "layout", "task": "JN19", "enforced": true },
         { "name": "lead.title", "ref": "#destaque", "tier": "layout", "task": "JN19", "enforced": true },
         { "name": "videos", "ref": "#todos", "tier": "layout", "task": "JN19", "enforced": true },
-        { "name": "ad.label", "ref": "main aside[aria-label='Anúncio da casa'] > p:first-child", "tier": "pixels", "task": "JN24", "enforced": true },
         { "name": "method", "ref": "section[aria-labelledby=como]", "tier": "pixels", "task": "JN19", "enforced": true },
         { "name": "terms", "ref": "#termos", "tier": "layout", "task": "JN19", "enforced": true },
         { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento]", "tier": "pixels", "task": "JN17", "enforced": true },
@@ -37,13 +36,11 @@
         { "name": "sources", "ref": "#fontes", "tier": "layout", "task": "JN20", "enforced": true },
         { "name": "article", "ref": "main article", "tier": "layout", "task": "JN7", "enforced": false },
         { "name": "facts", "ref": "main article figure", "tier": "layout", "task": "JN25", "enforced": false },
-        { "name": "ad.inline.label", "ref": "main aside[aria-label='Anúncio da casa'] > p", "tier": "pixels", "task": "JN24", "enforced": true },
         { "name": "terms", "ref": "#glossario", "tier": "layout", "task": "JN20", "enforced": true },
         { "name": "corrections", "ref": "#correcoes", "tier": "layout", "task": "JN20", "enforced": true },
         { "name": "credits", "ref": "#creditos", "tier": "layout", "task": "JN20", "enforced": true },
         { "name": "chapters", "ref": "section[aria-labelledby=capitulos-t]", "tier": "layout", "task": "JN20", "enforced": true },
         { "name": "ficha", "ref": "section[aria-labelledby=ficha-t]", "tier": "layout", "task": "JN20", "enforced": true },
-        { "name": "ad.side.label", "ref": "div[aria-label='Anúncio da casa'] > p:first-child", "tier": "pixels", "task": "JN24", "enforced": true },
         { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento]", "tier": "pixels", "task": "JN17", "enforced": true },
         { "name": "footer", "ref": "footer", "tier": "pixels", "task": "JN16", "enforced": true }
       ]

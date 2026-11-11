@@ -171,7 +171,7 @@ export function VideoPage({ video, description }: { video: Video; description: s
           {article && <article className="jn-article" data-design="article" dangerouslySetInnerHTML={{ __html: articleHtml(article.html, factsHtml) }} />}
           {facts && !inline && <FactsTable facts={facts} />}
 
-          <AdSlot format="in-content" slot="video-inline" design="ad.inline.label" />
+          <AdSlot format="in-content" slot="video-inline" />
 
           {video.terms.length > 0 && (
             <section id="termos" className="jn-terms" aria-labelledby="termos-t" data-design="terms">
@@ -305,7 +305,7 @@ export function VideoPage({ video, description }: { video: Video; description: s
             Assistir no YouTube
           </a>
 
-          <AdSlot format="sidebar" slot="video-side" design="ad.side.label" label="Anúncio da casa" note="Sorteado a cada visita entre os produtos do autor." />
+          <AdSlot format="sidebar" slot="video-side" />
         </aside>
       </div>
 

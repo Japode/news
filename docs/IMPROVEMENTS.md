@@ -132,7 +132,7 @@ The rules wait in `src/data/method.ts` (`SPONSORSHIP.rules`):
 1. A Viglet não escolhe pauta nem lê roteiro antes de o vídeo sair.
 2. Quando um vídeo fala de um produto da Viglet ou de um concorrente direto, o aviso aparece no topo da página, antes do texto.
 3. A ficha de cada vídeo diz se a Viglet tem relação com o assunto.
-4. Os quadros "Anúncio da casa" mostram, sorteados a cada visita, outros produtos do mesmo autor. Ficam fora do texto, não seguem o leitor e não guardam nada sobre quem lê.
+4. Os anúncios da casa mostram, sorteados a cada visita, outros produtos do mesmo autor. Ficam fora do texto, não seguem o leitor e não guardam nada sobre quem lê.
 
 Once he confirms or rewrites them, set `SPONSORSHIP.approved` to the date. The page
 shows the list, `scripts/verify.mjs` then requires it, and `design/regions.json` turns
