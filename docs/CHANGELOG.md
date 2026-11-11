@@ -7,5 +7,7 @@
 
 ## Block B — One page per video
 
+- ✅ **JN3** **A video's facts (YouTube id, date, chapters, terms, sources) live only in the private marketing repository** — scripts/import-video.mjs copies a video's facts and thumbnail from marketing into content/videos/<slug>/, idempotently, and the build refuses a video.json that misfits its type.
+
 ## Block C — Found, measured and linked
 

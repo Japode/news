@@ -67,6 +67,13 @@ check("JN2", /branches:\s*\[main\]/.test(workflow), "deploy.yml does not deploy 
 check("JN2", existsSync(join(DIST, ".nojekyll")), ".nojekyll is not served")
 check("JN2", existsSync(join(DIST, "CNAME")) && read("CNAME").trim() === new URL(SITE.origin).host, `CNAME does not name ${new URL(SITE.origin).host}`)
 
+// JN3 — every imported video is in the build (src/data/videos.ts refused none, or there
+// would be no build to verify), with the thumbnail the import copied beside it.
+const VIDEOS_DIR = join(REPO, "content", "videos")
+const imported = existsSync(VIDEOS_DIR) ? readdirSync(VIDEOS_DIR).filter((d) => existsSync(join(VIDEOS_DIR, d, "video.json"))) : []
+check("JN3", imported.sort().join() === app.VIDEOS.map((v) => v.slug).sort().join(), `content/videos/ holds ${imported.join(", ")}, the build loaded ${app.VIDEOS.map((v) => v.slug).join(", ")}`)
+for (const v of app.VIDEOS) check("JN3", existsSync(join(VIDEOS_DIR, v.slug, "thumbnail.jpg")), `${v.slug} has no thumbnail.jpg`)
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

@@ -37,25 +37,6 @@ first two under JN4.
 
 ## Block B — One page per video
 
-### §JN3 Importing a video from marketing
-
-`scripts/import-video.mjs <marketing video folder> <slug>` runs on the Alexandre's
-machine and reads what the video's own build already wrote: `narration/script.json` (the
-lines in their written words and the chapter titles; `pronounce` is the voice's concern
-and stays out), `shots.json` (the title and the keywords with their `def`, which become
-the glossary), `sources.json` (every clip with the licence YouTube reports), the
-chapters with their times from `out/<name>-pt-BR.description.txt`, and
-`out/thumbnail.pt-BR.jpg`. What the build cannot know is passed as flags: `--youtube
-<id>`, `--published <date>`, `--title` when the YouTube title differs from `shots.json`.
-
-It writes `content/videos/<slug>/video.json` and `thumbnail.jpg`. The thumbnail is
-versioned here, unlike marketing's media, because it is the site's own image.
-`video.json` has a TypeScript type, and the build refuses one that does not fit it. The
-README lists the steps for a new video, from the import to the published page.
-
-Done when: importing `marketing/japode/scion` writes a `video.json` the build accepts,
-and a second run with nothing changed changes no file.
-
 ### §JN5 The video page
 
 `/<slug>/` shows the title as `h1`, the date and the duration, then the video as a
@@ -101,8 +82,9 @@ Antique and superfans, with the definitions the video shows. The slug is chosen 
 search ("scion-anthropic"), and the article opens with what Scion is and why Git was not
 enough.
 
-Done when: the page is in the build with every term and all 36 credits, and the
-Alexandre has approved the article.
+Done when: the page is in the build with every term and all 33 credits (the clips on
+screen, as the description lists them; `sources.json` holds 36, three never played), and
+the Alexandre has approved the article.
 
 ### §JN8 The Docker page
 
@@ -110,6 +92,8 @@ Import `marketing/japode/docker`: the long video `gZEP6b_Fs00` (2026-11-10, 4 mi
 titled "O que é Docker? A caixa de navio que mudou o software" once the Alexandre
 applies the new title) and the Short `uMa5PYAAtcg` ("O Docker nasceu numa palestra de 5
 minutos"), which goes on the same page as a vertical facade, not on a page of its own.
+The Docker video defines no keyword on screen (no callout in its `shots.json` has a
+`def`), so its import brings no terms and the "Termos" box stays out of this page.
 
 The article opens by answering what Docker is, then tells the story the video tells: the
 1956 shipping container, chroot, FreeBSD jails, Linux namespaces and cgroups, the five-

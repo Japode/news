@@ -1,0 +1,430 @@
+{
+  "$comment": "Imported by scripts/import-video.mjs from marketing/japode/scion; never edited by hand.",
+  "slug": "scion-anthropic",
+  "title": "A IA escreve tanto código que a Anthropic precisou ir além do Git",
+  "youtube": "pffFIAU9uos",
+  "published": "2026-11-11",
+  "duration": 315,
+  "chapters": [
+    {
+      "start": 0,
+      "title": "Introdução"
+    },
+    {
+      "start": 25,
+      "title": "Trinta mil por dia"
+    },
+    {
+      "start": 55,
+      "title": "Feito para outro mundo"
+    },
+    {
+      "start": 88,
+      "title": "Onde o Git quebrou"
+    },
+    {
+      "start": 126,
+      "title": "O servidor no centro"
+    },
+    {
+      "start": 173,
+      "title": "Só o que você precisa"
+    },
+    {
+      "start": 204,
+      "title": "Sete pessoas, cinco meses"
+    },
+    {
+      "start": 259,
+      "title": "Nos ombros de gigantes"
+    }
+  ],
+  "narration": [
+    {
+      "chapter": 0,
+      "text": "Em setembro de dois mil e vinte e seis, a Anthropic, a empresa que cria o Claude, juntava mais de trinta mil mudanças de código por dia no repositório principal. E o Git, a ferramenta que guarda a história de quase todo software do mundo, não deu conta. Hoje eu quero te contar, com calma, o que quebrou, o que eles construíram no lugar, e o que isso muda para o seu Git. Vem comigo."
+    },
+    {
+      "chapter": 1,
+      "text": "Em maio, eram cerca de dois mil e quinhentos merges por dia. Quatro meses depois, mais de trinta mil. É o efeito dos agentes de inteligência artificial escrevendo código, e agente não para para o café."
+    },
+    {
+      "chapter": 1,
+      "text": "A própria Anthropic resume o problema numa frase: o gargalo, agora, é toda a infraestrutura feita na escala humana. Controle de versão, build e integração contínua. Escrever código deixou de ser a parte lenta."
+    },
+    {
+      "chapter": 2,
+      "text": "O Git nasceu em dois mil e cinco, escrito pelo Linus Torvalds para o kernel do Linux. A ideia central é linda: cada pessoa tem a história inteira no próprio computador, trabalha offline e sincroniza quando quiser."
+    },
+    {
+      "chapter": 2,
+      "text": "Só que a Anthropic usava o Git de um jeito centralizado: um único repositório gigante, e a integração contínua puxando código o tempo todo. Nas palavras deles, as propriedades que fazem o Git excelente para o trabalho distribuído e offline estavam atrapalhando a escala."
+    },
+    {
+      "chapter": 3,
+      "text": "Os números assustam. Só a história do branch principal tinha quase cem gigabytes. A integração contínua fazia cerca de vinte e cinco milhões de checkouts por dia. Se cada um baixasse tudo, seriam mais de seiscentos petabytes de tráfego por dia."
+    },
+    {
+      "chapter": 3,
+      "text": "O Git tem respostas para isso: clone raso, clone parcial, sparse checkout. A Anthropic usou todas, e chegou a manter centenas de espelhos internos do Git só para aguentar a carga. Ainda assim, quanto mais rápido entravam as mudanças, mais difícil ficava manter tudo de pé."
+    },
+    {
+      "chapter": 4,
+      "text": "Então eles inverteram a lógica. No Scion, quem guarda e trabalha a história é o servidor. Commit, merge, rebase, blame, diff: tudo acontece lá. Como a própria Anthropic diz, não sobra nada para dar push."
+    },
+    {
+      "chapter": 4,
+      "text": "A unidade de trabalho deixa de ser o commit e vira o changeset, uma entrada num write-ahead log, que guarda só os arquivos que mudaram. Os metadados ficam no Spanner, o conteúdo num armazenamento em nuvem, e mover um branch é uma única troca atômica numa linha do banco. Para responder blame e histórico, o servidor calcula o que eles chamam de derived data: dados derivados de cada changeset."
+    },
+    {
+      "chapter": 5,
+      "text": "E a máquina de quem trabalha? Ela não baixa mais o repositório inteiro. O cliente pede só as árvores e os arquivos de que precisa, e o checkout pode ser virtual: o arquivo aparece no disco na hora em que alguém precisa dele."
+    },
+    {
+      "chapter": 5,
+      "text": "No caminho, três camadas de cache: um daemon em cada máquina, um cache por região e, só no fim, o servidor. Cada camada responde sozinha mais de noventa e nove por cento dos pedidos. E não existe packfile para manter."
+    },
+    {
+      "chapter": 6,
+      "text": "O resultado? A infraestrutura do Scion ficou duzentas vezes menor que os antigos espelhos do Git, em processador e memória. Os checkouts de testes e de pesquisa ficaram duas ordens de grandeza mais rápidos: segundos, em vez de minutos. Só a integração contínua ganhou vinte e cinco por cento de capacidade."
+    },
+    {
+      "chapter": 6,
+      "text": "E tudo isso foi feito por uma equipe de sete pessoas, em cinco meses, enquanto os merges diários se multiplicavam por dez. Junto veio o Antique, uma nova ferramenta de revisão de código. E o Claude ajudou: uma versão do pipeline de importação reescrita por ele usava vinte vezes menos memória e era quatro vezes mais rápida. E hoje há instâncias do Claude, que eles chamam de superfans, cada uma acompanhando um componente do sistema."
+    },
+    {
+      "chapter": 7,
+      "text": "Nada disso nasceu do zero. A Anthropic dá o crédito ao Piper, do Google, e ao Sapling, da Meta, em especial ao Mononoke, o servidor do Sapling, que criou o modelo de dados Bonsai e muitas das técnicas usadas no Scion."
+    },
+    {
+      "chapter": 7,
+      "text": "E o seu Git? Continua aí. A própria Anthropic diz que o Scion não é, de jeito nenhum, um substituto do Git para uso geral: ele foi feito para monorepos realmente enormes. O plano é compartilhar as ideias, para que outras equipes levem parte delas para o próprio Git."
+    },
+    {
+      "chapter": 7,
+      "text": "Então, da próxima vez que você der um git push, lembra: a IA já escreve tanto código que até a ferramenta mais confiável da programação precisou de um próximo passo. Se essa história te ajudou, deixa o seu like e se inscreve no canal. Até a próxima."
+    }
+  ],
+  "terms": [
+    {
+      "term": "Dario Amodei",
+      "def": "CEO da Anthropic"
+    },
+    {
+      "term": "Scion",
+      "def": "o controle de versão da Anthropic, com a história no servidor"
+    },
+    {
+      "term": "changeset",
+      "def": "a unidade de mudança do Scion, no lugar do commit"
+    },
+    {
+      "term": "write-ahead log",
+      "def": "o registro onde cada changeset entra, em ordem"
+    },
+    {
+      "term": "Spanner",
+      "def": "o banco do Google onde ficam os metadados e os branches"
+    },
+    {
+      "term": "derived data",
+      "def": "o que o servidor calcula a partir dos changesets: blame, histórico"
+    },
+    {
+      "term": "checkout virtual",
+      "def": "o arquivo só aparece no disco quando alguém precisa dele"
+    },
+    {
+      "term": "scion-daemon",
+      "def": "o cache em cada máquina"
+    },
+    {
+      "term": "scion-cache",
+      "def": "o cache de árvores e arquivos de cada região"
+    },
+    {
+      "term": "scion-server",
+      "def": "a fonte da verdade, só no fim do caminho"
+    },
+    {
+      "term": "Antique",
+      "def": "a nova ferramenta de revisão de código da Anthropic"
+    },
+    {
+      "term": "superfans",
+      "def": "instâncias do Claude, cada uma acompanhando um componente"
+    }
+  ],
+  "sources": [
+    {
+      "text": "Todo número e toda afirmação do vídeo vem do post da Anthropic \"Redesigning source control at Anthropic\" (13/10/2026, atualizado em 15/10)",
+      "url": "https://www.anthropic.com/engineering/redesigning-source-control"
+    }
+  ],
+  "credits": [
+    {
+      "id": "tl9btezCHLg",
+      "title": "Mexico City timelapse, huge urban skyline, moving traffic 🌆  No Copyright – Time Lapse",
+      "channel": "FreeCut Studio",
+      "channelUrl": "https://www.youtube.com/channel/UC84LqEj_uZULHdPa2m5UrHg",
+      "url": "https://www.youtube.com/watch?v=tl9btezCHLg",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "NnVW9epLlTM",
+      "title": "The Day After AGI | World Economic Forum Annual Meeting 2026",
+      "channel": "World Economic Forum",
+      "channelUrl": "https://www.youtube.com/channel/UCw-kH-Od73XDAt7qtH9uBYA",
+      "url": "https://www.youtube.com/watch?v=NnVW9epLlTM",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "6t25Js8P9bc",
+      "title": "Digital binary code - Free 4k  motion background",
+      "channel": "Motion stock",
+      "channelUrl": "https://www.youtube.com/channel/UClGh4kKTQNKF0YuS_fHGphg",
+      "url": "https://www.youtube.com/watch?v=6t25Js8P9bc",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "WA7-A22Qh7s",
+      "title": "Holographic AI Brain Data Center Seamless Loop 4K No Copyright",
+      "channel": "Free Dream Vault",
+      "channelUrl": "https://www.youtube.com/channel/UC5K7QcN9KC2pR7qDIe0sbtQ",
+      "url": "https://www.youtube.com/watch?v=WA7-A22Qh7s",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "YvKkwkrxv9s",
+      "title": "Binary Code Matrix Tunnel Loop 4K - Cyber Data Stream No Copyright Video",
+      "channel": "Free Dream Vault",
+      "channelUrl": "https://www.youtube.com/channel/UC5K7QcN9KC2pR7qDIe0sbtQ",
+      "url": "https://www.youtube.com/watch?v=YvKkwkrxv9s",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "zjBsYTeHBCk",
+      "title": "Industrial Robot (NO copyright 4K footage)",
+      "channel": "No Copyright 4K Footage",
+      "channelUrl": "https://www.youtube.com/channel/UCBQ5pMft4EcBM0K4ZJMSYEw",
+      "url": "https://www.youtube.com/watch?v=zjBsYTeHBCk",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "vD88EyXss6Y",
+      "title": "Electronics assembly line Free Stock Video",
+      "channel": "Urban Hush",
+      "channelUrl": "https://www.youtube.com/channel/UCYx2E_VGXVUjI8N5iTmEoHA",
+      "url": "https://www.youtube.com/watch?v=vD88EyXss6Y",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "ZapW7ok7pAE",
+      "title": "Interchange Highway Overpass and Junction on Busy Day FREE STOCK FOOTAGE, NO COPYRIGHT VIDEOS,",
+      "channel": "Free Stock Videos",
+      "channelUrl": "https://www.youtube.com/channel/UCSBVXiZ-Yf4KwOo18SjG1qg",
+      "url": "https://www.youtube.com/watch?v=ZapW7ok7pAE",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "9vJZ604lBBI",
+      "title": "Assembly Line - Free Stock Footage HD",
+      "channel": "Free Stock Footage HD",
+      "channelUrl": "https://www.youtube.com/channel/UCfGLdph7K6HOfF1YVrzKUow",
+      "url": "https://www.youtube.com/watch?v=9vJZ604lBBI",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "fi29pfLcW4I",
+      "title": "Keynote: Linus Torvalds, Creator of Linux & Git with Dirk Hohndel, Founder, DH Consulting",
+      "channel": "The Linux Foundation",
+      "channelUrl": "https://www.youtube.com/channel/UCfX55Sx5hEFjoC3cNs6mCUQ",
+      "url": "https://www.youtube.com/watch?v=fi29pfLcW4I",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "AARC0wtjIJM",
+      "title": "4K Free Stock Footage – Book Pages Turning | No Copyright Literature Video",
+      "channel": "Free Stock Footage",
+      "channelUrl": "https://www.youtube.com/channel/UClR6m6aKIc-XthnwRJ2gTfg",
+      "url": "https://www.youtube.com/watch?v=AARC0wtjIJM",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "LeP1Jm0c0sI",
+      "title": "Library, Books, Corridor - Free footage on Pixabay - 846",
+      "channel": "wpthms",
+      "channelUrl": "https://www.youtube.com/channel/UC0bvCBzI4AGgtRO7TR0NdpA",
+      "url": "https://www.youtube.com/watch?v=LeP1Jm0c0sI",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "XrwewCWMq6k",
+      "title": "Data processing and storage center  Server room",
+      "channel": "Free Stock Footage",
+      "channelUrl": "https://www.youtube.com/channel/UCKO78AigSHXl2YoXzhef8ww",
+      "url": "https://www.youtube.com/watch?v=XrwewCWMq6k",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "iT89CGpsCiE",
+      "title": "Close Up Video Of Typing On Keyboard - Free Stock Creative Commons Video",
+      "channel": "Freestocks",
+      "channelUrl": "https://www.youtube.com/channel/UCgcmkT6xhHyoNy-yjO7O7MA",
+      "url": "https://www.youtube.com/watch?v=iT89CGpsCiE",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "4pTijpnbB2I",
+      "title": "Big Data Servers",
+      "channel": "Free Stock Footage",
+      "channelUrl": "https://www.youtube.com/channel/UCKO78AigSHXl2YoXzhef8ww",
+      "url": "https://www.youtube.com/watch?v=4pTijpnbB2I",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "jTFAseOjFEs",
+      "title": "Highway rush at night timelapse (4K) - Royalty Free  Video (The collection)",
+      "channel": "The Collection",
+      "channelUrl": "https://www.youtube.com/channel/UCPQI5ZQpuDjGBc-khCg50Lg",
+      "url": "https://www.youtube.com/watch?v=jTFAseOjFEs",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "ROSbrPMd8NE",
+      "title": "Server Room 04 / Free Stock Footage",
+      "channel": "101GreenLight TV",
+      "channelUrl": "https://www.youtube.com/channel/UCf_J50-XsjLQxJ4AHXmnujQ",
+      "url": "https://www.youtube.com/watch?v=ROSbrPMd8NE",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "r68DbzAKxKE",
+      "title": "Data processing and storage center  Server room  Supercomputer",
+      "channel": "Free Stock Footage",
+      "channelUrl": "https://www.youtube.com/channel/UCKO78AigSHXl2YoXzhef8ww",
+      "url": "https://www.youtube.com/watch?v=r68DbzAKxKE",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "jvXHLtb2yB4",
+      "title": "seamlessly looping animation of rack servers in data center",
+      "channel": "Top Videos creators",
+      "channelUrl": "https://www.youtube.com/channel/UCFGcoM_EWp-5lF3hX-aVp4A",
+      "url": "https://www.youtube.com/watch?v=jvXHLtb2yB4",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "kFlqbFORpFA",
+      "title": "Macro Shot of Computer Circuit Board - Free Stock Video Download - Free Stock Video Footage",
+      "channel": "Videvo",
+      "channelUrl": "https://www.youtube.com/channel/UCs0UeTXszjkZN7n_gI13wkQ",
+      "url": "https://www.youtube.com/watch?v=kFlqbFORpFA",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "rCULeI0Okd4",
+      "title": "Beachfront B-Roll: Hard Drive Spinning (Free to Use HD Stock Video Footage)",
+      "channel": "Beachfront B-Roll: Free Stock Footage",
+      "channelUrl": "https://www.youtube.com/channel/UCk0ICGtmgO3FvvjxD4tasdg",
+      "url": "https://www.youtube.com/watch?v=rCULeI0Okd4",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "qwVbtrG1xnI",
+      "title": "Global Business Map and Internet | Free Animation Background",
+      "channel": "Motion BG",
+      "channelUrl": "https://www.youtube.com/channel/UCsUb95wB-5SsR7J2Rc9t2TA",
+      "url": "https://www.youtube.com/watch?v=qwVbtrG1xnI",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "P7SLwfBZeJo",
+      "title": "Clip of SATA Disks in Disk Array",
+      "channel": "FREE FOOTAGE",
+      "channelUrl": "https://www.youtube.com/channel/UCRo3f6LFSaf0mX8iLqoDAFw",
+      "url": "https://www.youtube.com/watch?v=P7SLwfBZeJo",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "6-4V3OWGUlY",
+      "title": "Network animation - Copyright free",
+      "channel": "RIZLAZ",
+      "channelUrl": "https://www.youtube.com/channel/UCPRGg-pj4QUU-YQiKXYT6jw",
+      "url": "https://www.youtube.com/watch?v=6-4V3OWGUlY",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "YLfC-LIWueQ",
+      "title": "Server Room 01 / Free Stock Footage",
+      "channel": "101GreenLight TV",
+      "channelUrl": "https://www.youtube.com/channel/UCf_J50-XsjLQxJ4AHXmnujQ",
+      "url": "https://www.youtube.com/watch?v=YLfC-LIWueQ",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "wMeNdq3Q5xw",
+      "title": "Fiber Optic Network Background - Royalty free footage",
+      "channel": "Motion stock",
+      "channelUrl": "https://www.youtube.com/channel/UClGh4kKTQNKF0YuS_fHGphg",
+      "url": "https://www.youtube.com/watch?v=wMeNdq3Q5xw",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "QR-oKe2XEw0",
+      "title": "Singapore Marina Bay timelapse at night 🌆  No Copyright – Time Lapse",
+      "channel": "FreeCut Studio",
+      "channelUrl": "https://www.youtube.com/channel/UC84LqEj_uZULHdPa2m5UrHg",
+      "url": "https://www.youtube.com/watch?v=QR-oKe2XEw0",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "JvGIjEmA8uo",
+      "title": "PLEX - FREE 4K & HD Stock Footage & Animation - USA Connecting to the World - Planet. No Copyright",
+      "channel": "PLEX - Free 4K & HD Stock Footage & Animations",
+      "channelUrl": "https://www.youtube.com/channel/UCvIogYNX7GMI1FCBG7zUBYQ",
+      "url": "https://www.youtube.com/watch?v=JvGIjEmA8uo",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "6jcrCSo8iww",
+      "title": "Close-Up Video Of Typing - Free Stock Creative Commons Video",
+      "channel": "Freestocks",
+      "channelUrl": "https://www.youtube.com/channel/UCgcmkT6xhHyoNy-yjO7O7MA",
+      "url": "https://www.youtube.com/watch?v=6jcrCSo8iww",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "9EMqrqT-xNs",
+      "title": "Close Up Video Of Man Typing On Keyboard - Free Stock Creative Commons Video",
+      "channel": "Freestocks",
+      "channelUrl": "https://www.youtube.com/channel/UCgcmkT6xhHyoNy-yjO7O7MA",
+      "url": "https://www.youtube.com/watch?v=9EMqrqT-xNs",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "iwvI_MNzKqk",
+      "title": "Library Stock Video (4K)",
+      "channel": "Free Stock Video",
+      "channelUrl": "https://www.youtube.com/channel/UChErxiafJhwtPlkoyGaJLPw",
+      "url": "https://www.youtube.com/watch?v=iwvI_MNzKqk",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "lwbj9TxIA0s",
+      "title": "Toronto city timelapse at night, CN Tower skyline, moving traffic lights 🌆  No Copyright –Time Lapse",
+      "channel": "FreeCut Studio",
+      "channelUrl": "https://www.youtube.com/channel/UC84LqEj_uZULHdPa2m5UrHg",
+      "url": "https://www.youtube.com/watch?v=lwbj9TxIA0s",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    },
+    {
+      "id": "hTI5VbZt4M0",
+      "title": "Neon City Highway Night Traffic 4K No Copyright",
+      "channel": "Free Dream Vault",
+      "channelUrl": "https://www.youtube.com/channel/UC5K7QcN9KC2pR7qDIe0sbtQ",
+      "url": "https://www.youtube.com/watch?v=hTI5VbZt4M0",
+      "license": "Creative Commons Attribution license (reuse allowed)"
+    }
+  ]
+}

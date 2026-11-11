@@ -2,12 +2,11 @@
 
 ## Block A — The site at japode.com.br
 
-- 📋 **JN4** (deps: JN1 ✅, JN3) **A visitor on the home page cannot tell what the Japode channel is about or where its videos are** — The home is the link in the channel's bio, so it must say in one line what the videos are and list them newest first. → §JN4
+- 📋 **JN4** (deps: JN1 ✅, JN3 ✅) **A visitor on the home page cannot tell what the Japode channel is about or where its videos are** — The home is the link in the channel's bio, so it must say in one line what the videos are and list them newest first. → §JN4
 
 ## Block B — One page per video
 
-- 📋 **JN3** (deps: —) **A video's facts (YouTube id, date, chapters, terms, sources) live only in the private marketing repository** — The build in GitHub Actions cannot read marketing, so one command must copy each video's facts here, never retyped. → §JN3
-- 📋 **JN5** (deps: JN1 ✅, JN3) **There is no page for a video, so nothing outside YouTube can be searched for, linked to or quoted** — One page per video is what search engines and forums link to, and each one sends its reader back to the video. → §JN5
+- 📋 **JN5** (deps: JN1 ✅, JN3 ✅) **There is no page for a video, so nothing outside YouTube can be searched for, linked to or quoted** — One page per video is what search engines and forums link to, and each one sends its reader back to the video. → §JN5
 - 📋 **JN6** (deps: JN5) **The narration is speech, with filler words and lines cut for the voice, so as an article it reads badly** — A written article built from the same facts reads well and ranks for what people search, and it claims nothing beyond the sources. → §JN6
 - 📋 **JN7** (deps: JN5, JN6) **The Scion video has no page, though its subject is new and few texts in Portuguese explain it** — Scion is a recent subject that specialists search for, with little written in Portuguese, so its page has the best chance of ranking first. → §JN7
 - 📋 **JN8** (deps: JN5, JN6) **The Docker video has no page, though "o que é Docker" is a search that does not go away** — Docker is the channel's evergreen subject, and a page that answers "o que é Docker" can bring readers for years. → §JN8

@@ -27,5 +27,29 @@ npm run build   # tsc, build do cliente e do SSR, prerender e scripts/verify.mjs
 `scripts/verify.mjs` confere o `dist/` contra cada tarefa entregue e diz a qual tarefa pertence
 cada falha.
 
+## Um vídeo novo
+
+Os fatos de um vídeo vêm do repositório privado marketing, que o build no GitHub Actions não
+lê; por isso são copiados para `content/videos/<slug>/`, nunca redigitados.
+
+1. No marketing, rode o build do vídeo até o fim: ele escreve a descrição do YouTube, o
+   `out/plan.json` e a thumbnail que a importação lê.
+2. Publique o vídeo no YouTube e anote o id (`youtu.be/<id>`) e a data.
+3. Importe, nesta máquina:
+
+   ```
+   node scripts/import-video.mjs D:\Git\viglet\marketing\japode\<vídeo> <slug> --youtube <id> --published <AAAA-MM-DD> --title "<título no YouTube>"
+   ```
+
+   Escreve `video.json` (capítulos com os tempos, a narração sem as marcas da voz, os termos
+   com a definição, as fontes e os créditos das imagens) e `thumbnail.jpg`. O `--title` só é
+   preciso quando o título no YouTube difere do de `shots.json`. Rodar de novo sem mudança no
+   marketing não muda nenhum arquivo.
+4. `npm run build`: um `video.json` que não cabe no tipo `Video` (`src/data/videos.ts`) para o
+   build, com o campo que falhou.
+5. O artigo (`article.md`) é escrito a partir do vídeo e das fontes, e o Alexandre o aprova
+   antes de a página ir ao ar.
+6. Commit, e o Alexandre faz o push: o workflow publica o site.
+
 O plano está em [docs/ROADMAP.md](docs/ROADMAP.md), e o desenho de cada tarefa em
 [docs/IMPROVEMENTS.md](docs/IMPROVEMENTS.md).
