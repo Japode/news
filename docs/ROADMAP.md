@@ -2,8 +2,6 @@
 
 ## Block A — The site at japode.com.br
 
-- 📋 **JN4** (deps: JN1 ✅, JN3 ✅) **A visitor on the home page cannot tell what the Japode channel is about or where its videos are** — The home is the link in the channel's bio, so it must say in one line what the videos are and list them newest first. → §JN4
-
 ## Block B — One page per video
 
 - 📋 **JN5** (deps: JN1 ✅, JN3 ✅) **There is no page for a video, so nothing outside YouTube can be searched for, linked to or quoted** — One page per video is what search engines and forums link to, and each one sends its reader back to the video. → §JN5
@@ -16,7 +14,7 @@
 - 📋 **JN9** (deps: JN5) **Search engines and AI assistants see an embed but no structured facts about the video or the article** — Video data lets Google show the thumbnail and the chapters in its results, and llms.txt lets assistants cite the article. → §JN9
 - 📋 **JN10** (deps: JN2 ✅) **No number says whether the site brings anyone: which page was found, from which search, is unknown** — visibility measures every product through the Search Console, so japode.com.br needs a verified property that visibility can read. → §JN10
 - 📋 **JN11** (deps: JN7, JN8) **The videos' descriptions do not link to their pages, so a viewer who would rather read never finds them** — The YouTube link brings a page its first visitors and Google its first signal, and only the Alexandre can change it. → §JN11
-- 📋 **JN12** (deps: JN4) **japode.com and japode.com.br do not mention each other, so neither passes a visitor to the other** — One brand on two domains reads as two strangers unless each links the other, each in its own language. → §JN12
+- 📋 **JN12** (deps: JN4 ✅) **japode.com and japode.com.br do not mention each other, so neither passes a visitor to the other** — One brand on two domains reads as two strangers unless each links the other, each in its own language. → §JN12
 
 ## Non-goals
 

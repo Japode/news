@@ -74,6 +74,22 @@ const imported = existsSync(VIDEOS_DIR) ? readdirSync(VIDEOS_DIR).filter((d) => 
 check("JN3", imported.sort().join() === app.VIDEOS.map((v) => v.slug).sort().join(), `content/videos/ holds ${imported.join(", ")}, the build loaded ${app.VIDEOS.map((v) => v.slug).join(", ")}`)
 for (const v of app.VIDEOS) check("JN3", existsSync(join(VIDEOS_DIR, v.slug, "thumbnail.jpg")), `${v.slug} has no thumbnail.jpg`)
 
+// JN4 — the home reads as a blog: no landing-page hero, every imported video listed
+// newest first, each row linking its page (or the video until the page exists), with
+// its thumbnail served, and the subscribe link on the channel's address.
+const home = page("/")
+check("JN4", !home.includes("vg-site-hero"), "the home page still carries the landing-page hero")
+const rows = [...home.matchAll(/<article class="jn-post" id="([^"]+)"/g)].map((m) => m[1])
+const newest = [...app.VIDEOS].sort((a, b) => b.published.localeCompare(a.published)).map((v) => v.slug)
+check("JN4", rows.join() === newest.join(), `the home lists ${rows.join(", ") || "nothing"}, not ${newest.join(", ")} newest first`)
+for (const v of app.VIDEOS) {
+  const href = ROUTES.some((r) => r.path === `/${v.slug}/`) ? `/${v.slug}/` : `https://youtu.be/${v.youtube}`
+  const row = home.slice(home.indexOf(`id="${v.slug}"`), home.indexOf("</article>", home.indexOf(`id="${v.slug}"`)))
+  check("JN4", row.includes(`href="${href}"`), `the home row for ${v.slug} does not link ${href}`)
+  check("JN4", existsSync(join(DIST, v.slug, "thumbnail.jpg")), `${v.slug}'s thumbnail is not served`)
+}
+check("JN4", SITE.youtube === "https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg" && home.includes(`href="${SITE.youtube}"`), "the home does not link the channel's address to subscribe")
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

@@ -18,26 +18,6 @@ session.
 Done when: https://japode.com.br answers 200 over HTTPS with the home page, and the http
 and www addresses redirect to it.
 
-### §JN4 The home page
-
-`/` reads as a blog, not a landing page (the Alexandre, 2026-11-11: JN1's product hero
-is too loud). So no `SiteHero`, no gradient title and no badge: a quiet header with the
-mark and the name, one line on what the channel is (short videos in Portuguese about the
-history and the reasons behind the tools developers use every day, told from real
-sources), then the posts in one reading column, newest first. Each post is a row: the
-thumbnail, the title, the date, the duration, a one-line summary and the link to the
-video's page. The green is an accent (links, the date, a term), never a ground. Under
-the list, a plain link to subscribe on YouTube: its address is a single setting,
-`SITE.youtube`, set to https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg.
-
-No video is written into the page: the list reads `content/videos/` (JN3), so a new
-video appears on the home by being imported, and nothing else. The footer links
-japode.com and the GitHub organisation (JN12).
-
-Done when: the home lists every video in `content/videos/`, newest first, each row links
-its page, no `vg-site-hero` is in the HTML, and the subscribe link is the channel's
-address. `verify.mjs` checks the first three under JN4.
-
 ## Block B — One page per video
 
 ### §JN5 The video page
@@ -66,7 +46,9 @@ and the sources, and the Alexandre approves it before the task that adds the vid
 ships. It tells the same story in paragraphs: the filler words go, each chapter is a
 section under its title, and every number and quote links to the source it came from.
 The first paragraph answers the search the video targets ("o que é Docker" for Docker,
-"Scion Anthropic" for Scion).
+"Scion Anthropic" for Scion). That paragraph's first sentence is also the one-line
+summary under the post's title on the home (JN4 shipped its rows without one, since
+nothing imported carries a summary), and the page's meta description.
 
 The rule the videos keep holds here: nothing is made up, and no sentence goes beyond
 what the video and its cited sources say. The Markdown is rendered at build time; one

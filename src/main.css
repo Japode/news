@@ -10,6 +10,75 @@
    term in SemiBold, in the brand green. */
 
 @layer components {
+  /* A blog's reading column (JN4): the green is an accent, never a ground. */
+  .jn-column {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 16px 72px;
+  }
+  .jn-intro {
+    padding-bottom: 28px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--vg-border);
+  }
+  .jn-intro h1 {
+    font-family: var(--font-brand);
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .jn-intro p {
+    margin-top: 10px;
+    color: var(--vg-muted-foreground);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .jn-post {
+    display: grid;
+    /* minmax(0, …): a 1280px thumbnail must not widen the column past a phone's screen */
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--vg-border);
+  }
+  @media (max-width: 560px) {
+    .jn-post {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+  }
+  .jn-post-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--vg-radius-control);
+  }
+  .jn-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--vg-muted-foreground);
+    font-size: 0.85rem;
+  }
+  .jn-post-meta > * + *::before {
+    content: "·";
+    margin: 0 7px;
+  }
+  .jn-post-title {
+    margin-top: 6px;
+    font-family: var(--font-brand);
+    font-weight: 800;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .jn-subscribe {
+    margin-top: 32px;
+    color: var(--vg-muted-foreground);
+  }
+
   .jn-term {
     font-family: var(--font-brand);
     font-weight: 600;
@@ -30,11 +99,21 @@
   }
 }
 
-/* Outside the layer, to win over site.css: the hero title in ExtraBold (site.css draws
-   it Black), and the mark is a circle, so its frame is too. */
-.vg-site-hero h1 {
-  font-weight: 800;
+/* Outside the layer, to win over site.css, whose `.vg-site a { color: inherit }` and
+   glowing ground are a product page's. A blog's ground is plain, and its links are the
+   accent: green and underlined, except a post's title, which reads as a heading. */
+.vg-site::before {
+  background: var(--vg-background);
 }
-.vg-site-hero-icon {
-  border-radius: 50%;
+.vg-site .jn-column a {
+  color: var(--vg-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.vg-site .jn-column .jn-post-title a {
+  color: var(--vg-foreground);
+  text-decoration: none;
+}
+.vg-site .jn-column .jn-post-title a:hover {
+  color: var(--vg-brand);
 }

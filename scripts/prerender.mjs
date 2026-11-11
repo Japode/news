@@ -6,7 +6,7 @@
 // the PNG icons, drawn from public/logo.svg, which is the one source of the mark here: a
 // copy of marca/logo/japode.svg in the visibility repository, never redrawn.
 
-import { copyFileSync, readFileSync, writeFileSync } from "node:fs"
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { Resvg } from "@resvg/resvg-js"
@@ -41,6 +41,12 @@ const notFound = join(DIST, "404", "index.html")
 writeFileSync(notFound, readFileSync(notFound, "utf8").replace("</head>", `  <meta name="robots" content="noindex" />\n  </head>`))
 // GitHub Pages serves /404.html for any path it does not have.
 copyFileSync(notFound, join(DIST, "404.html"))
+
+// Each video's thumbnail, beside the page it belongs to: /<slug>/thumbnail.jpg (JN4).
+for (const v of app.VIDEOS) {
+  mkdirSync(join(DIST, v.slug), { recursive: true })
+  copyFileSync(join(REPO, "content", "videos", v.slug, "thumbnail.jpg"), join(DIST, v.slug, "thumbnail.jpg"))
+}
 
 // The PNG icons a manifest and an iOS home screen ask for, from the one SVG.
 const logo = readFileSync(join(REPO, "public", "logo.svg"), "utf8")

@@ -6,8 +6,11 @@ export const SITE = {
   /** The origin every canonical URL is written under: the final address from day one. */
   origin: "https://japode.com.br",
   title: "Japode — vídeos curtos sobre as ferramentas de quem programa",
+  /** The one line the home opens with: what the channel's videos are. */
   description:
-    "O site do canal Japode no YouTube: uma página por vídeo, com o vídeo, o texto escrito a partir dele, os termos que ele destaca e as fontes.",
+    "Vídeos curtos, em português, sobre a história e os porquês das ferramentas que quem programa usa todo dia, contados a partir de fontes reais.",
+  /** The channel, which the home asks the reader to subscribe to (JN4). */
+  youtube: "https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg",
   /** The English catalogue of the Japode products, which this site links and is linked from. */
   catalogue: "https://japode.com",
   github: "https://github.com/Japode",

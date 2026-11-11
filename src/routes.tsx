@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import { SITE } from "./data/site.ts"
+import { VIDEOS, type Video } from "./data/videos.ts"
 import { Home } from "./pages/Home.tsx"
 import { NotFound } from "./pages/NotFound.tsx"
 
@@ -21,7 +22,7 @@ export const ROUTES: Route[] = [
     title: SITE.title,
     description: SITE.description,
     index: true,
-    render: () => <Home />,
+    render: () => <Home posts={VIDEOS.map((video) => ({ video, href: postHref(video) }))} />,
   },
   {
     path: "/404/",
@@ -31,6 +32,10 @@ export const ROUTES: Route[] = [
     render: () => <NotFound />,
   },
 ]
+
+/** Where the home sends a post: its page once it has one (JN5), the video until then,
+    so no row links an address that answers 404. */
+export const postHref = (video: Video) => (ROUTES.some((r) => r.path === `/${video.slug}/`) ? `/${video.slug}/` : `https://youtu.be/${video.youtube}`)
 
 export const routeFor = (path: string): Route => {
   const clean = path.endsWith("/") ? path : `${path}/`
