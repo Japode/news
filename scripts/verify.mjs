@@ -57,6 +57,16 @@ check("JN1", !existsSync(join(DIST, "docs")) && !existsSync(join(DIST, "scripts"
 check("JN1", SITE.themeKey === "japode-news-theme", `the theme key is ${SITE.themeKey}, not japode-news-theme`)
 check("JN1", walk(join(DIST, "assets")).some((f) => /plus-jakarta-sans-latin-wght-normal-.*\.woff2$/.test(f)), "Plus Jakarta Sans is not shipped")
 
+// JN2 — the deploy builds (so a failed check here stops it) and publishes the build
+// output alone, and the domain file rides with it, naming the origin the pages are
+// canonical on. Whether japode.com.br answers is the push's to show, not the build's.
+const workflow = readFileSync(join(REPO, ".github", "workflows", "deploy.yml"), "utf8")
+check("JN2", /npm run build/.test(workflow), "deploy.yml does not run npm run build")
+check("JN2", /path:\s*\.?\/?dist\b/.test(workflow), "deploy.yml does not upload dist/")
+check("JN2", /branches:\s*\[main\]/.test(workflow), "deploy.yml does not deploy on a push to main")
+check("JN2", existsSync(join(DIST, ".nojekyll")), ".nojekyll is not served")
+check("JN2", existsSync(join(DIST, "CNAME")) && read("CNAME").trim() === new URL(SITE.origin).host, `CNAME does not name ${new URL(SITE.origin).host}`)
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)
