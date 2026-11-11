@@ -6,4 +6,6 @@
 
 ## Block B — One page per video
 
+- ⏸ **JN7** (deps: JN5 ✅, JN6 ✅) **The Scion video has no page, though its subject is new and few texts in Portuguese explain it** — set aside (Waits for the Alexandre to approve the article.): The Alexandre reads the Scion article.md and writes approved: <date> in its front matter, which puts it on the page. → §JN7
+
 ## Block C — Found, measured and linked
