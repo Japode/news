@@ -15,6 +15,10 @@
 //   out/<name>-pt-BR.description.txt the chapters with their times, and the primary sources
 //   out/plan.json                    the length of the cut
 //   out/thumbnail.pt-BR.jpg          the thumbnail, versioned here as the site's own image
+//   site.json (optional, JN18)       what only the Alexandre decides: the kicker, the sponsor
+//                                    tie ("none", "product", "competitor"), the numbers the video
+//                                    states as { value, measures, source }, and each source's
+//                                    { lang, published }, in the description's order
 // What the build cannot know is a flag: the YouTube id, the date it was published, and
 // the title when YouTube's differs from shots.json's.
 //
@@ -124,6 +128,30 @@ const sources = (sections["Fontes"] ?? sections["Fonte"] ?? []).map((line) => {
   return { text: line.replace(url, "").replace(/[:\s]+$/, "").trim(), url }
 })
 
+// The production credit (JN18): the line the build writes into the description, which
+// says the narration and music are generated. Every video carries it, so a page can too.
+const production = Object.keys(sections).find((head) => /^Narração\b/.test(head)) ?? fail("the description has no Narração line saying how the voice was made")
+
+// What only the Alexandre can decide (JN18), from the video's site.json in marketing:
+// the kicker, how the video relates to the sponsor, the numbers it states with their
+// sources, and each source's language and date. Optional until he writes it; checked
+// in full once it exists, so a typo there stops the import rather than the page.
+const site = existsSync(join(SRC, "site.json")) ? json("site.json") : null
+if (site) {
+  if (typeof site.kicker !== "string" || !site.kicker) fail("site.json has no kicker")
+  if (!["none", "product", "competitor"].includes(site.sponsorTie)) fail('site.json\'s sponsorTie is not "none", "product" or "competitor"')
+  for (const [i, f] of (site.facts ?? []).entries()) {
+    if (typeof f.value !== "string" || typeof f.measures !== "string" || !Number.isInteger(f.source)) fail(`site.json's facts[${i}] is not { value, measures, source }`)
+    if (!sources[f.source]) fail(`site.json's facts[${i}] names source ${f.source}, and the description lists ${sources.length}`)
+  }
+  for (const [i, s] of (site.sources ?? []).entries()) {
+    if (!sources[i]) fail(`site.json describes source ${i}, and the description lists ${sources.length}`)
+    if (s.lang !== undefined && !/^[a-z]{2}(-[A-Z]{2})?$/.test(s.lang)) fail(`site.json's sources[${i}].lang is not a language tag`)
+    if (s.published !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(s.published)) fail(`site.json's sources[${i}].published is not YYYY-MM-DD`)
+    Object.assign(sources[i], s.lang ? { lang: s.lang } : {}, s.published ? { published: s.published } : {})
+  }
+}
+
 const video = {
   $comment: `Imported by scripts/import-video.mjs from marketing/japode/${name}; never edited by hand.`,
   slug,
@@ -137,6 +165,8 @@ const video = {
   sources,
   credits,
   ...(flags.short ? { short: { youtube: flags.short, title: flags["short-title"] } } : {}),
+  production,
+  ...(site ? { kicker: site.kicker, sponsorTie: site.sponsorTie, ...(site.facts?.length ? { facts: site.facts } : {}) } : {}),
 }
 
 const OUT = join(REPO, "content", "videos", slug)

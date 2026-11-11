@@ -300,5 +300,6 @@
   "short": {
     "youtube": "uMa5PYAAtcg",
     "title": "O Docker nasceu numa palestra de 5 minutos"
-  }
+  },
+  "production": "Narração e música geradas com ElevenLabs."
 }

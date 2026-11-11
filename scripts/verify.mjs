@@ -247,6 +247,17 @@ const VIGLET_MARK = resolve(REPO, "..", "..", "alegauss", "visibility", "marca",
 if (existsSync(VIGLET_MARK)) check("JN17", readFileSync(VIGLET_MARK, "utf8") === readFileSync(join(REPO, "public", "viglet.svg"), "utf8"), "public/viglet.svg differs from visibility's marca/logo/viglet.svg")
 check("JN17", existsSync(join(DIST, "viglet.svg")), "Viglet's mark is not served")
 
+// JN18 — every video says how its voice was made; a number it states points at one of
+// its sources (src/data/videos.ts refuses the build otherwise, and this names the task);
+// every video in production in content/upcoming/ is loaded, and none is published.
+for (const v of app.VIDEOS) {
+  check("JN18", /ElevenLabs/.test(v.production ?? ""), `${v.slug} has no production credit: run scripts/import-video.mjs again`)
+  for (const [i, f] of (v.facts ?? []).entries()) check("JN18", Boolean(v.sources[f.source]), `${v.slug}'s fact ${i} names no source`)
+}
+const UPCOMING_DIR = join(REPO, "content", "upcoming")
+const upcomingFiles = existsSync(UPCOMING_DIR) ? readdirSync(UPCOMING_DIR).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5)) : []
+check("JN18", upcomingFiles.sort().join() === app.UPCOMING.map((u) => u.slug).sort().join(), `content/upcoming/ holds ${upcomingFiles.join(", ")}, the build loaded ${app.UPCOMING.map((u) => u.slug).join(", ")}`)
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

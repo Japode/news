@@ -69,26 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN18 JN18 — The fields the artboard reads
-
-The artboard shows things `video.json` does not carry. Each gets a field in the `Video`
-type and its CHECK, filled by `scripts/import-video.mjs` from
-`marketing/japode/<video>`, and the import refuses a video without a required one rather
-than inventing it:
-
-- `kicker`: the subject line above the title ("Controle de versão", "Contêineres").
-- `facts`: the "Os números do vídeo" rows, each `{ value, measures, source }`, `source` an index into `sources`. Marketing's README already keeps a "Facts and their sources" table for the Git video; the Scion and Docker folders gain one there first (outside this repo), never here.
-- `sources[].lang`, so a page can say "Em inglês", and `sources[].published` for the date the sources box prints.
-- `production`: the narration credit, read from the line the build writes into the YouTube description ("Narração e música geradas com ElevenLabs.").
-- `sponsorTie`: `none`, `product` or `competitor`, set by the Alexandre in marketing for each video; the ficha prints it, and `product` or `competitor` puts the notice at the top of the page.
-- `upcoming`: a marketing folder with a README and no `out/` video becomes a card "Em produção" with its title and one line, and nothing else.
-
-The dek and the reading time are not fields: the dek is the approved article's summary
-(JN6), and the minutes are counted from its words.
-
-Done when both imported videos carry every field, and `scripts/verify.mjs` checks each
-fact's `source` points at an existing source.
-
 ### §JN19 JN19 — The home as drawn
 
 `Home.tsx` rebuilt to the "Início" artboard, in this order, each block carrying its
@@ -219,3 +199,28 @@ With scripts off a slot collapses to nothing rather than to an empty frame.
 
 Done when the three slots are in the prerendered HTML with `data-ad-memory="off"`, and
 none sits inside the article's markup.
+
+### §JN25 JN25 — The editorial fields for the two published videos
+
+The import reads `marketing/japode/<video>/site.json` (JN18; its shape is in the header
+of `scripts/import-video.mjs`), but neither the Scion nor the Docker folder has one yet.
+So their pages can show no kicker above the title, no "Os números do vídeo" table, no
+sponsor tie in the ficha, and no language or date beside a source.
+
+What the Alexandre writes in marketing, for each video:
+
+- `kicker`: the subject line ("Controle de versão" for the Scion, "Contêineres" for Docker in
+  the artboard, his to confirm).
+- `sponsorTie`: `none`, `product` or `competitor`. Neither video touches a Viglet product, as
+  far as the scripts show, but the call is his.
+- `facts`: each number the video states, as `{ value, measures, source }`, checked against the
+  source the way the Git README's "Facts and their sources" table is. The Docker video names
+  no primary source in its description yet, so its facts need its sources first (JN8 waits on
+  the same).
+- `sources`: `{ lang, published }` per source, in the description's order.
+
+Then `node scripts/import-video.mjs` again for each video, with the flags `video.json`
+already records. The pages need no change: they show these fields when present.
+
+Done when both videos' `video.json` carry a kicker and a sponsor tie, and the Scion's
+carries its facts.

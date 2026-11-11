@@ -14,3 +14,4 @@
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
+- ⏸ **JN25** (deps: JN18 ✅, the Alexandre's site.json in marketing) **The Scion and Docker pages show no kicker, numbers table or sponsor tie: marketing has no site.json for them** — set aside (Waits for the Alexandre's site.json files in marketing.): Those choices are editorial, so they are the Alexandre's. → §JN25

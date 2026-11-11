@@ -5,7 +5,7 @@ import { absolute } from "./data/site.ts"
 
 export { ROUTES } from "./routes.tsx"
 export { SITE } from "./data/site.ts"
-export { VIDEOS } from "./data/videos.ts"
+export { VIDEOS, UPCOMING } from "./data/videos.ts"
 export { articleFor } from "./data/articles.ts"
 
 export const render = (path: string) => renderToString(<Layout path={routeFor(path).path}>{routeFor(path).render()}</Layout>)
