@@ -30,10 +30,12 @@ Copy `.github/workflows/deploy.yml` from japode.github.io: install, `npm run bui
 (which ends in `verify.mjs`, so a failed check stops the deploy), and publish `dist/`
 alone, so `docs/` and `scripts/` are never served. `public/CNAME` holds `japode.com.br`.
 
-The steps outside the code are the Alexandre's, and Claude writes them down instead of
-doing them: create the GitHub repository `Japode/news` and push; turn Pages on with
-"Enforce HTTPS"; at registro.br point the apex at GitHub Pages (the four A records) and
-`www` at `japode.github.io` with a CNAME. Nothing is pushed from a Claude session.
+The steps outside the code were the Alexandre's, and are done since 2026-11-11: the
+public repository `Japode/news` is pushed; Pages is on with the workflow as its source,
+the custom domain `japode.com.br` and HTTPS enforced; at registro.br the apex has GitHub
+Pages' four A records and `www` is a CNAME to `japode.github.io`. Until this task's
+workflow deploys, the domain answers GitHub's 404. Nothing is pushed from a Claude
+session.
 
 Done when: https://japode.com.br answers 200 over HTTPS with the home page, and the http
 and www addresses redirect to it.
@@ -44,8 +46,8 @@ and www addresses redirect to it.
 the history and the reasons behind the tools developers use every day, told from real
 sources), and then one card per video, newest first: the thumbnail, the title, the date,
 the duration, a one-line summary and the link to the video's page. Under them, a link to
-subscribe to the YouTube channel: its address is a single setting, `SITE.youtube`,
-filled with the handle the Alexandre gives.
+subscribe to the YouTube channel: its address is a single setting, `SITE.youtube`, set
+to https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg, the channel's address.
 
 No video is written into the page: the cards read `content/videos/` (JN3), so a new
 video appears on the home by being imported, and nothing else. The footer links
