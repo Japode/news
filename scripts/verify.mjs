@@ -234,6 +234,19 @@ for (const f of sources.filter((f) => f !== TOKENS)) {
 }
 check("JN15", page("/").includes('href="/assets/') && walk(join(DIST, "assets")).some((f) => f.endsWith(".css") && readFileSync(f, "utf8").includes("--green-text")), "the built CSS does not carry the site's tokens")
 
+// JN17 — every page names its sponsor, says Viglet is the author's and that it has no
+// say over the topics, outside the content; Viglet's mark is visibility's, unchanged.
+for (const r of ROUTES) {
+  const text = page(r.path)
+  const band = text.match(/<aside class="jn-sponsor"[\s\S]*?<\/aside>/)?.[0] ?? ""
+  check("JN17", band.includes("A Viglet é do autor do Japode e não escolhe nem revisa a pauta."), `${r.path} lacks the sponsor band and its disclosure`)
+  check("JN17", text.indexOf('<aside class="jn-sponsor"') > text.indexOf("</main>"), `${r.path} puts the sponsor band inside the content`)
+  check("JN17", !/github\.com\/openviglet|github\.com\/viglet/i.test(band), `${r.path}'s sponsor band links GitHub`)
+}
+const VIGLET_MARK = resolve(REPO, "..", "..", "alegauss", "visibility", "marca", "logo", "viglet.svg")
+if (existsSync(VIGLET_MARK)) check("JN17", readFileSync(VIGLET_MARK, "utf8") === readFileSync(join(REPO, "public", "viglet.svg"), "utf8"), "public/viglet.svg differs from visibility's marca/logo/viglet.svg")
+check("JN17", existsSync(join(DIST, "viglet.svg")), "Viglet's mark is not served")
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

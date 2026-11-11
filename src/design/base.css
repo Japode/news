@@ -6,6 +6,7 @@
 @import "./fonts.css";
 @import "./primitives.css";
 @import "./chrome.css";
+@import "./sponsor.css";
 
 /* No global box-sizing: the artboards size their boxes as content-box, and a padded
    1200px container sits 1248px wide in both, so the site measures the same. */

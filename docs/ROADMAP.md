@@ -8,12 +8,11 @@
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-- 📋 **JN17** (deps: JN16 ✅) **No page says the site is sponsored by Viglet, nor that Viglet belongs to the author** — A sponsor shown openly, with the tie and the rule beside it, is what lets a reader trust the rest of the page. → §JN17
 - 📋 **JN18** (deps: JN3 ✅) **The import lacks the kicker, the numbers with their sources, the narration credit and the sponsor tie the artboard shows** — A video's facts are imported, never retyped, so every new field the pages show must come through import-video.mjs first. → §JN18
-- 📋 **JN19** (deps: JN17, JN18) **The home is a list of rows, not the artboard's lead story, video grid, method strip and term index** — The home is where a visitor decides to trust the site, and the artboard puts the newest video's source on the first screen. → §JN19
-- 📋 **JN20** (deps: JN17, JN18) **A video page lacks the artboard's byline bar, sources box, numbers table, chapters aside and ficha** — These are the parts that let a reader check the video, so the page is where the artboard's credibility has to survive the build. → §JN20
+- 📋 **JN19** (deps: JN17 ✅, JN18) **The home is a list of rows, not the artboard's lead story, video grid, method strip and term index** — The home is where a visitor decides to trust the site, and the artboard puts the newest video's source on the first screen. → §JN19
+- 📋 **JN20** (deps: JN17 ✅, JN18) **A video page lacks the artboard's byline bar, sources box, numbers table, chapters aside and ficha** — These are the parts that let a reader check the video, so the page is where the artboard's credibility has to survive the build. → §JN20
 - 📋 **JN21** (deps: JN20) **At 390px a video page does not follow its mobile artboard: the aside is not folded into the column** — The link in a YouTube description is often opened on a phone, and only this page has a phone artboard to be held to. → §JN21
-- 📋 **JN22** (deps: JN17) **No page explains how a video is made, how the sponsorship works, how corrections are handled or who makes the videos** — Readers who doubt a page can check the method, the sponsor and the author for themselves, and the header and footer already link this page. → §JN22
+- 📋 **JN22** (deps: JN17 ✅) **No page explains how a video is made, how the sponsorship works, how corrections are handled or who makes the videos** — Readers who doubt a page can check the method, the sponsor and the author for themselves, and the header and footer already link this page. → §JN22
 - 📋 **JN23** (deps: JN22, the corrections form created by the Alexandre in Viglet's Cognito Forms account) **A reader who spots an error has no way to report it without hunting for an e-mail address** — A correction policy needs a way in, and the Alexandre chose a Cognito form over an address. → §JN23
 - 📋 **JN24** (deps: JN19, JN20) **The site never shows the author's other products, which every other Japode site cross-promotes** — The Alexandre chose Japode Ads, at random per visit, in labelled boxes apart from the article. → §JN24
 

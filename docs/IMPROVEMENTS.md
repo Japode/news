@@ -69,29 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN17 JN17 — The "Oferecimento" band
-
-Chosen by the Alexandre on 2026-11-11: Viglet sponsors the site, and the form is this
-site's own rather than the "Built on" `SiteSponsor` block the other Japode sites use. It
-borrows the TV news "Oferecimento" card: one band, the same on every page, between the
-content and the footer, never inside an article.
-
-The band (`data-design="sponsor"`, background `#F2F4F3`, a hairline on top): the label
-"OFERECIMENTO" (12px, 700, 0.12em), a 1px divider, Viglet's mark (36px, from
-visibility's `marca/logo/viglet.svg`, never redrawn) and the name "Viglet" linking
-viglet.org; then one sentence in Portuguese, carried over from `sponsor.json`'s summary
-in the japode.github.io repo: "Busca e conteúdo em código aberto para quem publica
-muito, nos próprios servidores e sem licença por usuário: Viglet Turing e Viglet Shio",
-each product linking its site (no GitHub URLs, the same link policy); and the disclosure
-"A Viglet é do autor do Japode e não escolhe nem revisa a pauta", linking the method
-page's sponsorship section. Under 600px the three parts stack.
-
-The copy lives in `src/data/sponsor.ts`, one place, so a change to the sponsor is one
-edit. Products always by their full names.
-
-Done when the band is in every prerendered page, `scripts/verify.mjs` checks the
-disclosure sentence is present on each, and tier 1 passes for `data-design="sponsor"`.
-
 ### §JN18 JN18 — The fields the artboard reads
 
 The artboard shows things `video.json` does not carry. Each gets a field in the `Video`
