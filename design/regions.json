@@ -34,7 +34,7 @@
         { "name": "title", "ref": "main h1", "tier": "layout", "task": "JN20", "enforced": true },
         { "name": "byline", "ref": "main > div:nth-child(3)", "tier": "layout", "task": "JN20", "enforced": true },
         { "name": "sources", "ref": "#fontes", "tier": "layout", "task": "JN20", "enforced": true },
-        { "name": "article", "ref": "main article", "tier": "layout", "task": "JN7", "enforced": false },
+        { "name": "article", "ref": "main article", "tier": "layout", "task": "JN7", "enforced": true },
         { "name": "facts", "ref": "main article figure", "tier": "layout", "task": "JN25", "enforced": false },
         { "name": "terms", "ref": "#glossario", "tier": "layout", "task": "JN20", "enforced": true },
         { "name": "corrections", "ref": "#correcoes", "tier": "layout", "task": "JN20", "enforced": true },

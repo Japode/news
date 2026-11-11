@@ -4,21 +4,6 @@
 
 ## Block B — One page per video
 
-### §JN7 The Scion page
-
-Import `marketing/japode/scion`: YouTube `pffFIAU9uos`, published 2026-11-11, 5 min 15
-s, with the title it has on YouTube, "A IA escreve tanto código que a Anthropic precisou
-ir além do Git". The primary source is Anthropic's post "Redesigning source control at
-Anthropic" (2026-10-13, updated 2026-10-15). The glossary has changeset, write-ahead
-log, Spanner, derived data, checkout virtual, scion-daemon, scion-cache, scion-server,
-Antique and superfans, with the definitions the video shows. The slug is chosen for the
-search ("scion-anthropic"), and the article opens with what Scion is and why Git was not
-enough.
-
-Done when: the page is in the build with every term and all 33 credits (the clips on
-screen, as the description lists them; `sources.json` holds 36, three never played), and
-the Alexandre has approved the article.
-
 ### §JN8 The Docker page
 
 Import `marketing/japode/docker`: the long video `gZEP6b_Fs00` (2026-11-10, 4 min 32 s,

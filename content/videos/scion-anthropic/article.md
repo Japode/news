@@ -1,5 +1,5 @@
 ---
-status: rascunho, aguardando a aprovação do Alexandre
+approved: 2026-11-11
 ---
 O Scion é o controle de versão que a Anthropic, a empresa que cria o Claude, construiu para o seu repositório principal quando o Git deixou de dar conta: em setembro de 2026, entravam ali [mais de 30 mil mudanças de código por dia](https://www.anthropic.com/engineering/redesigning-source-control). No Scion, a história fica no servidor, e a máquina de quem programa baixa só o que precisa. Tudo o que está aqui vem do post da Anthropic ["Redesigning source control at Anthropic"](https://www.anthropic.com/engineering/redesigning-source-control), de 13 de outubro de 2026, atualizado em 15 de outubro.
 
