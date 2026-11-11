@@ -3,7 +3,8 @@
 The site of the Japode YouTube channel, served at **japode.com.br**, in Portuguese: one page
 per video, with the video, the article written from it, the terms it highlights, its sources
 and the image credits. japode.com stays the English catalogue of the Japode products
-(`D:\Git\japode\japode.github.io`); each site links the other.
+(`D:\Git\japode\japode.github.io`); this site does not link it (the Alexandre, 2026-11-11),
+and its footer links only the method page and the channel.
 
 The plan is roadkeep's (prefix `JN`): `docs/ROADMAP.md`, `docs/IMPROVEMENTS.md` and
 `docs/CHANGELOG.md` are never edited by hand. The `news-roadmap-docs` skill says how a task

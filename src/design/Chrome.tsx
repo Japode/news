@@ -60,9 +60,6 @@ export function Header({ current }: { current?: string }) {
 const FOOT = [
   { href: SITE.method, label: "Como fazemos" },
   { href: SITE.youtube, label: "Canal no YouTube" },
-  { href: SITE.github, label: "GitHub" },
-  // japode.com is the apps site, which links back here (JN12); never "the English version"
-  { href: SITE.catalogue, label: "Aplicativos Japode (japode.com)" },
 ]
 
 /** The black footer: who makes the site, how corrections work, where to go next. */

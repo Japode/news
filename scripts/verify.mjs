@@ -172,13 +172,8 @@ for (const v of app.VIDEOS) {
   check("JN9", llms.includes(`(${SITE.origin}${path})`), `llms.txt lacks ${path}`)
 }
 
-// JN12 — every page's footer links japode.com, the apps site, which links back
-// (relabelled "Aplicativos Japode" in JN16: japode.com is not this site in English).
-for (const r of ROUTES) {
-  const text = page(r.path)
-  const footer = text.slice(text.lastIndexOf("<footer"))
-  check("JN12", footer.includes(`href="${SITE.catalogue}"`) && footer.includes("Aplicativos Japode (japode.com)"), `${r.path}'s footer does not link japode.com`)
-}
+// JN12's footer links to japode.com and GitHub left on 2026-11-11 at the Alexandre's
+// request: the footer links the method page and the channel only.
 
 // JN16 — one header and one footer: every page carries the same HTML for both, save the
 // aria-current that marks the page you are on.
@@ -237,12 +232,12 @@ for (const f of sources.filter((f) => f !== TOKENS)) {
 }
 check("JN15", page("/").includes('href="/assets/') && walk(join(DIST, "assets")).some((f) => f.endsWith(".css") && readFileSync(f, "utf8").includes("--green-text")), "the built CSS does not carry the site's tokens")
 
-// JN17 — every page names its sponsor, says Viglet is the author's and that it has no
-// say over the topics, outside the content; Viglet's mark is visibility's, unchanged.
+// JN17 — every page names its sponsor, outside the content (the disclosure left the band
+// on 2026-11-11; the method page says whose Viglet is); Viglet's mark is visibility's.
 for (const r of ROUTES) {
   const text = page(r.path)
   const band = text.match(/<aside class="jn-sponsor"[\s\S]*?<\/aside>/)?.[0] ?? ""
-  check("JN17", band.includes("A Viglet é do autor do Japode e não escolhe nem revisa a pauta."), `${r.path} lacks the sponsor band and its disclosure`)
+  check("JN17", band.includes(`href="${app.SPONSOR.url}"`), `${r.path} lacks the sponsor band`)
   check("JN17", text.indexOf('<aside class="jn-sponsor"') > text.indexOf("</main>"), `${r.path} puts the sponsor band inside the content`)
   check("JN17", !/github\.com\/openviglet|github\.com\/viglet/i.test(band), `${r.path}'s sponsor band links GitHub`)
 }
