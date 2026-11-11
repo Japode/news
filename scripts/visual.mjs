@@ -62,6 +62,9 @@ function serve(root) {
 
 async function open(browser, url, width, css) {
   const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1 })
+  // the site is measured on its own: a request to another host (the Japode Ads banner,
+  // drawn at random and never compared) would change the layout mid-capture
+  if (url.startsWith("http://127.0.0.1")) await page.route((u) => u.hostname !== "127.0.0.1", (route) => route.abort())
   await page.goto(url, { waitUntil: "load" })
   if (css) await page.addStyleTag({ content: css })
   await page.evaluate(async () => {

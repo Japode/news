@@ -35,6 +35,6 @@ export const AUTHOR = {
     { href: "https://alegauss.github.io", label: "alegauss.github.io" },
     { href: "https://github.com/alegauss", label: "GitHub" },
   ],
-  /** A path under public/ once the Alexandre supplies a photo; never a placeholder. */
-  photo: null as string | null,
+  /** His photo under public/, cropped square to 192px with its metadata stripped. */
+  photo: "/alexandre.jpg" as string | null,
 }
