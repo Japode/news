@@ -69,22 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN22 JN22 — The "Como fazemos" page
-
-A new route, `/como-fazemos/`, drawn from the "Como fazemos" artboard, indexed and in
-the sitemap (JN9). The header's "Como fazemos" and the footer's correction link now
-resolve here.
-
-Its blocks, each with a `data-design` name:
-
-- `steps`: "Do documento à página", four steps. The video step says what the YouTube descriptions already say: narration and music generated with ElevenLabs, footage only under CC BY.
-- `rules`: "O que seguimos" (every number has a source, the text goes no further than the video, the voice is synthetic and the page says so, a source in English is flagged).
-- `sponsorship` (`#patrocinio`): Viglet sponsors the site and belongs to the author; its numbered rules (no say over topics or scripts, a notice at the top when a video touches a Viglet product or a direct competitor, the tie in every ficha, house ads labelled and keeping nothing about the reader). The Alexandre confirms these rules word for word before the page ships, as with an article.
-- `corrections` (`#corrigir`): the policy, plus the slot for the form, which its own task fills.
-- `author`: Alexandre Oliveira, with the bio from visibility's VS48 draft (the employer is not named), and links to alegauss.github.io and GitHub. The photo shows only once the Alexandre supplies one, never a placeholder.
-
-No house ad on this page. Done when tier 2 passes for it at 1280.
-
 ### §JN23 JN23 — The correction form
 
 Decided on 2026-11-11: no e-mail address on the site; corrections arrive through a
@@ -161,3 +145,25 @@ already records. The pages need no change: they show these fields when present.
 
 Done when both videos' `video.json` carry a kicker and a sponsor tie, and the Scion's
 carries its facts.
+
+### §JN26 JN26 — The sponsorship rules, once approved
+
+The method page (JN22) says who sponsors the site and that Viglet is the author's, but
+not the four numbered rules the artboard draws under "Patrocínio": they are promises to
+the reader, so they reach the page only once the Alexandre approves them word for word,
+the way an article does.
+
+The rules wait in `src/data/method.ts` (`SPONSORSHIP.rules`):
+
+1. A Viglet não escolhe pauta nem lê roteiro antes de o vídeo sair.
+2. Quando um vídeo fala de um produto da Viglet ou de um concorrente direto, o aviso aparece no topo da página, antes do texto.
+3. A ficha de cada vídeo diz se a Viglet tem relação com o assunto.
+4. Os quadros "Anúncio da casa" mostram, sorteados a cada visita, outros produtos do mesmo autor. Ficam fora do texto, não seguem o leitor e não guardam nada sobre quem lê.
+
+Once he confirms or rewrites them, set `SPONSORSHIP.approved` to the date. The page
+shows the list, `scripts/verify.mjs` then requires it, and `design/regions.json` turns
+the `sponsorship` region of `como-fazemos` on (tier 1, pixels against the artboard: a
+rule reworded there means re-exporting the canvas with the same words first).
+
+Done when the approved rules are on `/como-fazemos/` and its sponsorship region passes
+`npm run visual`.

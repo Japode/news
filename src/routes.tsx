@@ -4,6 +4,7 @@ import { UPCOMING, VIDEOS, type Video } from "./data/videos.ts"
 import { Home } from "./pages/Home.tsx"
 import { NotFound } from "./pages/NotFound.tsx"
 import { VideoPage } from "./pages/VideoPage.tsx"
+import { Method } from "./pages/Method.tsx"
 import { minutes } from "./data/format.ts"
 import { articleFor } from "./data/articles.ts"
 
@@ -45,6 +46,14 @@ export const ROUTES: Route[] = [
     video,
     render: () => <VideoPage video={video} description={articleFor(video.slug)?.summary ?? holds(video)} />,
   })),
+  // how the videos are made, the sponsorship and the corrections, and who makes them (JN22)
+  {
+    path: SITE.method,
+    title: "Como fazemos — Japode",
+    description: "Como cada vídeo do Japode vai do documento à página: as fontes, o roteiro, a voz sintética, o patrocínio da Viglet, as correções e quem faz.",
+    index: true,
+    render: () => <Method />,
+  },
   {
     path: "/404/",
     title: "Página não encontrada — Japode",

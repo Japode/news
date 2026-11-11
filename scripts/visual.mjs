@@ -87,7 +87,8 @@ const measure = (page, selector) =>
       return {
         x: box.left + scrollX,
         width: box.width,
-        gap: prev ? box.top - prev.getBoundingClientRect().bottom : null,
+        // the space above it: only where the sibling before sits above, not beside it in a row
+        gap: prev && prev.getBoundingClientRect().bottom <= box.top + 1 ? box.top - prev.getBoundingClientRect().bottom : null,
         style,
       }
     },

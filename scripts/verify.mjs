@@ -261,6 +261,20 @@ const UPCOMING_DIR = join(REPO, "content", "upcoming")
 const upcomingFiles = existsSync(UPCOMING_DIR) ? readdirSync(UPCOMING_DIR).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5)) : []
 check("JN18", upcomingFiles.sort().join() === app.UPCOMING.map((u) => u.slug).sort().join(), `content/upcoming/ holds ${upcomingFiles.join(", ")}, the build loaded ${app.UPCOMING.map((u) => u.slug).join(", ")}`)
 
+// JN22 — the method page is served at the address the header and footer link, with the
+// sponsor's tie, the corrections policy and the author; the sponsorship's numbered rules
+// are on it only once the Alexandre approved them.
+const methodPath = SITE.method
+check("JN22", ROUTES.some((r) => r.path === methodPath && r.index), `${methodPath} is not an indexed route`)
+if (existsSync(join(DIST, app.outputDir(methodPath), "index.html"))) {
+  const m = page(methodPath)
+  check("JN22", m.includes('id="patrocinio"') && m.includes('id="correcoes"') && m.includes('id="corrigir"'), `${methodPath} lacks the sponsorship, corrections or report section`)
+  check("JN22", m.includes(`é do ${html(SITE.author)}, o autor do canal`), `${methodPath} does not say whose the sponsor is`)
+  check("JN22", m.includes("jn-method-numbered") === Boolean(app.SPONSORSHIP.approved), app.SPONSORSHIP.approved ? `${methodPath} lacks the approved sponsorship rules` : `${methodPath} shows sponsorship rules the Alexandre has not approved`)
+  check("JN22", !/\[FOTO\]|placeholder/i.test(m), `${methodPath} shows a placeholder`)
+}
+check("JN22", sitemap.includes(`<loc>${SITE.origin}${methodPath}</loc>`), `the sitemap lacks ${methodPath}`)
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

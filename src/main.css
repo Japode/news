@@ -1,6 +1,7 @@
 @import "./design/base.css";
 @import "./pages/home.css";
 @import "./pages/video.css";
+@import "./pages/method.css";
 
 /* What no page of block D has redrawn yet: the 404's reading column (JN1), the skip link,
    and the facade's play mark and hidden label (JN5), which the video page sizes in its own

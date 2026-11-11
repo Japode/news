@@ -1,0 +1,186 @@
+/* "Como fazemos" (JN22), as design/como-fazemos.html draws it at 1280. */
+
+.jn-method {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-48) var(--space-24) var(--space-72);
+}
+.jn-method-intro {
+  max-width: 760px;
+  margin-bottom: var(--space-48);
+}
+.jn-method-intro h1 {
+  margin: 0 0 var(--space-16);
+  font-size: var(--text-48);
+  line-height: 1.08;
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-display);
+}
+.jn-method-intro p {
+  color: var(--text-secondary);
+  font-size: var(--text-20);
+  line-height: 1.55;
+}
+
+.jn-method-steps {
+  border-top: var(--line-rule) solid var(--ink);
+  padding-top: var(--space-24);
+  margin-bottom: var(--space-56);
+}
+.jn-method-steps h2 {
+  margin: 0 0 var(--space-24);
+  color: var(--text-muted);
+  font-size: var(--text-13);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+}
+.jn-method-steps ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-32);
+}
+.jn-method-steps li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.jn-method-steps li span {
+  color: var(--green-text);
+  font-size: var(--text-14);
+  font-weight: var(--weight-bold);
+}
+.jn-method-steps h3 {
+  font-size: var(--text-20);
+  font-weight: var(--weight-bold);
+}
+.jn-method-steps li p {
+  color: var(--text-secondary);
+  font-size: var(--text-15);
+  line-height: 1.55;
+}
+
+.jn-method-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-48);
+}
+.jn-method-main {
+  flex: 999 1 560px;
+  min-width: 0;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+.jn-method-main h2 {
+  margin: 0 0 var(--space-12);
+  font-size: var(--text-26);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-heading);
+}
+.jn-method-main section[aria-labelledby="regras"] h2 {
+  margin-bottom: var(--space-16);
+}
+.jn-method-rules {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--line-hair) solid var(--rule);
+  font-size: var(--text-17);
+  line-height: 1.6;
+}
+.jn-method-rules li {
+  padding: var(--space-14) 0;
+  border-bottom: var(--line-hair) solid var(--rule);
+}
+.jn-method-lead {
+  margin: 0 0 var(--space-12);
+  color: var(--text);
+  font-size: var(--text-17);
+  line-height: 1.6;
+}
+#patrocinio .jn-method-lead {
+  margin-bottom: var(--space-20);
+}
+.jn-method-numbered {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+  border-top: var(--line-hair) solid var(--rule);
+}
+.jn-method-numbered li {
+  display: flex;
+  gap: var(--space-16);
+  padding: var(--space-14) 0;
+  border-bottom: var(--line-hair) solid var(--rule);
+  font-size: var(--text-16);
+  line-height: 1.55;
+}
+.jn-method-numbered li span:first-child {
+  flex: 0 0 24px;
+  color: var(--green-text);
+  font-weight: var(--weight-extrabold);
+}
+.jn-method-report {
+  margin-top: var(--space-24);
+  border: var(--line-hair) solid var(--ink);
+  padding: var(--space-24);
+  font-size: var(--text-16);
+  line-height: 1.55;
+}
+
+.jn-method-author {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+.jn-method-author section {
+  border: var(--line-hair) solid var(--ink);
+  padding: var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+.jn-method-author h2 {
+  color: var(--text-muted);
+  font-size: var(--text-13);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+}
+.jn-method-author img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+}
+.jn-method-author-name {
+  font-size: var(--text-20);
+  font-weight: var(--weight-extrabold);
+}
+.jn-method-author p {
+  color: var(--text-secondary);
+  font-size: var(--text-15);
+  line-height: 1.55;
+}
+.jn-method-author .jn-method-author-name {
+  color: var(--ink);
+}
+.jn-method-author-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+
+@media (max-width: 600px) {
+  .jn-method {
+    padding: var(--space-32) var(--space-16) var(--space-48);
+  }
+  .jn-method-intro h1 {
+    font-size: var(--text-32);
+  }
+}
