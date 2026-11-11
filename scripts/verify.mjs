@@ -188,6 +188,16 @@ for (const p of designPages) {
 check("JN13", designPages.length === 4, `design/pages.json lists ${designPages.length} artboards, not the canvas's 4`)
 check("JN13", !existsSync(join(DIST, "design")) && !walk(DIST).some((f) => f.endsWith(".png") && f.includes("baseline")), "the design reference is published with the site")
 
+// JN14 — the visual gate has a region map that names real artboards, owning tasks and
+// tiers, and the deploy runs it after the build.
+const regions = JSON.parse(readFileSync(join(DESIGN, "regions.json"), "utf8")).pages
+for (const p of regions) {
+  check("JN14", designPages.some((d) => d.page === p.page && d.width === p.width), `design/regions.json names ${p.page}@${p.width}, which design/pages.json does not`)
+  check("JN14", ROUTES.some((r) => r.path === p.route) || p.regions.every((r) => !r.enforced), `design/regions.json enforces regions on ${p.route}, which the site does not serve`)
+  for (const r of p.regions) check("JN14", /^JN\d+$/.test(r.task) && ["pixels", "layout"].includes(r.tier) && typeof r.enforced === "boolean", `design/regions.json's ${p.page} ${r.name} lacks a task, a tier or an enforced flag`)
+}
+check("JN14", /npm run visual/.test(readFileSync(join(REPO, ".github", "workflows", "deploy.yml"), "utf8")), "deploy.yml does not run the visual gate")
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

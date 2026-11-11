@@ -1,0 +1,82 @@
+{
+  "$comment": [
+    "The regions the visual gate (scripts/visual.mjs, JN14) compares. A region names a CSS",
+    "selector in the reference page (design/<page>.html, which stays byte for byte the",
+    "canvas's) and is found on the site by data-design=\"<name>\". tier \"pixels\" compares",
+    "the element's screenshot; \"layout\" compares its box and computed style. A region is",
+    "checked only once \"enforced\" is true: the task named in \"task\" turns it on in the",
+    "commit that builds it, and a region that is enforced and missing on the site fails."
+  ],
+  "pages": [
+    {
+      "page": "home",
+      "route": "/",
+      "width": 1280,
+      "regions": [
+        { "name": "header", "ref": "body > div > header", "tier": "pixels", "task": "JN16", "enforced": false },
+        { "name": "intro", "ref": "main > p:first-child", "tier": "layout", "task": "JN19", "enforced": false },
+        { "name": "lead", "ref": "section[aria-labelledby=destaque]", "tier": "layout", "task": "JN19", "enforced": false },
+        { "name": "lead.title", "ref": "#destaque", "tier": "layout", "task": "JN19", "enforced": false },
+        { "name": "videos", "ref": "#todos", "tier": "layout", "task": "JN19", "enforced": false },
+        { "name": "ad.label", "ref": "main aside[aria-label='Anúncio da casa'] > p:first-child", "tier": "pixels", "task": "JN24", "enforced": false },
+        { "name": "method", "ref": "section[aria-labelledby=como]", "tier": "pixels", "task": "JN19", "enforced": false },
+        { "name": "terms", "ref": "#termos", "tier": "layout", "task": "JN19", "enforced": false },
+        { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento]", "tier": "pixels", "task": "JN17", "enforced": false },
+        { "name": "footer", "ref": "footer", "tier": "pixels", "task": "JN16", "enforced": false }
+      ]
+    },
+    {
+      "page": "video",
+      "route": "/scion-anthropic/",
+      "width": 1280,
+      "regions": [
+        { "name": "header", "ref": "body > div > header", "tier": "pixels", "task": "JN16", "enforced": false },
+        { "name": "breadcrumb", "ref": "main > nav", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "title", "ref": "main h1", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "byline", "ref": "main > div:nth-child(3)", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "sources", "ref": "#fontes", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "article", "ref": "main article", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "facts", "ref": "main article figure", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "ad.inline.label", "ref": "main aside[aria-label='Anúncio da casa'] > p", "tier": "pixels", "task": "JN24", "enforced": false },
+        { "name": "terms", "ref": "#glossario", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "corrections", "ref": "#correcoes", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "credits", "ref": "#creditos", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "chapters", "ref": "section[aria-labelledby=capitulos-t]", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "ficha", "ref": "section[aria-labelledby=ficha-t]", "tier": "layout", "task": "JN20", "enforced": false },
+        { "name": "ad.side.label", "ref": "div[aria-label='Anúncio da casa'] > p:first-child", "tier": "pixels", "task": "JN24", "enforced": false },
+        { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento]", "tier": "pixels", "task": "JN17", "enforced": false },
+        { "name": "footer", "ref": "footer", "tier": "pixels", "task": "JN16", "enforced": false }
+      ]
+    },
+    {
+      "page": "como-fazemos",
+      "route": "/como-fazemos/",
+      "width": 1280,
+      "regions": [
+        { "name": "header", "ref": "body > div > header", "tier": "pixels", "task": "JN16", "enforced": false },
+        { "name": "intro", "ref": "main > div:first-child", "tier": "layout", "task": "JN22", "enforced": false },
+        { "name": "steps", "ref": "section[aria-labelledby=etapas]", "tier": "pixels", "task": "JN22", "enforced": false },
+        { "name": "rules", "ref": "section[aria-labelledby=regras]", "tier": "pixels", "task": "JN22", "enforced": false },
+        { "name": "sponsorship", "ref": "#patrocinio", "tier": "pixels", "task": "JN22", "enforced": false },
+        { "name": "corrections", "ref": "#correcoes", "tier": "layout", "task": "JN22", "enforced": false },
+        { "name": "author", "ref": "aside[aria-labelledby=autor-t]", "tier": "layout", "task": "JN22", "enforced": false },
+        { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento]", "tier": "pixels", "task": "JN17", "enforced": false },
+        { "name": "footer", "ref": "footer", "tier": "pixels", "task": "JN16", "enforced": false }
+      ]
+    },
+    {
+      "page": "video-mobile",
+      "route": "/scion-anthropic/",
+      "width": 390,
+      "regions": [
+        { "name": "header", "ref": "body > div > header", "tier": "pixels", "task": "JN21", "enforced": false },
+        { "name": "title", "ref": "main h1", "tier": "layout", "task": "JN21", "enforced": false },
+        { "name": "sources", "ref": "#fontes", "tier": "layout", "task": "JN21", "enforced": false },
+        { "name": "chapters", "ref": "main details", "tier": "layout", "task": "JN21", "enforced": false },
+        { "name": "ficha", "ref": "section[aria-labelledby=ficha-m]", "tier": "layout", "task": "JN21", "enforced": false },
+        { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento-m]", "tier": "pixels", "task": "JN21", "enforced": false },
+        { "name": "footer", "ref": "footer", "tier": "pixels", "task": "JN21", "enforced": false }
+      ]
+    }
+  ]
+}

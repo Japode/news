@@ -2,3 +2,4 @@ node_modules/
 dist/
 dist-server/
 .claude/settings.local.json
+visual-report/

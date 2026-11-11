@@ -39,6 +39,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      # the visual gate (JN14): the built pages against the artboards in design/, both
+      # rendered here by the pinned Playwright's Chromium; --self first proves the gate
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Visual gate
+        run: npm run visual -- --self && npm run visual
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

@@ -62,6 +62,13 @@ A task that touches the site (anything outside `docs/`) also passes **`npm run b
 `scripts/verify.mjs`, which checks `dist/` against each shipped task's "done when" and
 names the task a failure belongs to. A task with a checkable outcome adds its check there.
 
+After the build, the same task passes **`npm run visual`** (JN14): the built pages against
+the artboards in `design/`, region by region as `design/regions.json` lists them. A task
+that builds a region turns its `"enforced"` on in that commit, and gives the element its
+`data-design="<name>"`. `npm run visual -- --self` proves the gate itself, and is the one to
+run after a change to `scripts/visual.mjs` or to `design/`. Never edit `design/*.html` or a
+baseline to make a page pass: `design/README.md` says when they change.
+
 **Name EVERY task id an assertion holds, not just the one you are working.**
 
 ## ⛔ READ SECOND — four files are owned by `roadkeep`

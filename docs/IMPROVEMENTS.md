@@ -69,31 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN14 JN14 — The visual gate
-
-A whole-page pixel diff cannot be the only check: the artboard's copy is a mock-up of
-the Scion page, and the built page renders the approved article, so the screenshots
-differ wherever the text does. The gate therefore has two tiers, both in
-`scripts/visual.mjs` and run by `npm run visual` after `npm run build`.
-
-Tier 1, pixels. The chrome and the fixed blocks hold the same content on both sides:
-header, footer, the sponsor band, the sources box and the "Anúncio da casa" frame (never
-the banner inside it, which Japode Ads draws at random). Each is screenshotted by its
-`data-design="<name>"` attribute, on the reference and on `dist/`, and compared with
-pixelmatch: any pixel over the anti-aliasing threshold fails, and the diff PNG is
-written to `visual-report/`.
-
-Tier 2, layout. For every `data-design` element of a page, the box (x, width, height
-when the content is fixed), the font family, size, weight, line height, colour,
-background, border and the gap to the previous sibling are read with `getComputedStyle`
-on both sides and compared within 1px. A failure names the page, the width, the element
-and the property.
-
-Both tiers run at 1280 and, where an artboard exists, 390. Playwright's Chromium is
-pinned in `package.json` so CI and the Alexandre's machine render the same fonts. The
-deploy workflow runs the gate after the build, and the skill's gate section gains `npm
-run visual`.
-
 ### §JN15 JN15 — The site's own design system
 
 Decided by the Alexandre on 2026-11-11: the site gets its own small design system and

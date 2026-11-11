@@ -22,3 +22,4 @@
 ## Block D — The site drawn in the artboard, pixel for pixel
 
 - ✅ **JN13** **The artboard the site must match lives only in a private canvas, so no build can be compared against it** — The four artboards are static pages in design/ with PNG baselines from the pinned Playwright; verify checks each baseline and that none is published (design recorded in `design/README.md`).
+- ✅ **JN14** **Nothing measures how far a built page is from its artboard, so "pixel perfect" is a judgement by eye** — npm run visual compares each enforced region with its artboard, both rendered live, in pixels or layout within 1px; --self proves it and the deploy runs both (design recorded in `scripts/visual.mjs`).
