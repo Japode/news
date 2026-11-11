@@ -1,0 +1,58 @@
+/* The ground every page stands on (JN15): the font, the reset and the page itself, on
+   the tokens only. The font is the @fontsource-variable files under the family name the
+   artboards ask for, so the site and design/ render the same glyphs. */
+
+@import "./tokens.css";
+@import "./fonts.css";
+@import "./primitives.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--green-text);
+}
+a:hover {
+  color: var(--green-strong);
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+ol,
+ul,
+figure {
+  margin: 0;
+}
+
+/* the container every region sits in: 1200px plus the gutters */
+.jn-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}

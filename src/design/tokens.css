@@ -1,0 +1,115 @@
+/* The site's design tokens (JN15): every value the artboards in design/ use, and the
+   only file under src/ that may spell a colour. A component reads these; it never
+   restates one. The names say what a value is for, not what it looks like, so a design
+   change is one edit here. scripts/verify.mjs fails on a hex anywhere else in src/. */
+
+:root {
+  /* ink and text */
+  --ink: #111111;
+  --text: #1c201d;
+  --text-secondary: #333833;
+  --text-muted: #555b57;
+  --white: #ffffff;
+
+  /* rules, borders, fields */
+  --rule: #e3e6e4;
+  --rule-strong: #d5dad7;
+  --rule-divider: #c9cfcb;
+  --placeholder-dash: #b8beba;
+  --field-border: #8a918d;
+
+  /* soft surfaces */
+  --surface: #ffffff;
+  --surface-soft: #f4f6f5; /* the ficha */
+  --surface-band: #f2f4f3; /* the sponsor band */
+
+  /* green, from the mark */
+  --green: #2bcb6b; /* buttons and the play mark, with dark text on it */
+  --green-strong: #11904a; /* large numerals only: under 4.5:1 on white */
+  --green-text: #0b6b37; /* links and kickers: the green that passes 4.5:1 on white */
+  --green-light: #d4f7df; /* links on the black footer */
+
+  /* the black footer */
+  --footer-bg: #111111;
+  --footer-heading: #ffffff;
+  --footer-lead: #e8ece9;
+  --footer-text: #c9d0cb;
+  --footer-rule: #2e3330;
+  --footer-fine: #a9b1ac;
+
+  /* type */
+  --font: "Plus Jakarta Sans", system-ui, sans-serif;
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-20: 20px;
+  --text-21: 21px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-26: 26px;
+  --text-28: 28px;
+  --text-30: 30px;
+  --text-32: 32px;
+  --text-40: 40px;
+  --text-48: 48px;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  --tracking-display: -0.025em;
+  --tracking-title: -0.02em;
+  --tracking-heading: -0.01em;
+  --tracking-kicker: 0.08em;
+  --tracking-label: 0.1em;
+  --tracking-band: 0.12em;
+
+  /* space */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-72: 72px;
+
+  /* layout */
+  --container: 1200px;
+  --gutter: 24px;
+  --reading: 680px;
+  --aside: 300px;
+  --target: 44px; /* the smallest control a finger reaches */
+
+  /* radii */
+  --radius-control: 4px; /* buttons, fields */
+  --radius-frame: 6px; /* the ad frame */
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* lines */
+  --line-hair: 1px;
+  --line-rule: 2px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --gutter: 16px;
+  }
+}

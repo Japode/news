@@ -1,0 +1,103 @@
+/* The primitives the pages compose (JN15), each as the artboards draw it. */
+
+/* Button: solid green with ink text, or outlined in ink. */
+.jn-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--target);
+  padding: 0 var(--space-20);
+  border: 0;
+  border-radius: var(--radius-control);
+  font-family: inherit;
+  font-size: var(--text-15);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+  cursor: pointer;
+}
+.jn-button-solid,
+.jn-button-solid:hover {
+  background: var(--green);
+  color: var(--ink);
+}
+.jn-button-outline,
+.jn-button-outline:hover {
+  border: var(--line-hair) solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-weight: var(--weight-semibold);
+}
+.jn-button-compact {
+  min-height: 40px;
+  padding: 0 var(--space-16);
+}
+
+/* Chip: a term, a filter. */
+.jn-chip,
+.jn-chip:hover {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 var(--space-14);
+  border: var(--line-hair) solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  color: var(--ink);
+  font-size: var(--text-14);
+  text-decoration: none;
+}
+
+/* Kicker: the subject line above a title. */
+.jn-kicker {
+  margin: 0;
+  color: var(--green-text);
+  font-size: var(--text-13);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+}
+.jn-kicker-small {
+  font-size: var(--text-12);
+}
+.jn-kicker-muted {
+  color: var(--text-muted);
+}
+
+/* Rule: a hairline between blocks, or the ink rule that opens a section. */
+.jn-rule {
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: var(--line-hair) solid var(--rule);
+}
+.jn-rule-ink {
+  border-top: var(--line-rule) solid var(--ink);
+}
+
+/* Field: a label over its control. */
+.jn-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.jn-field-label {
+  font-size: var(--text-14);
+  font-weight: var(--weight-bold);
+}
+.jn-field-hint {
+  color: var(--text-muted);
+  font-weight: var(--weight-regular);
+}
+.jn-field-control {
+  min-height: var(--target);
+  padding: 0 var(--space-12);
+  border: var(--line-hair) solid var(--field-border);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--text-15);
+}
+textarea.jn-field-control {
+  padding: var(--space-10) var(--space-12);
+  resize: vertical;
+}

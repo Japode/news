@@ -15,8 +15,6 @@ export const SITE = {
   catalogue: "https://japode.com",
   github: "https://github.com/Japode",
   author: "Alexandre Oliveira",
-  /** The theme choice is stored under this key, as every Japode site names its own. */
-  themeKey: "japode-news-theme",
 } as const
 
 export const absolute = (path: string) => `${SITE.origin}${path}`

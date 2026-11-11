@@ -5,15 +5,14 @@ vídeo, com o vídeo, o texto, os termos, as fontes e os créditos das imagens.
 
 ## Como é feito
 
-Igual a [japode.com](https://japode.com) (`Japode/japode.github.io`), para que os dois sites
-Japode sejam uma coisa só de manter: Vite e React 19, prerenderizados por uma entrada SSR
-(`src/entry-server.tsx`) e `scripts/prerender.mjs`, com `@viglet/viglet-design-system` no tom
-verde (`src/tone.css`, copiado de japode.com) e Tailwind 4. Cada página é HTML estático que se
-lê sem JavaScript; só o botão de tema roda no navegador, como uma ilha (`src/islands.tsx`).
+Vite e React 19, como [japode.com](https://japode.com) (`Japode/japode.github.io`),
+prerenderizados por uma entrada SSR (`src/entry-server.tsx`) e `scripts/prerender.mjs`. O
+visual é o dos artboards em `design/`, com um design system próprio em `src/design/`: os
+tokens (`tokens.css`), a base e os componentes primitivos. Cada página é HTML estático que se
+lê sem JavaScript; só o vídeo roda no navegador, como uma ilha (`src/islands.tsx`).
 
-O que muda é a língua e a letra. A página é `lang="pt-BR"`, toda URL canônica fica em
-`https://japode.com.br` (`SITE.origin`, em `src/data/site.ts`) e o tema é guardado em
-`japode-news-theme`. Os títulos usam Plus Jakarta Sans ExtraBold e os termos destacados
+A página é `lang="pt-BR"` e toda URL canônica fica em `https://japode.com.br`
+(`SITE.origin`, em `src/data/site.ts`). Há um tema só, o claro dos artboards. Os títulos usam Plus Jakarta Sans ExtraBold e os termos destacados
 SemiBold (`.jn-term`), a letra em que os vídeos desenham suas palavras-chave, no verde da
 marca. A marca em `public/logo.svg` é uma cópia de `marca/logo/japode.svg` do repositório
 visibility, nunca redesenhada; o favicon, o manifest e os ícones PNG saem dela.

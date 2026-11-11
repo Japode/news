@@ -1,10 +1,9 @@
 import type { ReactNode } from "react"
-import { SiteFooter, SiteNav } from "@viglet/viglet-design-system/site"
 import { SITE } from "../data/site.ts"
-import { Island } from "../islands.tsx"
 
-// The footer passes a visitor on (JN12): to japode.com, the English catalogue of the
-// Japode products, which links back here; to the channel; and to the source.
+// The interim chrome, on the site's own design system (JN15): the mark and the name, and
+// a footer that passes a visitor on (JN12) to japode.com, which links back here, to the
+// channel and to the source. JN16 replaces both with the artboard's header and footer.
 const FOOT = [
   { href: SITE.catalogue, label: "Os produtos da Japode" },
   { href: SITE.youtube, label: "Canal no YouTube" },
@@ -17,9 +16,27 @@ export function Layout({ children }: { children: ReactNode }) {
       <a className="jn-skip" href="#main">
         Pular para o conteúdo
       </a>
-      <SiteNav brand={{ href: "/", name: SITE.name, logo: "/logo.svg" }} actions={<Island name="theme-toggle" />} />
+      <header className="jn-header">
+        <div className="jn-container jn-header-row">
+          <a className="jn-brand" href="/">
+            <img src="/logo.svg" alt="" width={36} height={36} />
+            {SITE.name}
+          </a>
+        </div>
+      </header>
       <main id="main">{children}</main>
-      <SiteFooter brand={{ href: "/", name: SITE.name, logo: "/logo.svg" }} links={FOOT} disclaimer={<>© 2026 {SITE.author}.</>} />
+      <footer className="jn-footer">
+        <div className="jn-container jn-footer-row">
+          <span>© 2026 {SITE.author}.</span>
+          <nav aria-label="Rodapé">
+            {FOOT.map((l) => (
+              <a key={l.href} href={l.href}>
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </footer>
     </>
   )
 }

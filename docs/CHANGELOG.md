@@ -23,3 +23,4 @@
 
 - ✅ **JN13** **The artboard the site must match lives only in a private canvas, so no build can be compared against it** — The four artboards are static pages in design/ with PNG baselines from the pinned Playwright; verify checks each baseline and that none is published (design recorded in `design/README.md`).
 - ✅ **JN14** **Nothing measures how far a built page is from its artboard, so "pixel perfect" is a judgement by eye** — npm run visual compares each enforced region with its artboard, both rendered live, in pixels or layout within 1px; --self proves it and the deploy runs both (design recorded in `scripts/visual.mjs`).
+- ✅ **JN15** **The pages are drawn by the Viglet design system, whose type, colours and spacing are not the artboard's** — The site styles itself from src/design (tokens, base, primitives) with no Viglet design system, Tailwind or theme toggle; verify bans stray hex colours (design recorded in `src/design/tokens.css`).

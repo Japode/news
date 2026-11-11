@@ -1,253 +1,270 @@
-@import "tailwindcss";
-@import "@viglet/viglet-design-system/preset";
-@import "@viglet/viglet-design-system/fonts";
-@import "@viglet/viglet-design-system/site.css";
-@import "./tone.css";
+@import "./design/base.css";
 
-/* The site's own pieces, on the design system's tokens only: no colour and no radius
-   is declared here (tone.css holds the ground). The type is the videos' type
-   (marketing/japode/brand): titles in Plus Jakarta Sans ExtraBold, and a highlighted
-   term in SemiBold, in the brand green. */
+/* The current pages' pieces, on the site's own tokens (JN15). They are the reading
+   column of JN4 to JN8, kept working until the pages of block D replace them with the
+   artboards' layout; a piece that page rebuilds moves to its component and leaves here. */
 
-@layer components {
-  /* A blog's reading column (JN4): the green is an accent, never a ground. */
-  .jn-column {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 48px 16px 72px;
-  }
-  .jn-intro {
-    padding-bottom: 28px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid var(--vg-border);
-  }
-  .jn-intro h1 {
-    font-family: var(--font-brand);
-    font-weight: 800;
-    font-size: 2rem;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-  .jn-intro p {
-    margin-top: 10px;
-    color: var(--vg-muted-foreground);
-    font-size: 1.05rem;
-    line-height: 1.6;
-  }
+/* A blog's reading column (JN4): the green is an accent, never a ground. */
+.jn-column {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-48) var(--space-16) var(--space-72);
+}
+.jn-intro {
+  padding-bottom: var(--space-28);
+  margin-bottom: var(--space-8);
+  border-bottom: var(--line-hair) solid var(--rule);
+}
+.jn-intro h1 {
+  font-size: var(--text-32);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-title);
+  line-height: 1.15;
+}
+.jn-intro p {
+  margin-top: var(--space-10);
+  color: var(--text-muted);
+  font-size: var(--text-17);
+  line-height: 1.6;
+}
 
+.jn-post {
+  display: grid;
+  /* minmax(0, …): a 1280px thumbnail must not widen the column past a phone's screen */
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: var(--space-20);
+  align-items: start;
+  padding: var(--space-24) 0;
+  border-bottom: var(--line-hair) solid var(--rule);
+}
+@media (max-width: 560px) {
   .jn-post {
-    display: grid;
-    /* minmax(0, …): a 1280px thumbnail must not widen the column past a phone's screen */
-    grid-template-columns: 200px minmax(0, 1fr);
-    gap: 20px;
-    align-items: start;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--vg-border);
-  }
-  @media (max-width: 560px) {
-    .jn-post {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 12px;
-    }
-  }
-  .jn-post-thumb img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--vg-radius-control);
-  }
-  .jn-post-meta {
-    display: flex;
-    flex-wrap: wrap;
-    color: var(--vg-muted-foreground);
-    font-size: 0.85rem;
-  }
-  .jn-post-meta > * + *::before {
-    content: "·";
-    margin: 0 7px;
-  }
-  .jn-post-title {
-    margin-top: 6px;
-    font-family: var(--font-brand);
-    font-weight: 800;
-    font-size: 1.3rem;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-  }
-  .jn-post-summary {
-    margin-top: 6px;
-    color: var(--vg-muted-foreground);
-    line-height: 1.55;
-  }
-
-  /* the article (JN6): prose at a reading size, a chapter per h2 */
-  .jn-article {
-    margin-top: 28px;
-    font-size: 1.075rem;
-    line-height: 1.75;
-  }
-  .jn-article p {
-    margin: 0 0 1.1em;
-  }
-  .jn-article blockquote {
-    margin: 0 0 1.1em;
-    padding-left: 16px;
-    border-left: 3px solid var(--vg-brand-border);
-    color: var(--vg-muted-foreground);
-  }
-
-  /* the video page (JN5) */
-  .jn-video h2 {
-    margin: 36px 0 12px;
-    font-family: var(--font-brand);
-    font-weight: 800;
-    font-size: 1.35rem;
-    letter-spacing: -0.01em;
-  }
-  .jn-facade {
-    position: relative;
-    display: block;
-    aspect-ratio: 16 / 9;
-    margin-top: 28px;
-    overflow: hidden;
-    border-radius: var(--vg-radius-panel);
-    background: var(--vg-muted);
-  }
-  .jn-facade img,
-  .jn-facade iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    object-fit: cover;
-  }
-  .jn-facade-short {
-    aspect-ratio: 9 / 16;
-    max-width: 300px;
-    margin-top: 12px;
-  }
-  .jn-short-title {
-    color: var(--vg-muted-foreground);
-  }
-  .jn-play {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 72px;
-    height: 72px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: color-mix(in oklab, #000 65%, transparent);
-  }
-  .jn-play::after {
-    content: "";
-    position: absolute;
-    left: 29px;
-    top: 22px;
-    border-style: solid;
-    border-width: 14px 0 14px 22px;
-    border-color: transparent transparent transparent #fff;
-  }
-  .jn-facade:hover .jn-play {
-    background: var(--vg-brand-light);
-  }
-  .jn-skip-text {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-  }
-  .jn-chapters {
-    list-style: none;
-    padding: 0;
-  }
-  .jn-chapters li {
-    padding: 4px 0;
-  }
-  .jn-time {
-    display: inline-block;
-    min-width: 3.2em;
-    font-variant-numeric: tabular-nums;
-    color: var(--vg-muted-foreground);
-  }
-  .jn-box dl > div {
-    padding: 8px 0;
-    border-bottom: 1px solid var(--vg-border);
-  }
-  .jn-box dd {
-    margin: 2px 0 0;
-    color: var(--vg-muted-foreground);
-  }
-  .jn-box ul {
-    padding-left: 1.2em;
-    list-style: disc;
-  }
-  .jn-box li {
-    padding: 3px 0;
-    overflow-wrap: anywhere;
-  }
-  .jn-box p {
-    color: var(--vg-muted-foreground);
-  }
-  .jn-credits {
-    font-size: 0.9rem;
-  }
-
-  .jn-subscribe {
-    margin-top: 32px;
-    color: var(--vg-muted-foreground);
-  }
-
-  .jn-term {
-    font-family: var(--font-brand);
-    font-weight: 600;
-    color: var(--vg-brand);
-  }
-
-  .jn-skip {
-    position: absolute;
-    left: -9999px;
-  }
-  .jn-skip:focus {
-    left: 16px;
-    top: 12px;
-    z-index: 100;
-    padding: 8px 14px;
-    border-radius: var(--vg-radius-control);
-    background: var(--vg-popover);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-12);
   }
 }
-
-/* Outside the layer, to win over site.css, whose `.vg-site a { color: inherit }` and
-   glowing ground are a product page's. A blog's ground is plain, and its links are the
-   accent: green and underlined, except a post's title, which reads as a heading. */
-.vg-site::before {
-  background: var(--vg-background);
+.jn-post-thumb img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-control);
 }
-.vg-site .jn-column a {
-  color: var(--vg-brand);
-  text-decoration: underline;
+.jn-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-size: var(--text-14);
+}
+.jn-post-meta > * + *::before {
+  content: "·";
+  margin: 0 var(--space-6);
+}
+.jn-post-title {
+  margin-top: var(--space-6);
+  font-size: var(--text-21);
+  font-weight: var(--weight-extrabold);
+  line-height: 1.3;
+  letter-spacing: var(--tracking-heading);
+}
+.jn-post-summary {
+  margin-top: var(--space-6);
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* the article (JN6): prose at a reading size, a chapter per h2 */
+.jn-article {
+  margin-top: var(--space-28);
+  font-size: var(--text-17);
+  line-height: 1.75;
+}
+.jn-article p {
+  margin: 0 0 1.1em;
+}
+.jn-article blockquote {
+  margin: 0 0 1.1em;
+  padding-left: var(--space-16);
+  border-left: var(--line-rule) solid var(--rule-strong);
+  color: var(--text-muted);
+}
+
+/* the video page (JN5) */
+.jn-video h2 {
+  margin: var(--space-36) 0 var(--space-12);
+  font-size: var(--text-22);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-heading);
+}
+.jn-facade {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  margin-top: var(--space-28);
+  overflow: hidden;
+  background: var(--ink);
+}
+.jn-facade img,
+.jn-facade iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: contain;
+}
+.jn-facade-short {
+  aspect-ratio: 9 / 16;
+  max-width: 300px;
+  margin-top: var(--space-12);
+}
+.jn-short-title {
+  color: var(--text-muted);
+}
+.jn-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  height: 72px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-circle);
+  background: var(--ink);
+}
+.jn-play::after {
+  content: "";
+  position: absolute;
+  left: 29px;
+  top: 22px;
+  border-style: solid;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent var(--green);
+}
+.jn-skip-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.jn-chapters {
+  list-style: none;
+  padding: 0;
+}
+.jn-chapters li {
+  padding: var(--space-4) 0;
+}
+.jn-time {
+  display: inline-block;
+  min-width: 3.2em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.jn-box dl > div {
+  padding: var(--space-8) 0;
+  border-bottom: var(--line-hair) solid var(--rule);
+}
+.jn-box dd {
+  margin: var(--space-2) 0 0;
+  color: var(--text-muted);
+}
+.jn-box ul {
+  padding-left: 1.2em;
+  list-style: disc;
+}
+.jn-box li {
+  padding: var(--space-2) 0;
+  overflow-wrap: anywhere;
+}
+.jn-box p {
+  color: var(--text-muted);
+}
+.jn-credits {
+  font-size: var(--text-14);
+}
+
+.jn-subscribe {
+  margin-top: var(--space-32);
+  color: var(--text-muted);
+}
+
+.jn-term {
+  font-weight: var(--weight-semibold);
+  color: var(--green-text);
+}
+
+.jn-skip {
+  position: absolute;
+  left: -9999px;
+}
+.jn-skip:focus {
+  left: var(--space-16);
+  top: var(--space-12);
+  z-index: 100;
+  padding: var(--space-8) var(--space-14);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+}
+
+/* A post's title reads as a heading; chapter and credit lists are lists to scan. */
+.jn-column a {
   text-underline-offset: 3px;
 }
-.vg-site .jn-column .jn-post-title a {
-  color: var(--vg-foreground);
+.jn-column .jn-post-title a {
+  color: var(--ink);
   text-decoration: none;
 }
-.vg-site .jn-column .jn-post-title a:hover {
-  color: var(--vg-brand);
+.jn-column .jn-post-title a:hover {
+  color: var(--green-text);
 }
-/* A chapter list and the credits are lists to scan, not prose: their links carry no
-   underline, and the credits stay in the muted ink until hovered (JN5). */
-.vg-site .jn-column .jn-chapters a {
+.jn-column .jn-chapters a {
   text-decoration: none;
 }
-.vg-site .jn-column .jn-chapters a:hover {
+.jn-column .jn-chapters a:hover {
   text-decoration: underline;
 }
-.vg-site .jn-column .jn-credits a {
-  color: var(--vg-muted-foreground);
+.jn-column .jn-credits a {
+  color: var(--text-muted);
 }
-.vg-site .jn-column .jn-credits a:hover {
-  color: var(--vg-brand);
+.jn-column .jn-credits a:hover {
+  color: var(--green-text);
+}
+
+/* the interim chrome, until JN16 draws the artboard's header and footer */
+.jn-header {
+  border-bottom: var(--line-rule) solid var(--ink);
+}
+.jn-header-row,
+.jn-footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding-top: var(--space-18);
+  padding-bottom: var(--space-18);
+}
+.jn-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  color: var(--ink);
+  font-size: var(--text-24);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-title);
+  text-decoration: none;
+}
+.jn-brand img {
+  width: 36px;
+  height: 36px;
+}
+.jn-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  font-size: var(--text-14);
+}
+.jn-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-20);
+}
+.jn-footer a {
+  color: var(--green-light);
 }

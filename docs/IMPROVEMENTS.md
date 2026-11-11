@@ -69,27 +69,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN15 JN15 — The site's own design system
-
-Decided by the Alexandre on 2026-11-11: the site gets its own small design system and
-drops `@viglet/viglet-design-system` (and Tailwind, if nothing else needs it).
-CLAUDE.md's "Built like japode.com" rule is rewritten in the same commit.
-
-`src/design/tokens.css` holds every value the artboard uses, as custom properties, and
-nothing else may spell a hex or a px size:
-
-- Ink `#111111`, body `#1C201D`, secondary `#333833`, muted `#555B57`; rules `#E3E6E4` and `#D5DAD7`, placeholder dash `#B8BEBA`, field border `#8A918D`; soft surfaces `#F4F6F5` (ficha) and `#F2F4F3` (sponsor band).
-- Green `#2BCB6B` (buttons, play mark; dark text on it), `#11904A` (large numerals only), `#0B6B37` (links and kickers, the only green that passes 4.5:1 on white), `#D4F7DF` (links on the black footer, whose text is `#C9D0CB`, rule `#2E3330`, fine print `#A9B1AC`).
-- Plus Jakarta Sans 400 to 800, still shipped from `@fontsource-variable` so JN1's font check holds; the type scale 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 24, 26, 30, 40, 48 px, with the kicker style (13px, 700, uppercase, 0.08em).
-- Container 1200px plus 24px gutters (16px under 600px); radii 4 (buttons, fields), 6 (ad frame), pill, circle.
-
-`src/design/` also holds the primitives later tasks compose: Button (solid and outline),
-Chip, Kicker, Rule, Field. The theme toggle goes, since the artboard draws no dark
-theme; a dark theme comes back only with its own artboard.
-
-Done when the build has no Viglet design system import and `scripts/verify.mjs` fails on
-a hex outside `tokens.css`.
-
 ### §JN16 JN16 — One header and one footer
 
 `Layout.tsx` stops using `SiteNav` and `SiteFooter` and renders `Header` and `Footer`

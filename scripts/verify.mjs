@@ -52,9 +52,8 @@ for (const icon of manifest.icons) check("JN1", existsSync(join(DIST, icon.src.r
 const MARK = resolve(REPO, "..", "..", "alegauss", "visibility", "marca", "logo", "japode.svg")
 if (existsSync(MARK)) check("JN1", readFileSync(MARK, "utf8") === readFileSync(join(REPO, "public", "logo.svg"), "utf8"), "public/logo.svg differs from visibility's marca/logo/japode.svg")
 check("JN1", !existsSync(join(DIST, "docs")) && !existsSync(join(DIST, "scripts")), "docs/ or scripts/ is published")
-// The site's theme key is its own, so a choice made on japode.com does not leak here, and
-// the titles' type (Plus Jakarta Sans, as the videos draw it) is served, not fallen back.
-check("JN1", SITE.themeKey === "japode-news-theme", `the theme key is ${SITE.themeKey}, not japode-news-theme`)
+// The titles' type (Plus Jakarta Sans, as the videos draw it) is served, not fallen back.
+// (The theme key JN1 also checked left with the theme toggle in JN15.)
 check("JN1", walk(join(DIST, "assets")).some((f) => /plus-jakarta-sans-latin-wght-normal-.*\.woff2$/.test(f)), "Plus Jakarta Sans is not shipped")
 
 // JN2 — the deploy builds (so a failed check here stops it) and publishes the build
@@ -197,6 +196,26 @@ for (const p of regions) {
   for (const r of p.regions) check("JN14", /^JN\d+$/.test(r.task) && ["pixels", "layout"].includes(r.tier) && typeof r.enforced === "boolean", `design/regions.json's ${p.page} ${r.name} lacks a task, a tier or an enforced flag`)
 }
 check("JN14", /npm run visual/.test(readFileSync(join(REPO, ".github", "workflows", "deploy.yml"), "utf8")), "deploy.yml does not run the visual gate")
+
+// JN15 — the site draws itself with its own design system: no Viglet design system in
+// the dependencies, the build or the sources, and no colour spelled outside the tokens.
+const pkg = JSON.parse(readFileSync(join(REPO, "package.json"), "utf8"))
+const deps = { ...pkg.dependencies, ...pkg.devDependencies }
+check("JN15", !deps["@viglet/viglet-design-system"] && !deps.tailwindcss, "package.json still depends on the Viglet design system or Tailwind")
+const SRC = join(REPO, "src")
+const sources = walk(SRC).filter((f) => /\.(css|ts|tsx)$/.test(f))
+for (const f of [...sources, join(REPO, "vite.config.ts"), join(REPO, "index.html"), ...walk(join(REPO, "scripts"))]) {
+  const text = readFileSync(f, "utf8")
+  const name = f.slice(REPO.length + 1).replaceAll("\\", "/")
+  if (name === "scripts/verify.mjs") continue
+  check("JN15", !text.includes("@viglet/viglet-design-system") && !/\bvg-site\b|data-tone=/.test(text), `${name} still uses the Viglet design system`)
+}
+const TOKENS = join(SRC, "design", "tokens.css")
+for (const f of sources.filter((f) => f !== TOKENS)) {
+  const hex = readFileSync(f, "utf8").match(/#[0-9a-fA-F]{3,8}\b/)
+  check("JN15", !hex, `${f.slice(REPO.length + 1).replaceAll("\\", "/")} spells the colour ${hex?.[0]} outside src/design/tokens.css`)
+}
+check("JN15", page("/").includes('href="/assets/') && walk(join(DIST, "assets")).some((f) => f.endsWith(".css") && readFileSync(f, "utf8").includes("--green-text")), "the built CSS does not carry the site's tokens")
 
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)

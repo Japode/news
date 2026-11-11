@@ -15,8 +15,10 @@ is worked and committed.
   registro.br, GitHub Pages, the YouTube descriptions and the forum posts are his. Drafts for
   YouTube and forums live in `D:\Git\alegauss\visibility\drafts\`, and what was published in
   that repository's `actions.json`.
-- **Built like japode.com**: Vite and React prerendered, `@viglet/viglet-design-system` with the
-  green tone, and `scripts/verify.mjs` checking the build against each shipped task.
+- **Drawn from the artboards, on its own design system**: Vite and React prerendered, like
+  japode.com, but styled by `src/design/` (tokens, base, primitives), never the Viglet design
+  system. The artboards in `design/` are the target; `scripts/verify.mjs` checks the build
+  against each shipped task and `npm run visual` against the artboards.
 - **The brand is the videos' brand**: the mark from visibility's `marca/logo/japode.svg`
   (never redrawn), green #2BCB6B to #11904A with #D4F7DF, Plus Jakarta Sans, as
   `marketing/japode/brand` draws it in the videos.
