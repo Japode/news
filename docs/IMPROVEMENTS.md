@@ -2,22 +2,6 @@
 
 ## Block A — The site at japode.com.br
 
-### §JN2 Serving japode.com.br
-
-Copy `.github/workflows/deploy.yml` from japode.github.io: install, `npm run build`
-(which ends in `verify.mjs`, so a failed check stops the deploy), and publish `dist/`
-alone, so `docs/` and `scripts/` are never served. `public/CNAME` holds `japode.com.br`.
-
-The steps outside the code were the Alexandre's, and are done since 2026-11-11: the
-public repository `Japode/news` is pushed; Pages is on with the workflow as its source,
-the custom domain `japode.com.br` and HTTPS enforced; at registro.br the apex has GitHub
-Pages' four A records and `www` is a CNAME to `japode.github.io`. Until this task's
-workflow deploys, the domain answers GitHub's 404. Nothing is pushed from a Claude
-session.
-
-Done when: https://japode.com.br answers 200 over HTTPS with the home page, and the http
-and www addresses redirect to it.
-
 ## Block B — One page per video
 
 ### §JN7 The Scion page
