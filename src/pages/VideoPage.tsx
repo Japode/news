@@ -7,6 +7,7 @@ import { articleFor } from "../data/articles.ts"
 import { correctionsFor } from "../data/corrections.ts"
 import { articleLd, ldJson, videoLd } from "../data/structured.ts"
 import { SPONSOR } from "../data/sponsor.ts"
+import { AdSlot } from "../design/AdSlot.tsx"
 
 /* A video's page, as the "Página do vídeo" artboard draws it (JN20). The main column
    carries what lets a reader check the video: the byline bar, the video, the sources box
@@ -170,6 +171,8 @@ export function VideoPage({ video, description }: { video: Video; description: s
           {article && <article className="jn-article" data-design="article" dangerouslySetInnerHTML={{ __html: articleHtml(article.html, factsHtml) }} />}
           {facts && !inline && <FactsTable facts={facts} />}
 
+          <AdSlot format="in-content" slot="video-inline" design="ad.inline.label" />
+
           {video.terms.length > 0 && (
             <section id="termos" className="jn-terms" aria-labelledby="termos-t" data-design="terms">
               <h2 id="termos-t">{`Os ${plural(video.terms.length, "termo", "termos")} deste vídeo`}</h2>
@@ -301,6 +304,8 @@ export function VideoPage({ video, description }: { video: Video; description: s
           <a className="jn-button jn-button-solid jn-video-watch" href={watch}>
             Assistir no YouTube
           </a>
+
+          <AdSlot format="sidebar" slot="video-side" design="ad.side.label" label="Anúncio da casa" note="Sorteado a cada visita entre os produtos do autor." />
         </aside>
       </div>
 

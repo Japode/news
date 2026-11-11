@@ -95,32 +95,6 @@ Done when `scripts/verify.mjs` finds no Cognito script in any prerendered HTML a
 facade on `/como-fazemos/`, and a submission from the built site reaches the Alexandre's
 Cognito entries.
 
-### §JN24 JN24 — House ads from Japode Ads
-
-Decided on 2026-11-11: Japode Ads (ads.japode.com, the house network in
-`D:\Git\japode\ads`) shows the author's products in parts of the site, picked at random
-on each visit by the network's own weighted draw over `catalogue.json`. This site adds
-no logic of its own to the choice.
-
-Three slots, as the artboards draw them:
-
-- the home, a strip between "Todos os vídeos" and "O que cada página traz";
-- a video page, an in-content box after the article and before the terms;
-- a video page, a sidebar box under "Assistir no YouTube" (on a phone it folds away, and the in-content box stays).
-
-Each slot is the network's `div` (`data-japode-ads`, the matching `data-ad-format`, a
-`data-ad-slot` naming the page and place, `data-ad-memory="off"` so nothing is stored),
-loaded the way japode.github.io's `Layout.tsx` does, inside a frame this site draws: the
-label "Anúncio da casa · sorteado a cada visita" above it (11px, 700, 0.1em), and on the
-home a line under it saying the boxes show only the author's products and track nobody.
-The "Como fazemos" page has no slot.
-
-Tier 1 compares the frame and its label, never the banner, which changes on every load.
-With scripts off a slot collapses to nothing rather than to an empty frame.
-
-Done when the three slots are in the prerendered HTML with `data-ad-memory="off"`, and
-none sits inside the article's markup.
-
 ### §JN25 JN25 — The editorial fields for the two published videos
 
 The import reads `marketing/japode/<video>/site.json` (JN18; its shape is in the header

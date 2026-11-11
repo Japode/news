@@ -3,6 +3,7 @@ import type { Upcoming, Video } from "../data/videos.ts"
 import { articleFor } from "../data/articles.ts"
 import { clock, readingMinutes, shortDate } from "../data/format.ts"
 import { Button, Chip } from "../design/primitives.tsx"
+import { AdSlot } from "../design/AdSlot.tsx"
 
 /* The home, as the "Início" artboard draws it (JN19): the channel's line; the newest
    video as the lead, its source on the first screen; every video as a card, then the
@@ -124,6 +125,8 @@ export function Home({ posts, upcoming }: { posts: Post[]; upcoming: Upcoming[] 
           ))}
         </div>
       </section>
+
+      <AdSlot format="strip" slot="home-strip" design="ad.label" note="Japode Ads: só produtos do mesmo autor, sem rastrear quem lê." />
 
       <section className="jn-home-method" aria-labelledby="como" data-design="method">
         <h2 id="como">O que cada página traz</h2>

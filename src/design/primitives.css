@@ -101,3 +101,32 @@ textarea.jn-field-control {
   padding: var(--space-10) var(--space-12);
   resize: vertical;
 }
+
+/* The house-ad frame (JN24): a label above the network's banner, apart from any article. */
+.jn-ad-label {
+  margin: 0 0 var(--space-8);
+  color: var(--text-muted);
+  font-size: var(--text-11);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+.jn-ad-note {
+  margin: var(--space-8) 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-12);
+  line-height: 1.45;
+}
+.jn-ad-strip {
+  padding: var(--space-32) 0;
+  border-bottom: var(--line-hair) solid var(--rule);
+}
+.jn-ad-in-content {
+  margin-top: var(--space-16);
+  max-width: var(--reading);
+}
+@media (max-width: 600px) {
+  .jn-ad-sidebar {
+    display: none;
+  }
+}

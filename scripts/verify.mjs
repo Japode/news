@@ -275,6 +275,20 @@ if (existsSync(join(DIST, app.outputDir(methodPath), "index.html"))) {
 }
 check("JN22", sitemap.includes(`<loc>${SITE.origin}${methodPath}</loc>`), `the sitemap lacks ${methodPath}`)
 
+// JN24 — the house ads: the home's strip and a video page's in-content and sidebar slots,
+// each labelled and storing nothing, none inside an article, none on the method page,
+// and the frames hidden with scripts off.
+const slots = (text) => [...text.matchAll(/<div data-japode-ads="" data-ad-format="([^"]+)" data-ad-slot="([^"]+)" data-ad-theme="light" data-ad-memory="off"><\/div>/g)].map((m) => m[2])
+check("JN24", slots(page("/")).join() === "home-strip", `the home's house-ad slots are ${slots(page("/")).join(", ") || "none"}, not home-strip`)
+for (const v of app.VIDEOS) {
+  const text = page(`/${v.slug}/`)
+  check("JN24", slots(text).sort().join() === "video-inline,video-side", `/${v.slug}/'s house-ad slots are ${slots(text).join(", ") || "none"}`)
+  const article = text.match(/<article class="jn-article"[\s\S]*?<\/article>/)?.[0] ?? ""
+  check("JN24", !article.includes("data-japode-ads"), `/${v.slug}/ puts a house ad inside its article`)
+}
+check("JN24", slots(page(SITE.method)).length === 0, `${SITE.method} carries a house ad`)
+check("JN24", page("/").includes('<script src="https://ads.japode.com/v1/ads.js" async></script>') && /<noscript><style>\.jn-ad\s*\{\s*display:\s*none;?\s*\}<\/style><\/noscript>/.test(page("/")), "the pages do not load the Japode Ads loader, or show empty frames with scripts off")
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)
