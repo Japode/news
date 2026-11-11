@@ -20,26 +20,30 @@ and www addresses redirect to it.
 
 ### §JN4 The home page
 
-`/` shows the mark, one line on what the channel is (short videos in Portuguese about
-the history and the reasons behind the tools developers use every day, told from real
-sources), and then one card per video, newest first: the thumbnail, the title, the date,
-the duration, a one-line summary and the link to the video's page. Under them, a link to
-subscribe to the YouTube channel: its address is a single setting, `SITE.youtube`, set
-to https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg, the channel's address.
+`/` reads as a blog, not a landing page (the Alexandre, 2026-11-11: JN1's product hero
+is too loud). So no `SiteHero`, no gradient title and no badge: a quiet header with the
+mark and the name, one line on what the channel is (short videos in Portuguese about the
+history and the reasons behind the tools developers use every day, told from real
+sources), then the posts in one reading column, newest first. Each post is a row: the
+thumbnail, the title, the date, the duration, a one-line summary and the link to the
+video's page. The green is an accent (links, the date, a term), never a ground. Under
+the list, a plain link to subscribe on YouTube: its address is a single setting,
+`SITE.youtube`, set to https://www.youtube.com/channel/UC8vYs--SLUt_vbwRwStUNxg.
 
-No video is written into the page: the cards read `content/videos/` (JN3), so a new
+No video is written into the page: the list reads `content/videos/` (JN3), so a new
 video appears on the home by being imported, and nothing else. The footer links
 japode.com and the GitHub organisation (JN12).
 
-Done when: the home lists every video in `content/videos/`, newest first, each card
-links its page, and the subscribe link is the channel's address. `verify.mjs` checks the
-first two under JN4.
+Done when: the home lists every video in `content/videos/`, newest first, each row links
+its page, no `vg-site-hero` is in the HTML, and the subscribe link is the channel's
+address. `verify.mjs` checks the first three under JN4.
 
 ## Block B — One page per video
 
 ### §JN5 The video page
 
-`/<slug>/` shows the title as `h1`, the date and the duration, then the video as a
+`/<slug>/` is a blog post, in the home's reading column and quiet header (JN4), with no
+hero. It shows the title as `h1`, the date and the duration, then the video as a
 click-to-load facade: the thumbnail with a play button, which loads the
 youtube-nocookie.com iframe only when clicked, so the page sets no YouTube cookie and
 stays light. Then the article and the chapters, each one a link to
