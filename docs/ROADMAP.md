@@ -6,7 +6,6 @@
 
 ## Block C — Found, measured and linked
 
-- 📋 **JN11** (deps: JN7 ✅, JN8 ✅) **The videos' descriptions do not link to their pages, so a viewer who would rather read never finds them** — The YouTube link brings a page its first visitors and Google its first signal, and only the Alexandre can change it. → §JN11
 - 📋 **JN12** (deps: JN4 ✅) **japode.com and japode.com.br do not mention each other, so neither passes a visitor to the other** — One brand on two domains reads as two strangers unless each links the other, each in its own language. → §JN12
 
 ## Non-goals
