@@ -78,7 +78,7 @@ for (const v of app.VIDEOS) check("JN3", existsSync(join(VIDEOS_DIR, v.slug, "th
 // its thumbnail served, and the subscribe link on the channel's address.
 const home = page("/")
 check("JN4", !home.includes("vg-site-hero"), "the home page still carries the landing-page hero")
-const rows = [...home.matchAll(/<article class="jn-post" id="([^"]+)"/g)].map((m) => m[1])
+const rows = [...home.matchAll(/<article class="jn-card" id="([^"]+)"/g)].map((m) => m[1])
 const newest = [...app.VIDEOS].sort((a, b) => b.published.localeCompare(a.published)).map((v) => v.slug)
 check("JN4", rows.join() === newest.join(), `the home lists ${rows.join(", ") || "nothing"}, not ${newest.join(", ")} newest first`)
 for (const v of app.VIDEOS) {
@@ -126,7 +126,8 @@ for (const v of app.VIDEOS) {
   for (const p of article.html.match(/<p>[\s\S]*?<\/p>/g) ?? []) {
     check("JN6", !/\d/.test(p.replace(/<a [^>]*>[\s\S]*?<\/a>/g, "")) || /<a href="https?:/.test(p), `${v.slug}: a paragraph states a number with no link to its source: ${p.replace(/<[^>]+>/g, "").slice(0, 80)}…`)
   }
-  check("JN6", page("/").includes(html(article.summary)), `the home row for ${v.slug} lacks the article's summary`)
+  // the home shows a summary only as the lead's dek (JN19): the newest video's
+  if (v === app.VIDEOS[0]) check("JN6", page("/").includes(html(article.summary)), `the home's lead for ${v.slug} lacks the article's summary`)
 }
 
 // JN8 — a video cut into a Short as well shows it on the same page, as a facade that

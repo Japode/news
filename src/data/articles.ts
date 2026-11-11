@@ -26,6 +26,8 @@ export interface Article {
   summary: string
   /** The `##` headings, in order. */
   headings: string[]
+  /** How many words the body holds, for the reading time a byline shows (JN19). */
+  words: number
 }
 
 const FILES = import.meta.glob("../../content/videos/*/article.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>
@@ -47,7 +49,8 @@ function parse(file: string, source: string): Article | null {
   if (!opening || opening.startsWith("#")) throw new Error(`${file}: the article opens with a paragraph, before its first heading`)
   const summary = plain(opening).match(/^.+?[.!?](?=\s|$)/)?.[0] ?? plain(opening)
   const headings = [...body.matchAll(/^##\s+(.+)$/gm)].map((h) => h[1].trim())
-  return { approved, html: marked.parse(body, { async: false }), summary, headings }
+  const words = plain(body.replace(/^#+\s+/gm, "")).split(" ").filter(Boolean).length
+  return { approved, html: marked.parse(body, { async: false }), summary, headings, words }
 }
 
 const ARTICLES = new Map(

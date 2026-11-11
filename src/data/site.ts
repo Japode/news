@@ -8,7 +8,7 @@ export const SITE = {
   title: "Japode — vídeos curtos sobre as ferramentas de quem programa",
   /** The one line the home opens with: what the channel's videos are. */
   description:
-    "Vídeos curtos, em português, sobre a história e os porquês das ferramentas que quem programa usa todo dia, contados a partir de fontes reais.",
+    "Vídeos curtos em português sobre a história e o porquê das ferramentas que desenvolvedores usam todo dia, contados a partir de fontes reais.",
   /** The channel, which the home asks the reader to subscribe to (JN4). */
   youtube: "https://www.youtube.com/@japode",
   /** The English catalogue of the Japode products, which this site links and is linked from. */

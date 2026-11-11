@@ -1,4 +1,5 @@
 @import "./design/base.css";
+@import "./pages/home.css";
 
 /* The current pages' pieces, on the site's own tokens (JN15). They are the reading
    column of JN4 to JN8, kept working until the pages of block D replace them with the

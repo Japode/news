@@ -14,13 +14,13 @@
       "width": 1280,
       "regions": [
         { "name": "header", "ref": "body > div > header", "tier": "pixels", "task": "JN16", "enforced": true },
-        { "name": "intro", "ref": "main > p:first-child", "tier": "layout", "task": "JN19", "enforced": false },
-        { "name": "lead", "ref": "section[aria-labelledby=destaque]", "tier": "layout", "task": "JN19", "enforced": false },
-        { "name": "lead.title", "ref": "#destaque", "tier": "layout", "task": "JN19", "enforced": false },
-        { "name": "videos", "ref": "#todos", "tier": "layout", "task": "JN19", "enforced": false },
+        { "name": "intro", "ref": "main > p:first-child", "tier": "layout", "task": "JN19", "enforced": true },
+        { "name": "lead", "ref": "section[aria-labelledby=destaque]", "tier": "layout", "task": "JN19", "enforced": true },
+        { "name": "lead.title", "ref": "#destaque", "tier": "layout", "task": "JN19", "enforced": true },
+        { "name": "videos", "ref": "#todos", "tier": "layout", "task": "JN19", "enforced": true },
         { "name": "ad.label", "ref": "main aside[aria-label='Anúncio da casa'] > p:first-child", "tier": "pixels", "task": "JN24", "enforced": false },
-        { "name": "method", "ref": "section[aria-labelledby=como]", "tier": "pixels", "task": "JN19", "enforced": false },
-        { "name": "terms", "ref": "#termos", "tier": "layout", "task": "JN19", "enforced": false },
+        { "name": "method", "ref": "section[aria-labelledby=como]", "tier": "pixels", "task": "JN19", "enforced": true },
+        { "name": "terms", "ref": "#termos", "tier": "layout", "task": "JN19", "enforced": true },
         { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento]", "tier": "pixels", "task": "JN17", "enforced": true },
         { "name": "footer", "ref": "footer", "tier": "pixels", "task": "JN16", "enforced": true }
       ]

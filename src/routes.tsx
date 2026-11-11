@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 import { SITE } from "./data/site.ts"
-import { VIDEOS, type Video } from "./data/videos.ts"
+import { UPCOMING, VIDEOS, type Video } from "./data/videos.ts"
 import { Home } from "./pages/Home.tsx"
 import { NotFound } from "./pages/NotFound.tsx"
 import { VideoPage } from "./pages/VideoPage.tsx"
@@ -33,7 +33,7 @@ export const ROUTES: Route[] = [
     title: SITE.title,
     description: SITE.description,
     index: true,
-    render: () => <Home posts={VIDEOS.map((video) => ({ video, href: postHref(video) }))} />,
+    render: () => <Home posts={VIDEOS.map((video) => ({ video, href: postHref(video) }))} upcoming={UPCOMING} />,
   },
   // one page per imported video (JN5)
   ...VIDEOS.map<Route>((video) => ({
