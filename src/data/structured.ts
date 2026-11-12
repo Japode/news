@@ -9,7 +9,11 @@ import type { Article } from "./articles.ts"
 /** 315 seconds as "PT5M15S". */
 export const isoDuration = (seconds: number) => `PT${Math.floor(seconds / 60) ? `${Math.floor(seconds / 60)}M` : ""}${seconds % 60 ? `${seconds % 60}S` : ""}` || "PT0S"
 
-export const thumbnailUrl = (video: Video) => absolute(`/${video.slug}/thumbnail.jpg`)
+/** "2026-11-11" as "2026-11-11T00:00:00-03:00": Google wants a date-time with its zone in
+    uploadDate, and the imported facts carry only the day, which is Brasília's (UTC-3, no DST). */
+export const isoDateTime = (day: string) => `${day}T00:00:00-03:00`
+
+export const thumbnailUrl =(video: Video) => absolute(`/${video.slug}/thumbnail.jpg`)
 
 const publisher = {
   "@type": "Organization",
@@ -26,7 +30,7 @@ export function videoLd(video: Video, description: string) {
     name: video.title,
     description,
     thumbnailUrl: [thumbnailUrl(video)],
-    uploadDate: video.published,
+    uploadDate: isoDateTime(video.published),
     duration: isoDuration(video.duration),
     embedUrl: `https://www.youtube.com/embed/${video.youtube}`,
     contentUrl: watch,
@@ -89,7 +93,7 @@ export function articleLd(video: Video, article: Article) {
     headline: video.title,
     description: article.summary,
     image: [thumbnailUrl(video)],
-    datePublished: article.approved,
+    datePublished: isoDateTime(article.approved),
     inLanguage: "pt-BR",
     mainEntityOfPage: absolute(`/${video.slug}/`),
     author: author(),
@@ -105,7 +109,7 @@ export function standaloneLd(post: { slug: string; title: string; article: Artic
     headline: post.title,
     description: post.article.summary,
     image: [absolute("/icon-512.png")],
-    datePublished: post.article.approved,
+    datePublished: isoDateTime(post.article.approved),
     inLanguage: "pt-BR",
     mainEntityOfPage: absolute(`/${post.slug}/`),
     author: author(),

@@ -160,7 +160,7 @@ for (const v of app.VIDEOS) {
   check("JN9", Boolean(vo), `${path} has no VideoObject`)
   if (vo) {
     for (const field of ["name", "description", "thumbnailUrl", "uploadDate", "duration", "embedUrl"]) check("JN9", Boolean(vo[field]?.length), `${path}'s VideoObject lacks ${field}`)
-    check("JN9", /^PT(\d+M)?(\d+S)?$/.test(vo.duration ?? "") && vo.uploadDate === v.published, `${path}'s VideoObject has a duration or date that is not the video's`)
+    check("JN9", /^PT(\d+M)?(\d+S)?$/.test(vo.duration ?? "") && vo.uploadDate === `${v.published}T00:00:00-03:00`, `${path}'s VideoObject has a duration or date that is not the video's`)
     check("JN9", vo.hasPart?.length === v.chapters.length && vo.hasPart.every((c, i) => c["@type"] === "Clip" && c.name === v.chapters[i].title && c.startOffset === v.chapters[i].start && c.endOffset > c.startOffset && c.url), `${path}'s VideoObject lacks a Clip per chapter`)
   }
   const article = app.articleFor(v.slug)
