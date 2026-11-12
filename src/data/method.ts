@@ -3,14 +3,13 @@
 export const STEPS = [
   { title: "A fonte", text: "Um post, um paper ou um anúncio de quem fez a coisa. Fica registrado com título, data e link." },
   { title: "O roteiro", text: "Cada data e cada número do roteiro é conferido contra a fonte. O que não está nela não entra." },
-  { title: "O vídeo", text: "Narração e música geradas com ElevenLabs. Imagens de terceiros só com licença CC BY, cada uma creditada." },
+  { title: "O vídeo", text: "Imagens de terceiros só com licença CC BY, cada uma creditada." },
   { title: "A página", text: "O texto sai do roteiro, e o autor lê e aprova antes de a página ir ao ar." },
 ]
 
 export const RULES = [
   { lead: "Todo número tem fonte.", text: " Na página, ele aponta para o documento de onde saiu." },
   { lead: "O texto não vai além do vídeo.", text: " Nada que não esteja no vídeo ou nas fontes." },
-  { lead: "A voz é sintética, e a página diz isso.", text: " Na ficha de cada vídeo e na descrição do YouTube." },
   { lead: "Fonte em inglês é avisada.", text: " A página diz o idioma de cada fonte." },
 ]
 

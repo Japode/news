@@ -50,7 +50,7 @@ export const ROUTES: Route[] = [
   {
     path: SITE.method,
     title: "Como fazemos — Japode",
-    description: "Como cada vídeo do Japode vai do documento à página: as fontes, o roteiro, a voz sintética, o patrocínio da Viglet, as correções e quem faz.",
+    description: "Como cada vídeo do Japode vai do documento à página: as fontes, o roteiro, as imagens, as correções e quem faz.",
     index: true,
     render: () => <Method />,
   },

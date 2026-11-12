@@ -209,7 +209,9 @@ export function VideoPage({ video, description }: { video: Video; description: s
             <div>
               <h2>Como este vídeo foi feito</h2>
               <p>
-                {[video.production, article ? `Este texto sai do vídeo, sem acrescentar fatos, e foi aprovado por ${SITE.author} em ${shortDate(article.approved)}.` : null].filter(Boolean).join(" ") + " "}
+                {/* the production credit (video.production) stays in the data, off the page
+                    (the Alexandre, 2026-11-11) */}
+                {article ? `Este texto sai do vídeo, sem acrescentar fatos, e foi aprovado por ${SITE.author} em ${shortDate(article.approved)}. ` : ""}
                 <a href={SITE.method}>Mais sobre o método</a>
               </p>
             </div>
@@ -284,12 +286,6 @@ export function VideoPage({ video, description }: { video: Video; description: s
               <dd>{video.sources.length ? plural(video.sources.length, "primária", "primárias") : "nenhuma listada"}</dd>
               <dt>Correções</dt>
               <dd>{corrections.length ? String(corrections.length) : "nenhuma"}</dd>
-              {video.production && (
-                <>
-                  <dt>Narração</dt>
-                  <dd>{/ElevenLabs/.test(video.production) ? "voz gerada com ElevenLabs" : video.production}</dd>
-                </>
-              )}
               <dt>Imagens</dt>
               <dd>{`${plural(video.credits.length, "trecho", "trechos")}${ccBy ? " CC BY" : ""}`}</dd>
               {tie && (

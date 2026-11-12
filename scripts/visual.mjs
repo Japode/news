@@ -130,11 +130,22 @@ const snap = (page, selector) =>
     el.style.top = `${(parseFloat(getComputedStyle(el).top) || 0) - frac}px`
   }, selector)
 
+/** The element's whole pixels only: its box, snapped to the grid, cut to whole rows and
+    columns, so a fractional height does not end the capture on a row blended with whatever
+    sits below it, which differs between the artboard and the site. */
+async function whole(page, selector) {
+  const box = await page.evaluate((selector) => {
+    const r = document.querySelector(selector).getBoundingClientRect()
+    return { x: Math.round(r.left + scrollX), y: Math.round(r.top + scrollY), width: Math.floor(r.width), height: Math.floor(r.height) }
+  }, selector)
+  return page.screenshot({ clip: box, fullPage: true })
+}
+
 async function comparePixels(refPage, refSel, sitePage, siteSel, out) {
   await snap(refPage, refSel)
   await snap(sitePage, siteSel)
-  const a = PNG.sync.read(await refPage.locator(refSel).first().screenshot())
-  const b = PNG.sync.read(await sitePage.locator(siteSel).first().screenshot())
+  const a = PNG.sync.read(await whole(refPage, refSel))
+  const b = PNG.sync.read(await whole(sitePage, siteSel))
   if (a.width !== b.width || a.height !== b.height) return [`size ${b.width}x${b.height}, artboard ${a.width}x${a.height}`]
   const diff = new PNG({ width: a.width, height: a.height })
   const n = pixelmatch(a.data, b.data, diff.data, a.width, a.height, { threshold: 0.1 })
