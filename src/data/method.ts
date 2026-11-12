@@ -32,8 +32,8 @@ export const SPONSORSHIP = {
     checked: committers.top ranks GitHub contributors by country (alegauss was 4th in Brazil). */
 export const AUTHOR = {
   bio: {
-    lead: "Desenvolvedor de software brasileiro. É um programador ativo na comunidade de código aberto, ",
-    claim: { text: "um dos principais contribuidores do Brasil no GitHub", href: "https://committers.top/brazil#alegauss" },
+    lead: "Desenvolvedor de software brasileiro. É um programador ativo na comunidade de código aberto, um dos principais contribuidores do Brasil no ",
+    claim: { text: "GitHub", href: "https://committers.top/brazil#alegauss" },
     tail: ".",
   },
   links: [
