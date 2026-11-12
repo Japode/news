@@ -1,7 +1,4 @@
-/* The method page's copy (JN22), in one place. The sponsorship rules are promises the
-   Alexandre makes to the reader, so they reach the page the way an article does: only
-   once he approves them word for word, with the date in `approved`. Until then the page
-   says who the sponsor is and whose it is, and nothing it has not confirmed. */
+/* The method page's copy (JN22), in one place. */
 
 export const STEPS = [
   { title: "A fonte", text: "Um post, um paper ou um anúncio de quem fez a coisa. Fica registrado com título, data e link." },
@@ -16,17 +13,6 @@ export const RULES = [
   { lead: "A voz é sintética, e a página diz isso.", text: " Na ficha de cada vídeo e na descrição do YouTube." },
   { lead: "Fonte em inglês é avisada.", text: " A página diz o idioma de cada fonte." },
 ]
-
-export const SPONSORSHIP = {
-  /** YYYY-MM-DD once the Alexandre approves the rules below word for word; null until then. */
-  approved: null as string | null,
-  rules: [
-    "A Viglet não escolhe pauta nem lê roteiro antes de o vídeo sair.",
-    "Quando um vídeo fala de um produto da Viglet ou de um concorrente direto, o aviso aparece no topo da página, antes do texto.",
-    "A ficha de cada vídeo diz se a Viglet tem relação com o assunto.",
-    "Os anúncios da casa mostram, sorteados a cada visita, outros produtos do mesmo autor. Ficam fora do texto, não seguem o leitor e não guardam nada sobre quem lê.",
-  ],
-}
 
 /** The author, in the Alexandre's own words (2026-11-11), the claim linked to where it can be
     checked: committers.top ranks GitHub contributors by country (alegauss was 4th in Brazil). */

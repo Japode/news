@@ -54,7 +54,6 @@
         { "name": "intro", "ref": "main > div:first-child", "tier": "layout", "task": "JN22", "enforced": true },
         { "name": "steps", "ref": "section[aria-labelledby=etapas]", "tier": "pixels", "task": "JN22", "enforced": true },
         { "name": "rules", "ref": "section[aria-labelledby=regras]", "tier": "pixels", "task": "JN22", "enforced": true },
-        { "name": "sponsorship", "ref": "#patrocinio", "tier": "pixels", "task": "JN22", "enforced": false },
         { "name": "corrections", "ref": "#correcoes", "tier": "layout", "task": "JN22", "enforced": true },
         { "name": "author", "ref": "aside[aria-labelledby=autor-t]", "tier": "layout", "task": "JN22", "enforced": true },
         { "name": "sponsor", "ref": "aside[aria-labelledby=oferecimento]", "tier": "pixels", "task": "JN22", "enforced": true },

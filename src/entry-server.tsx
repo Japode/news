@@ -7,7 +7,6 @@ export { ROUTES } from "./routes.tsx"
 export { SITE } from "./data/site.ts"
 export { VIDEOS, UPCOMING } from "./data/videos.ts"
 export { articleFor } from "./data/articles.ts"
-export { SPONSORSHIP } from "./data/method.ts"
 export { SPONSOR } from "./data/sponsor.ts"
 
 export const render = (path: string) => renderToString(<Layout path={routeFor(path).path}>{routeFor(path).render()}</Layout>)

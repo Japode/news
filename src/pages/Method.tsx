@@ -1,14 +1,13 @@
 import { SITE } from "../data/site.ts"
-import { SPONSOR } from "../data/sponsor.ts"
-import { AUTHOR, RULES, SPONSORSHIP, STEPS } from "../data/method.ts"
+import { AUTHOR, RULES, STEPS } from "../data/method.ts"
 import { ldJson, personLd } from "../data/structured.ts"
 import { Island } from "../islands.tsx"
 
 /* "Como fazemos", as its artboard draws it (JN22): how a video goes from a document to a
-   page, the rules the site keeps, how the sponsorship works, how corrections are handled,
-   and who makes the videos. The copy is src/data/method.ts; the sponsorship's numbered
-   rules show only once the Alexandre approves them. Each run of copy is one string, so
-   it shapes as the artboard's runs do (design/README.md). */
+   page, the rules the site keeps, how corrections are handled, and who makes the videos.
+   The copy is src/data/method.ts. The sponsorship section left on 2026-11-11 at the
+   Alexandre's request; the band above the footer names the sponsor. Each run of copy is
+   one string, so it shapes as the artboard's runs do (design/README.md). */
 
 /* The author's links as icons: a globe for his site, GitHub's mark for GitHub. Inline,
    in the text colour, decorative to a screen reader, which reads the link's label. */
@@ -60,25 +59,6 @@ export function Method() {
                 </li>
               ))}
             </ul>
-          </section>
-
-          <section id="patrocinio" aria-labelledby="patrocinio-t" data-design="sponsorship">
-            <h2 id="patrocinio-t">Patrocínio</h2>
-            <p className="jn-method-lead">
-              {"O Japode tem oferecimento da "}
-              <a href={SPONSOR.url}>{SPONSOR.name}</a>
-              {`, que faz o Viglet Turing, o Viglet Shio e o Viglet Dumont. A ${SPONSOR.name} é do ${SITE.author}, o autor do canal, e toda página diz isso no mesmo lugar, logo acima do rodapé.`}
-            </p>
-            {SPONSORSHIP.approved && (
-              <ol className="jn-method-numbered">
-                {SPONSORSHIP.rules.map((rule, i) => (
-                  <li key={rule}>
-                    <span>{String(i + 1)}</span>
-                    <span>{rule}</span>
-                  </li>
-                ))}
-              </ol>
-            )}
           </section>
 
           <section id="correcoes" aria-labelledby="correcoes-t" data-design="corrections">
