@@ -28,9 +28,14 @@ export const SPONSORSHIP = {
   ],
 }
 
-/** The author, from visibility's VS48 bio (the employer is not named), and what he does here. */
+/** The author, in the Alexandre's own words (2026-11-11), the claim linked to where it can be
+    checked: committers.top ranks GitHub contributors by country (alegauss was 4th in Brazil). */
 export const AUTHOR = {
-  bio: "Desenvolvedor brasileiro. Faz a Viglet, de busca corporativa em código aberto (Viglet Turing, Viglet Shio e Viglet Dumont), o Cursarei e ferramentas para o Claude Code. Escolhe os temas e aprova cada página do Japode antes de ela ir ao ar.",
+  bio: {
+    lead: "Desenvolvedor de software brasileiro. É um programador ativo na comunidade de código aberto, ",
+    claim: { text: "um dos principais contribuidores do Brasil no GitHub", href: "https://committers.top/brazil#alegauss" },
+    tail: ".",
+  },
   links: [
     { href: "https://alegauss.github.io", label: "alegauss.github.io" },
     { href: "https://github.com/alegauss", label: "GitHub" },

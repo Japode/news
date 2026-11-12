@@ -80,7 +80,11 @@ export function Method() {
             <h2 id="autor-t">Quem faz</h2>
             {AUTHOR.photo && <img src={AUTHOR.photo} alt={`Foto de ${SITE.author}`} width={96} height={96} />}
             <p className="jn-method-author-name">{SITE.author}</p>
-            <p>{AUTHOR.bio}</p>
+            <p>
+              {AUTHOR.bio.lead}
+              <a href={AUTHOR.bio.claim.href}>{AUTHOR.bio.claim.text}</a>
+              {AUTHOR.bio.tail}
+            </p>
             <p className="jn-method-author-links">
               {AUTHOR.links.map((l) => (
                 <a key={l.href} href={l.href}>
