@@ -2,6 +2,7 @@ import { SITE } from "../data/site.ts"
 import { SPONSOR } from "../data/sponsor.ts"
 import { AUTHOR, RULES, SPONSORSHIP, STEPS } from "../data/method.ts"
 import { ldJson, personLd } from "../data/structured.ts"
+import { Island } from "../islands.tsx"
 
 /* "Como fazemos", as its artboard draws it (JN22): how a video goes from a document to a
    page, the rules the site keeps, how the sponsorship works, how corrections are handled,
@@ -67,11 +68,9 @@ export function Method() {
             <h2 id="correcoes-t">Correções</h2>
             <p className="jn-method-lead">Quando um vídeo erra, a página dele ganha uma nota com a data, o que estava errado e o que está certo. A nota não some depois, e a descrição no YouTube recebe a mesma nota.</p>
             <div id="corrigir" className="jn-method-report">
-              <p>
-                {"Para apontar um erro, comente no vídeo, no "}
-                <a href={SITE.youtube}>canal do Japode no YouTube</a>
-                {", dizendo o que está errado e onde está o certo."}
-              </p>
+              <h3>Envie uma correção</h3>
+              <p>Diga em que vídeo, o que está errado e, se souber, onde está o certo. Cada correção é conferida antes de entrar na página.</p>
+              <Island name="correction-form" />
             </div>
           </section>
         </div>

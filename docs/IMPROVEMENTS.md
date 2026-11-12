@@ -38,32 +38,6 @@ records each change with its date.
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-### §JN23 JN23 — The correction form
-
-Decided on 2026-11-11: no e-mail address on the site; corrections arrive through a
-Cognito Forms form in Viglet's account, embedded the way viglet.org does it
-(`D:\Git\viglet\site\src\components\CognitoForm.tsx`: `seamless.js` with the account key
-and a `data-form` id).
-
-The form, created by the Alexandre (this task cannot start before it exists): "Vídeo" (a
-choice of the published videos), "O que está errado" (required), "Onde está o certo" (a
-link, optional), "Seu e-mail" (optional, only to answer). The artboard draws those four
-fields and the "Enviar correção" button; the embed is styled to match with Cognito's
-theme settings, and tier 2 is not run over it, since Cognito draws its own markup.
-
-The non-goal allows the form but no cookie before consent, so the script is not loaded
-with the page. `#corrigir` prerenders a facade in the artboard's frame, with a button
-"Abrir o formulário"; the click loads the embed in place, the reader's own act, as the
-video facade does for YouTube. With scripts off, the button is a link to the form's
-public page on cognitoforms.com.
-
-A video page's correction link carries the video's slug, which preselects it where
-Cognito's prefill allows.
-
-Done when `scripts/verify.mjs` finds no Cognito script in any prerendered HTML and the
-facade on `/como-fazemos/`, and a submission from the built site reaches the Alexandre's
-Cognito entries.
-
 ### §JN25 JN25 — The editorial fields for the two published videos
 
 The import reads `marketing/japode/<video>/site.json` (JN18; its shape is in the header

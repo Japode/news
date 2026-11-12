@@ -284,6 +284,16 @@ for (const v of app.VIDEOS) {
 check("JN24", slots(page(SITE.method)).length === 0, `${SITE.method} carries a house ad`)
 check("JN24", page("/").includes('<script src="https://ads.japode.com/v1/ads.js" async></script>') && /<noscript><style>\.jn-ad\s*\{\s*display:\s*none;?\s*\}<\/style><\/noscript>/.test(page("/")), "the pages do not load the Japode Ads loader, or show empty frames with scripts off")
 
+// JN23 — the correction form loads only on the reader's click: no prerendered page carries
+// Cognito's script, and the method page's #corrigir holds the facade, a link to the form's
+// public page so it works with scripts off.
+for (const r of ROUTES) check("JN23", !/<script[^>]*cognitoforms\.com/.test(page(r.path)), `${r.path} loads Cognito before a click`)
+if (existsSync(join(DIST, app.outputDir(SITE.method), "index.html"))) {
+  const m = page(SITE.method)
+  const report = m.slice(m.indexOf('id="corrigir"'), m.indexOf("</section>", m.indexOf('id="corrigir"')))
+  check("JN23", report.includes(`href="${SITE.cognito.page}"`) && report.includes("data-cognito-facade") && report.includes('data-island="correction-form"'), `${SITE.method}#corrigir lacks the form's facade`)
+}
+
 // The author is alegauss.github.io's Person, by its @id, wherever a page credits him: the
 // method page as a Person of its own, and every video's VideoObject and Article.
 const PERSON = "https://alegauss.github.io/#person"

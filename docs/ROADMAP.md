@@ -8,8 +8,6 @@
 
 ## Block D — The site drawn in the artboard, pixel for pixel
 
-- 📋 **JN23** (deps: JN22 ✅, the corrections form created by the Alexandre in Viglet's Cognito Forms account) **A reader who spots an error has no way to report it without hunting for an e-mail address** — A correction policy needs a way in, and the Alexandre chose a Cognito form over an address. → §JN23
-
 ## Non-goals
 
 - **Pages in English** japode.com is the English catalogue; this is the Portuguese home

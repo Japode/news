@@ -1,5 +1,6 @@
 import type { ComponentType } from "react"
 import { VideoFacade } from "./components/VideoFacade.tsx"
+import { CorrectionForm } from "./components/CorrectionForm.tsx"
 
 /* The page is static HTML; only these pieces run in the browser. Each interactive piece
    is an island: rendered with the page, then hydrated on its own from the props written
@@ -9,6 +10,7 @@ import { VideoFacade } from "./components/VideoFacade.tsx"
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ISLANDS: Record<string, ComponentType<any>> = {
   "video-facade": VideoFacade,
+  "correction-form": CorrectionForm,
 }
 
 export function Island({ name, props = {} }: { name: keyof typeof ISLANDS & string; props?: Record<string, string> }) {

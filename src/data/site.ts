@@ -19,6 +19,13 @@ export const SITE = {
   method: "/como-fazemos/",
   /** Where a reader reports an error (JN23): the form on the method page. */
   corrections: "/como-fazemos/#corrigir",
+  /** The corrections form in the Alexandre's Cognito Forms account (JN23), embedded with
+      seamless.js only after a click; `page` is its public address, for scripts off. */
+  cognito: {
+    key: "oLU_1FtCdka0rWW4IF3WnQ",
+    form: "1",
+    page: "https://www.cognitoforms.com/f/oLU_1FtCdka0rWW4IF3WnQ/1",
+  },
 } as const
 
 export const absolute = (path: string) => `${SITE.origin}${path}`
