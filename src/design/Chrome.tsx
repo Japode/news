@@ -72,7 +72,7 @@ export function Footer() {
             <img src="/logo.svg" alt="" width={28} height={28} />
             {SITE.name}
           </span>
-          <p>Vídeos curtos em português sobre as ferramentas de quem programa.</p>
+          <p>Vídeos curtos e artigos em português sobre as ferramentas de quem programa.</p>
         </div>
         <div className="jn-foot-corrections">
           <span className="jn-foot-heading">Correções</span>
