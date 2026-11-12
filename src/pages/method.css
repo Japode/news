@@ -186,7 +186,21 @@
 .jn-method-author-links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-16);
+  gap: var(--space-8);
+}
+.jn-method-author-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--target);
+  height: var(--target);
+  border: var(--line-hair) solid var(--rule-strong);
+  border-radius: var(--radius-circle);
+  color: var(--ink);
+}
+.jn-method-author-links a:hover {
+  border-color: var(--ink);
+  color: var(--green-text);
 }
 
 @media (max-width: 600px) {

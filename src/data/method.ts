@@ -36,10 +36,11 @@ export const AUTHOR = {
     claim: { text: "GitHub", href: "https://committers.top/brazil#alegauss" },
     tail: ".",
   },
+  /** Shown as icons; the label is the link's accessible name and its tooltip. */
   links: [
-    { href: "https://alegauss.github.io", label: "alegauss.github.io" },
-    { href: "https://github.com/alegauss", label: "GitHub" },
-  ],
+    { href: "https://alegauss.github.io", label: "Site pessoal: alegauss.github.io", icon: "site" },
+    { href: "https://github.com/alegauss", label: "GitHub: alegauss", icon: "github" },
+  ] as const,
   /** His photo under public/, cropped square to 192px with its metadata stripped. */
   photo: "/alexandre.jpg" as string | null,
 }
