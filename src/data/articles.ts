@@ -39,7 +39,7 @@ const plain = (md: string) =>
     .replace(/\s+/g, " ")
     .trim()
 
-function parse(file: string, source: string): Article | null {
+export function parse(file: string, source: string): Article | null {
   const m = source.replace(/\r\n/g, "\n").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
   if (!m) throw new Error(`${file}: an article opens with front matter (--- approved: YYYY-MM-DD ---)`)
   const approved = m[1].match(/^approved:\s*(\d{4}-\d{2}-\d{2})\s*$/m)?.[1]

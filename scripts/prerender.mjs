@@ -114,7 +114,8 @@ for (const [file, size] of [["icon-192.png", 192], ["icon-512.png", 512], ["appl
 const siteDate = lastAuthoredChange(REPO, ["src", "public", "index.html", "content"])
 const url = (route) => {
   const v = route.video
-  const lastmod = v ? lastAuthoredChange(REPO, [`content/videos/${v.slug}`]) ?? siteDate : siteDate
+  const own = v ? `content/videos/${v.slug}` : route.post ? `content/articles/${route.post.slug}` : null
+  const lastmod = own ? lastAuthoredChange(REPO, [own]) ?? siteDate : siteDate
   const video = v
     ? [
         "    <video:video>",
@@ -153,6 +154,8 @@ writeFileSync(
     "",
     ...app.ROUTES.filter((r) => r.video).map((r) => `- [${r.video.title}](${abs(r.path)}): ${r.description}`),
     "",
+    // the articles on their own (JN27), when there are any
+    ...(app.ROUTES.some((r) => r.post) ? ["## Artigos", "", ...app.ROUTES.filter((r) => r.post).map((r) => `- [${r.post.title}](${abs(r.path)}): ${r.description}`), ""] : []),
   ].join("\n"),
 )
 

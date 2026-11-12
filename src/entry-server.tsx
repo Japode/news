@@ -6,6 +6,7 @@ import { absolute } from "./data/site.ts"
 export { ROUTES } from "./routes.tsx"
 export { SITE } from "./data/site.ts"
 export { VIDEOS, UPCOMING } from "./data/videos.ts"
+export { STANDALONE } from "./data/standalone.ts"
 export { articleFor } from "./data/articles.ts"
 export { SPONSOR } from "./data/sponsor.ts"
 

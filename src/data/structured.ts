@@ -97,5 +97,21 @@ export function articleLd(video: Video, article: Article) {
   }
 }
 
+/** An article on its own (JN27): the same Article, with the site's mark as its image. */
+export function standaloneLd(post: { slug: string; title: string; article: Article }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.article.summary,
+    image: [absolute("/icon-512.png")],
+    datePublished: post.article.approved,
+    inLanguage: "pt-BR",
+    mainEntityOfPage: absolute(`/${post.slug}/`),
+    author: author(),
+    publisher,
+  }
+}
+
 /** JSON for a <script> element: "</" cannot close it early. */
 export const ldJson = (data: unknown) => JSON.stringify(data).replace(/</g, "\\u003c")

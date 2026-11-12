@@ -34,3 +34,7 @@
 - ✅ **JN24** **The site never shows the author's other products, which every other Japode site cross-promotes** — Japode Ads fills a labelled strip on the home and an in-content and sidebar box on each video page, storing nothing and outside the article (design recorded in `src/design/AdSlot.tsx`).
 - ✅ **JN23** **A reader who spots an error has no way to report it without hunting for an e-mail address** — #corrigir loads the Cognito form on a click only, linking its page with scripts off (design recorded in `src/components/CorrectionForm.tsx`).
 - 🗑 **JN26** **The method page omits the sponsorship rules the artboard draws: the Alexandre has not approved their wording** — abandoned: The Alexandre removed the sponsorship section from the method page, so its rules have no place to go.
+
+## Block E — Articles on their own
+
+- ✅ **JN27** **An article needs a video: the site has no page for a text written on its own, from its sources** — An approved article in content/articles gets its page, a home card, sitemap and llms.txt lines, and verify checks each; a draft stays off the site (design recorded in `src/data/standalone.ts`).

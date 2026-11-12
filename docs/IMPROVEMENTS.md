@@ -62,3 +62,5 @@ already records. The pages need no change: they show these fields when present.
 
 Done when both videos' `video.json` carry a kicker and a sponsor tie, and the Scion's
 carries its facts.
+
+## Block E — Articles on their own

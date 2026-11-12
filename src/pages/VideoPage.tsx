@@ -28,12 +28,12 @@ const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one :
 
 /** The article's [n] marks as superscript links to the sources box, and the numbers
     table where the article asks for it with a <!-- numeros --> line. */
-function articleHtml(html: string, facts: string | null) {
+export function articleHtml(html: string, facts: string | null) {
   const marked = html.replace(/\[(\d+)\]/g, '<sup><a href="#fontes">[$1]</a></sup>')
   return facts && marked.includes("<!-- numeros -->") ? marked.replace("<!-- numeros -->", facts) : marked
 }
 
-function SourceLine({ source, n }: { source: Source; n: number }) {
+export function SourceLine({ source, n }: { source: Source; n: number }) {
   const tail = [source.published ? `${shortDate(source.published)}.` : null, source.lang ? (LANG[source.lang.slice(0, 2)] ?? null) : null].filter(Boolean).join(" ")
   return (
     <p>

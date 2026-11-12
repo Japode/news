@@ -7,6 +7,8 @@ import { VideoPage } from "./pages/VideoPage.tsx"
 import { Method } from "./pages/Method.tsx"
 import { minutes } from "./data/format.ts"
 import { articleFor } from "./data/articles.ts"
+import { STANDALONE, type Standalone } from "./data/standalone.ts"
+import { ArticlePage } from "./pages/ArticlePage.tsx"
 
 /* The route table: every page the site serves. prerender.mjs writes one page per row,
    and a video's page joins it as a row built from content/videos/ (JN5). */
@@ -19,6 +21,8 @@ export interface Route {
   index: boolean
   /** The video a page is about: prerender.mjs writes its og:image, its sitemap tags and its llms.txt line (JN9). */
   video?: Video
+  /** The article on its own a page is (JN27): its sitemap date and its llms.txt line. */
+  post?: Standalone
   render: () => ReactNode
 }
 
@@ -34,7 +38,7 @@ export const ROUTES: Route[] = [
     title: SITE.title,
     description: SITE.description,
     index: true,
-    render: () => <Home posts={VIDEOS.map((video) => ({ video, href: postHref(video) }))} upcoming={UPCOMING} />,
+    render: () => <Home posts={VIDEOS.map((video) => ({ video, href: postHref(video) }))} upcoming={UPCOMING} articles={STANDALONE} />,
   },
   // one page per imported video (JN5)
   ...VIDEOS.map<Route>((video) => ({
@@ -46,7 +50,16 @@ export const ROUTES: Route[] = [
     video,
     render: () => <VideoPage video={video} description={articleFor(video.slug)?.summary ?? holds(video)} />,
   })),
-  // how the videos are made, the sponsorship and the corrections, and who makes them (JN22)
+  // one page per approved article on its own, no video (JN27)
+  ...STANDALONE.map<Route>((post) => ({
+    path: `/${post.slug}/`,
+    title: `${post.title} — Japode`,
+    description: post.article.summary,
+    index: true,
+    post,
+    render: () => <ArticlePage post={post} />,
+  })),
+  // how the videos are made, the corrections, and who makes them (JN22)
   {
     path: SITE.method,
     title: "Como fazemos — Japode",
@@ -62,6 +75,11 @@ export const ROUTES: Route[] = [
     render: () => <NotFound />,
   },
 ]
+
+// a slug two pages claim would leave one of them unreachable: stop the build instead (JN27)
+for (const [i, r] of ROUTES.entries()) {
+  if (ROUTES.findIndex((o) => o.path === r.path) !== i) throw new Error(`two pages claim ${r.path}: rename content/articles/${r.path.slice(1, -1)}/`)
+}
 
 /** Where the home sends a post: its page once it has one (JN5), the video until then,
     so no row links an address that answers 404. */

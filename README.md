@@ -63,5 +63,31 @@ lê; por isso são copiados para `content/videos/<slug>/`, nunca redigitados.
    Sem `approved:`, o artigo é um rascunho: fica no repositório e em nenhuma página.
 6. Commit, e o Alexandre faz o push: o workflow publica o site.
 
+## Um artigo sem vídeo
+
+Um texto que não vem de nenhum vídeo é escrito aqui mesmo, numa pasta
+`content/articles/<slug>/` (o slug vira o endereço: `japode.com.br/<slug>/`), com dois arquivos:
+
+- `article.json`: o título, a linha de assunto (opcional) e as fontes, pelo menos uma:
+
+  ```json
+  {
+    "title": "O título do artigo",
+    "kicker": "Controle de versão",
+    "sources": [
+      { "text": "Quem publicou, \"o título do documento\"", "url": "https://...", "lang": "en", "published": "AAAA-MM-DD" }
+    ]
+  }
+  ```
+
+- `article.md`: o mesmo formato do artigo de um vídeo: front matter, um parágrafo de abertura
+  (a primeira frase vira o resumo) e uma seção `##` por parte. Todo parágrafo com número tem
+  link para a fonte, e um `[1]` vira um link para a caixa de fontes. Sem `approved:` é rascunho.
+
+O artigo aprovado ganha a sua página (como a de um vídeo, sem o vídeo), um card na seção
+"Artigos" da home, e entra no sitemap e no `llms.txt`. `npm run build` para com o campo que
+falhou se o `article.json` não cabe, e um slug repetido (de outro artigo ou de um vídeo) também
+para o build.
+
 O plano está em [docs/ROADMAP.md](docs/ROADMAP.md), e o desenho de cada tarefa em
 [docs/IMPROVEMENTS.md](docs/IMPROVEMENTS.md).

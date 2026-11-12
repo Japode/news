@@ -291,6 +291,36 @@ if (existsSync(join(DIST, app.outputDir(SITE.method), "index.html"))) {
   check("JN23", report.includes(`href="${SITE.cognito.page}"`) && report.includes("data-cognito-facade") && report.includes('data-island="correction-form"'), `${SITE.method}#corrigir lacks the form's facade`)
 }
 
+// JN27 — every approved article on its own has its page (its title as h1, every source in
+// the sources box, each paragraph that states a number linking a source, an Article
+// crediting the author), a card on the home, and its sitemap and llms.txt lines; a draft
+// in content/articles/ is on no page.
+const ARTICLES_DIR = join(REPO, "content", "articles")
+const articleDirs = existsSync(ARTICLES_DIR) ? readdirSync(ARTICLES_DIR).filter((d) => statSync(join(ARTICLES_DIR, d)).isDirectory()) : []
+for (const slug of articleDirs) {
+  const post = app.STANDALONE.find((p) => p.slug === slug)
+  if (!post) {
+    check("JN27", !existsSync(join(DIST, slug, "index.html")), `content/articles/${slug} is a draft and has a page`)
+    continue
+  }
+  const path = `/${slug}/`
+  if (!existsSync(join(DIST, slug, "index.html"))) {
+    check("JN27", false, `${path} was not prerendered`)
+    continue
+  }
+  const text = page(path)
+  check("JN27", text.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] === html(post.title), `${path} lacks its h1`)
+  for (const s of post.sources) check("JN27", text.includes(`href="${html(s.url)}"`), `${path} lacks the source ${s.url}`)
+  for (const p of post.article.html.match(/<p>[\s\S]*?<\/p>/g) ?? []) {
+    check("JN27", !/\d/.test(p.replace(/<a [^>]*>[\s\S]*?<\/a>/g, "")) || /<a href="https?:/.test(p), `${slug}: a paragraph states a number with no link to its source: ${p.replace(/<[^>]+>/g, "").slice(0, 80)}…`)
+  }
+  const al = [...text.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1])).find((x) => x["@type"] === "Article")
+  check("JN27", al?.author?.["@id"] === "https://alegauss.github.io/#person" && al.headline === post.title, `${path}'s Article JSON-LD does not credit the author`)
+  check("JN27", page("/").includes(`<article class="jn-text-card" id="${slug}">`) && page("/").includes(`href="${path}"`), `the home lacks ${slug}'s card`)
+  check("JN27", sitemap.includes(`<loc>${SITE.origin}${path}</loc>`), `the sitemap lacks ${path}`)
+  check("JN27", read("llms.txt").includes(`(${SITE.origin}${path})`), `llms.txt lacks ${path}`)
+}
+
 // The author is alegauss.github.io's Person, by its @id, wherever a page credits him: the
 // method page as a Person of its own, and every video's VideoObject and Article.
 const PERSON = "https://alegauss.github.io/#person"

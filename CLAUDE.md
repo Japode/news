@@ -27,6 +27,7 @@ is worked and committed.
   `D:\Git\viglet\marketing\japode\<video>` (private), which the CI cannot read, so they are
   copied into `content/videos/<slug>/` on the Alexandre's machine.
 - **An article claims nothing beyond the video and its sources**, and the Alexandre approves
-  it before its page ships.
+  it before its page ships. An article with no video (`content/articles/<slug>/`, JN27)
+  claims nothing beyond the sources its `article.json` lists, under the same approval.
 - **Always the full product name** when a Viglet product is named ("Viglet Turing", never
   "Turing").

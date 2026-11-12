@@ -164,6 +164,24 @@
   font-size: var(--text-14);
 }
 
+/* --- the articles on their own (JN27): text cards, no thumbnail */
+.jn-text-card > a,
+.jn-text-card > a:hover {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  height: 100%;
+  padding-top: var(--space-16);
+  border-top: var(--line-rule) solid var(--ink);
+  color: var(--ink);
+  text-decoration: none;
+}
+.jn-text-card-summary {
+  color: var(--text-secondary);
+  font-size: var(--text-15);
+  line-height: 1.55;
+}
+
 /* --- what each page holds */
 .jn-home-method {
   padding: var(--space-40) 0 var(--space-48);

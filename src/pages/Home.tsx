@@ -1,5 +1,6 @@
 import { SITE } from "../data/site.ts"
 import type { Upcoming, Video } from "../data/videos.ts"
+import type { Standalone } from "../data/standalone.ts"
 import { articleFor } from "../data/articles.ts"
 import { clock, readingMinutes, shortDate } from "../data/format.ts"
 import { Button, Chip } from "../design/primitives.tsx"
@@ -97,7 +98,22 @@ const METHOD = [
   { title: "Os créditos", text: "Toda imagem de terceiros, com canal, link e licença." },
 ]
 
-export function Home({ posts, upcoming }: { posts: Post[]; upcoming: Upcoming[] }) {
+/** An article on its own (JN27): a card of text, no thumbnail, as it has no video. */
+function ArticleCard({ post }: { post: Standalone }) {
+  const meta = [shortDate(post.article.approved), `leitura de ${readingMinutes(post.article.words)} min`, sourceCount(post.sources.length)].join(" · ")
+  return (
+    <article className="jn-text-card" id={post.slug}>
+      <a href={`/${post.slug}/`}>
+        {post.kicker && <span className="jn-kicker jn-kicker-small">{post.kicker}</span>}
+        <span className="jn-card-title">{post.title}</span>
+        <span className="jn-text-card-summary">{post.article.summary}</span>
+        <span className="jn-card-meta">{meta}</span>
+      </a>
+    </article>
+  )
+}
+
+export function Home({ posts, upcoming, articles = [] }: { posts: Post[]; upcoming: Upcoming[]; articles?: Standalone[] }) {
   const [lead] = posts
   const terms = posts
     .flatMap(({ video, href }) => video.terms.map((t) => ({ term: t.term, href: `${href}#termos` })))
@@ -125,6 +141,20 @@ export function Home({ posts, upcoming }: { posts: Post[]; upcoming: Upcoming[] 
           ))}
         </div>
       </section>
+
+      {articles.length > 0 && (
+        <section id="artigos" className="jn-home-videos" aria-labelledby="artigos-t">
+          <div className="jn-home-videos-head">
+            <h2 id="artigos-t">Artigos</h2>
+            <span>{`${articles.length === 1 ? "1 artigo" : `${articles.length} artigos`} · mais recente primeiro`}</span>
+          </div>
+          <div className="jn-home-grid">
+            {articles.map((a) => (
+              <ArticleCard key={a.slug} post={a} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <AdSlot format="strip" slot="home-strip" />
 

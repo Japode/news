@@ -1,6 +1,7 @@
 /* A video's corrections (JN20): content/videos/<slug>/corrections.json, a list of
    { date, wrong, right }. Corrections are editorial, so they live in this repo, not in
-   marketing; a video without the file has none. The page prints each one and never
+   marketing; a page without the file has none. An article on its own (JN27) keeps its
+   file in content/articles/<slug>/. The page prints each one and never
    drops it, so a correction once made stays on the page. */
 
 export interface Correction {
@@ -10,7 +11,7 @@ export interface Correction {
   right: string
 }
 
-const FILES = import.meta.glob("../../content/videos/*/corrections.json", { eager: true, import: "default" })
+const FILES = import.meta.glob(["../../content/videos/*/corrections.json", "../../content/articles/*/corrections.json"], { eager: true, import: "default" })
 
 const BY_SLUG = new Map(
   Object.entries(FILES).map(([file, data]) => {
