@@ -95,19 +95,24 @@ export function Method() {
         <aside className="jn-method-author" aria-labelledby="autor-t" data-design="author">
           <section>
             <h2 id="autor-t">Quem faz</h2>
-            {AUTHOR.photo && <img src={AUTHOR.photo} alt={`Foto de ${SITE.author}`} width={96} height={96} />}
-            <p className="jn-method-author-name">{SITE.author}</p>
+            {/* the photo beside the name and the links, the bio under both at full width */}
+            <div className="jn-method-author-head">
+              {AUTHOR.photo && <img src={AUTHOR.photo} alt={`Foto de ${SITE.author}`} width={88} height={88} />}
+              <div>
+                <p className="jn-method-author-name">{SITE.author}</p>
+                <p className="jn-method-author-links">
+                  {AUTHOR.links.map((l) => (
+                    <a key={l.href} href={l.href} aria-label={l.label} title={l.label}>
+                      {ICONS[l.icon]}
+                    </a>
+                  ))}
+                </p>
+              </div>
+            </div>
             <p>
               {AUTHOR.bio.lead}
               <a href={AUTHOR.bio.claim.href}>{AUTHOR.bio.claim.text}</a>
               {AUTHOR.bio.tail}
-            </p>
-            <p className="jn-method-author-links">
-              {AUTHOR.links.map((l) => (
-                <a key={l.href} href={l.href} aria-label={l.label} title={l.label}>
-                  {ICONS[l.icon]}
-                </a>
-              ))}
             </p>
           </section>
         </aside>

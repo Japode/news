@@ -157,7 +157,18 @@
   padding: var(--space-24);
   display: flex;
   flex-direction: column;
-  gap: var(--space-12);
+  gap: var(--space-16);
+}
+.jn-method-author-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+.jn-method-author-head > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
 }
 .jn-method-author h2 {
   color: var(--text-muted);
@@ -167,8 +178,10 @@
   text-transform: uppercase;
 }
 .jn-method-author img {
-  width: 96px;
-  height: 96px;
+  flex: 0 0 auto;
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-circle);
   object-fit: cover;
 }
 .jn-method-author-name {
