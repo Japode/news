@@ -1,6 +1,7 @@
 import { SITE } from "../data/site.ts"
 import { SPONSOR } from "../data/sponsor.ts"
 import { AUTHOR, RULES, SPONSORSHIP, STEPS } from "../data/method.ts"
+import { ldJson, personLd } from "../data/structured.ts"
 
 /* "Como fazemos", as its artboard draws it (JN22): how a video goes from a document to a
    page, the rules the site keeps, how the sponsorship works, how corrections are handled,
@@ -91,6 +92,11 @@ export function Method() {
           </section>
         </aside>
       </div>
+
+      {/* the author as the same schema.org Person alegauss.github.io publishes, by @id, so
+          search engines read "Quem faz" as that one person; after the content, so the first
+          element is still the intro */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(personLd()) }} />
     </div>
   )
 }

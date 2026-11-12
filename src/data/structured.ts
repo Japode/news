@@ -31,6 +31,7 @@ export function videoLd(video: Video, description: string) {
     embedUrl: `https://www.youtube.com/embed/${video.youtube}`,
     contentUrl: watch,
     inLanguage: "pt-BR",
+    creator: author(),
     publisher,
     hasPart: video.chapters.map((c, i) => ({
       "@type": "Clip",
@@ -40,6 +41,45 @@ export function videoLd(video: Video, description: string) {
       url: `${watch}&t=${c.start}`,
     })),
   }
+}
+
+/** The author as schema.org knows him: the same Person, under the same @id, that
+    alegauss.github.io publishes (its AG15), so a search engine reads every page here that
+    names him as that one person, the one who also builds Viglet and Cursarei. Copied from
+    alegauss.github.io's src/pages/Home.tsx personJsonLd(); a change there is made here too.
+    The photo is this site's own copy. */
+export const PERSON_ID = "https://alegauss.github.io/#person"
+
+export function personLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: SITE.author,
+    alternateName: ["alegauss", "Alê Oliveira"],
+    url: "https://alegauss.github.io/",
+    image: absolute("/alexandre.jpg"),
+    nationality: { "@type": "Country", name: "Brazil" },
+    jobTitle: "Software developer",
+    worksFor: { "@type": "Organization", name: "Viglet", url: "https://www.viglet.org", sameAs: ["https://github.com/openviglet"] },
+    affiliation: [{ "@type": "Organization", name: "Japode", url: "https://japode.com", sameAs: ["https://github.com/Japode"] }],
+    sameAs: [
+      "https://github.com/alegauss",
+      "https://www.linkedin.com/in/alegauss/",
+      "https://stackoverflow.com/users/2497985/alegauss",
+      "https://huggingface.co/alegauss",
+      "https://dev.to/alegauss",
+      "https://x.com/alegauss",
+      "https://bsky.app/profile/alegauss.bsky.social",
+    ],
+    knowsAbout: ["Enterprise search", "Content management systems", "Claude Code", "Coding agents", "Windows desktop apps"],
+  }
+}
+
+/** The author where a page credits him: the whole Person, so the page needs no other script. */
+const author = () => {
+  const { "@context": _, ...person } = personLd()
+  return person
 }
 
 export function articleLd(video: Video, article: Article) {
@@ -52,7 +92,7 @@ export function articleLd(video: Video, article: Article) {
     datePublished: article.approved,
     inLanguage: "pt-BR",
     mainEntityOfPage: absolute(`/${video.slug}/`),
-    author: { "@type": "Person", name: SITE.author },
+    author: author(),
     publisher,
   }
 }

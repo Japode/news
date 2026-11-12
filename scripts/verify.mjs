@@ -284,6 +284,19 @@ for (const v of app.VIDEOS) {
 check("JN24", slots(page(SITE.method)).length === 0, `${SITE.method} carries a house ad`)
 check("JN24", page("/").includes('<script src="https://ads.japode.com/v1/ads.js" async></script>') && /<noscript><style>\.jn-ad\s*\{\s*display:\s*none;?\s*\}<\/style><\/noscript>/.test(page("/")), "the pages do not load the Japode Ads loader, or show empty frames with scripts off")
 
+// The author is alegauss.github.io's Person, by its @id, wherever a page credits him: the
+// method page as a Person of its own, and every video's VideoObject and Article.
+const PERSON = "https://alegauss.github.io/#person"
+const lds = (text) => [...text.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]))
+const personOk = (p) => p?.["@type"] === "Person" && p["@id"] === PERSON && p.name === SITE.author && p.sameAs?.includes("https://github.com/alegauss")
+if (existsSync(join(DIST, app.outputDir(SITE.method), "index.html"))) check("JN22", lds(page(SITE.method)).some(personOk), `${SITE.method} lacks the author's Person JSON-LD`)
+for (const v of app.VIDEOS) {
+  const ld = lds(page(`/${v.slug}/`))
+  check("JN9", personOk(ld.find((x) => x["@type"] === "VideoObject")?.creator), `/${v.slug}/'s VideoObject does not credit the author's Person`)
+  const art = ld.find((x) => x["@type"] === "Article")
+  if (art) check("JN9", personOk(art.author), `/${v.slug}/'s Article does not credit the author's Person`)
+}
+
 if (failures.length) {
   console.error(`verify: ${failures.length} check(s) failed\n  ${failures.join("\n  ")}`)
   process.exit(1)

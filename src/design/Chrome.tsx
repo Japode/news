@@ -72,10 +72,7 @@ export function Footer() {
             <img src="/logo.svg" alt="" width={28} height={28} />
             {SITE.name}
           </span>
-          {/* one string, not text and a variable: React would split it into separate text
-              nodes, which Chrome shapes apart, and the kerning across the seams would
-              differ from the artboard's single run */}
-          <p>{`Vídeos curtos em português sobre as ferramentas de quem programa. Feito por ${SITE.author}.`}</p>
+          <p>Vídeos curtos em português sobre as ferramentas de quem programa.</p>
         </div>
         <div className="jn-foot-corrections">
           <span className="jn-foot-heading">Correções</span>
