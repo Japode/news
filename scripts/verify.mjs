@@ -132,13 +132,15 @@ for (const v of app.VIDEOS) {
   if (v === app.VIDEOS[0]) check("JN6", page("/").includes(html(article.summary)), `the home's lead for ${v.slug} lacks the article's summary`)
 }
 
-// JN8 — a video cut into a Short as well shows it on the same page, as a facade that
-// links the Short on YouTube, with its frame served; the Short has no page of its own.
-for (const v of app.VIDEOS.filter((x) => x.short)) {
+// JN8 — a video cut into Shorts as well shows each one on the same page, as a facade that
+// links the Short on YouTube, with its frame served; no Short has a page of its own.
+for (const v of app.VIDEOS.filter((x) => x.shorts?.length)) {
   const text = page(`/${v.slug}/`)
-  check("JN8", text.includes(`data-facade="${v.short.youtube}"`) && text.includes(`href="https://www.youtube.com/shorts/${v.short.youtube}"`), `/${v.slug}/ lacks the Short's facade`)
-  check("JN8", existsSync(join(DIST, v.slug, "short.jpg")), `${v.slug}'s Short frame is not served`)
-  check("JN8", !ROUTES.some((r) => r.path.includes(v.short.youtube)), `the Short ${v.short.youtube} has a page of its own`)
+  for (const s of v.shorts) {
+    check("JN8", text.includes(`data-facade="${s.youtube}"`) && text.includes(`href="https://www.youtube.com/shorts/${s.youtube}"`), `/${v.slug}/ lacks the facade of the Short ${s.youtube}`)
+    check("JN8", existsSync(join(DIST, v.slug, `short-${s.youtube}.jpg`)), `${v.slug}'s frame of the Short ${s.youtube} is not served`)
+    check("JN8", !ROUTES.some((r) => r.path.includes(s.youtube)), `the Short ${s.youtube} has a page of its own`)
+  }
 }
 
 // JN9 — each video's page carries a VideoObject with every field Google reads and a Clip

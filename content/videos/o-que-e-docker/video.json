@@ -1,7 +1,7 @@
 {
   "$comment": "Imported by scripts/import-video.mjs from marketing/japode/docker; never edited by hand.",
   "slug": "o-que-e-docker",
-  "title": "Docker: a caixa de navio que mudou o software",
+  "title": "O que é Docker? A caixa de navio que mudou o software",
   "youtube": "gZEP6b_Fs00",
   "published": "2026-11-10",
   "duration": 272,
@@ -297,9 +297,17 @@
       "license": "Creative Commons Attribution license (reuse allowed)"
     }
   ],
-  "short": {
-    "youtube": "uMa5PYAAtcg",
-    "title": "O Docker nasceu numa palestra de 5 minutos"
-  },
+  "shorts": [
+    {
+      "youtube": "uMa5PYAAtcg",
+      "title": "O Docker nasceu numa palestra de 5 minutos",
+      "cut": 1
+    },
+    {
+      "youtube": "Yi3N1dGhYCA",
+      "title": "\"Na minha máquina funciona\": a briga antes do Docker",
+      "cut": 2
+    }
+  ],
   "production": "Narração e música geradas com ElevenLabs."
 }

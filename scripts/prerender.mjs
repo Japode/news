@@ -97,8 +97,8 @@ copyFileSync(notFound, join(DIST, "404.html"))
 for (const v of app.VIDEOS) {
   mkdirSync(join(DIST, v.slug), { recursive: true })
   copyFileSync(join(REPO, "content", "videos", v.slug, "thumbnail.jpg"), join(DIST, v.slug, "thumbnail.jpg"))
-  // and the frame its Short's facade shows (JN8)
-  if (v.short) copyFileSync(join(REPO, "content", "videos", v.slug, "short.jpg"), join(DIST, v.slug, "short.jpg"))
+  // and the frame each Short's facade shows (JN8)
+  for (const s of v.shorts ?? []) copyFileSync(join(REPO, "content", "videos", v.slug, `short-${s.youtube}.jpg`), join(DIST, v.slug, `short-${s.youtube}.jpg`))
 }
 
 // The PNG icons a manifest and an iOS home screen ask for, from the one SVG.

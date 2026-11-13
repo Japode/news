@@ -22,14 +22,21 @@
 // What the build cannot know is a flag: the YouTube id, the date it was published, and
 // the title when YouTube's differs from shots.json's.
 //
-// A video cut into a Short as well (JN8) names it with --short and --short-title: the
-// Short goes on the same page, not on one of its own. Its facade image is a frame of
-// out/<name>-short-pt-BR.mp4, taken with ffmpeg as short.jpg.
+// A video cut into Shorts as well (JN8) names each one with --short <cut>:<id>:<title>,
+// repeated, in the order the page lists them: the Shorts go on the same page, not on
+// pages of their own. <cut> is the Short's number in marketing: cut 1 is
+// out/<name>-short-pt-BR.mp4 where that exists, and every cut <n> is otherwise
+// out/shorts/<name>-short-<n>-pt-BR.mp4. <title> is YouTube's, and its trailing hashtags
+// (#shorts) are dropped. Each facade image is a frame of that cut, taken with ffmpeg as
+// short-<id>.jpg; a frame no Short names any more is deleted.
+//
+// scripts/scan-channel.mjs reads the channel and prints this command, with every flag, for
+// each video the channel has changed.
 //
 // A second run with nothing changed changes no file: video.json is written only when its
 // text differs, and the thumbnail only when its bytes do.
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs"
 import { basename, dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { parseArgs } from "node:util"
@@ -47,20 +54,37 @@ const { values: flags, positionals } = parseArgs({
     youtube: { type: "string" },
     published: { type: "string" },
     title: { type: "string" },
-    short: { type: "string" },
-    "short-title": { type: "string" },
+    short: { type: "string", multiple: true },
   },
 })
 const [folder, slug] = positionals
-if (!folder || !slug) fail("usage: import-video.mjs <marketing video folder> <slug> --youtube <id> --published <YYYY-MM-DD> [--title <title>]")
+if (!folder || !slug) fail("usage: import-video.mjs <marketing video folder> <slug> --youtube <id> --published <YYYY-MM-DD> [--title <title>] [--short <cut>:<id>:<title> ...]")
 if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) fail(`the slug "${slug}" is not lowercase words joined by hyphens`)
 if (!flags.youtube || !/^[\w-]{11}$/.test(flags.youtube)) fail("--youtube <id> is the 11-character id from youtu.be/<id>")
 if (!flags.published || !/^\d{4}-\d{2}-\d{2}$/.test(flags.published)) fail("--published <YYYY-MM-DD> is the day the video went public")
-if (Boolean(flags.short) !== Boolean(flags["short-title"])) fail("--short <id> and --short-title <title> go together")
-if (flags.short && !/^[\w-]{11}$/.test(flags.short)) fail("--short <id> is the 11-character id from youtube.com/shorts/<id>")
+
+/** YouTube's title without the hashtags it ends with ("… #shorts #ia"). */
+const bare = (title) => {
+  const words = title.trim().split(/\s+/)
+  while (words.length > 1 && words.at(-1).startsWith("#")) words.pop()
+  return words.join(" ")
+}
 
 const SRC = resolve(folder)
 const name = basename(SRC)
+const shortsWanted = (flags.short ?? []).map((spec) => {
+  const m = spec.match(/^(\d+):([\w-]{11}):(.+)$/s)
+  if (!m) fail(`--short "${spec}" is not <cut>:<11-character id>:<title>`)
+  const cut = Number(m[1])
+  const legacy = join(SRC, "out", `${name}-short-pt-BR.mp4`)
+  const file = cut === 1 && existsSync(legacy) ? legacy : join(SRC, "out", "shorts", `${name}-short-${cut}-pt-BR.mp4`)
+  if (!existsSync(file)) fail(`${file} is missing: no cut ${cut} of ${name}'s Shorts`)
+  const title = bare(m[3])
+  if (!title) fail(`--short "${spec}" has no title once its hashtags are dropped`)
+  return { cut, youtube: m[2], title, file }
+})
+if (new Set(shortsWanted.map((s) => s.youtube)).size !== shortsWanted.length) fail("a Short is named twice")
+if (new Set(shortsWanted.map((s) => s.cut)).size !== shortsWanted.length) fail("two Shorts name the same cut")
 const need = (path) => {
   const full = join(SRC, path)
   if (!existsSync(full)) fail(`${full} is missing: run the video's own build first`)
@@ -155,7 +179,7 @@ if (site) {
 const video = {
   $comment: `Imported by scripts/import-video.mjs from marketing/japode/${name}; never edited by hand.`,
   slug,
-  title: flags.title ?? shots.title,
+  title: flags.title ? bare(flags.title) : shots.title,
   youtube: flags.youtube,
   published: flags.published,
   duration: Math.round(plan.length),
@@ -164,7 +188,7 @@ const video = {
   terms,
   sources,
   credits,
-  ...(flags.short ? { short: { youtube: flags.short, title: flags["short-title"] } } : {}),
+  ...(shortsWanted.length ? { shorts: shortsWanted.map(({ cut, youtube, title }) => ({ youtube, title, cut })) } : {}),
   production,
   ...(site ? { kicker: site.kicker, sponsorTie: site.sponsorTie, ...(site.facts?.length ? { facts: site.facts } : {}) } : {}),
 }
@@ -180,17 +204,23 @@ const put = (file, data) => {
 }
 put("video.json", JSON.stringify(video, null, 2) + "\n")
 put("thumbnail.jpg", readFileSync(need("out/thumbnail.pt-BR.jpg")))
-if (flags.short) {
+const frames = shortsWanted.map((s) => `short-${s.youtube}.jpg`)
+for (const s of shortsWanted) {
   // one frame of the Short, a second in, scaled to 720 px tall, written to stdout so `put`
   // compares it before anything on disk changes
-  const frame = spawnSync("ffmpeg", ["-v", "error", "-ss", "1", "-i", need(`out/${name}-short-pt-BR.mp4`), "-frames:v", "1", "-vf", "scale=-2:720", "-q:v", "3", "-f", "mjpeg", "-"], { maxBuffer: 1 << 26 })
-  if (frame.error || frame.status !== 0 || !frame.stdout.length) fail(`ffmpeg could not take a frame of the Short: ${frame.error?.message ?? frame.stderr}`)
-  put("short.jpg", frame.stdout)
+  const frame = spawnSync("ffmpeg", ["-v", "error", "-ss", "1", "-i", s.file, "-frames:v", "1", "-vf", "scale=-2:720", "-q:v", "3", "-f", "mjpeg", "-"], { maxBuffer: 1 << 26 })
+  if (frame.error || frame.status !== 0 || !frame.stdout.length) fail(`ffmpeg could not take a frame of the Short ${s.youtube}: ${frame.error?.message ?? frame.stderr}`)
+  put(`short-${s.youtube}.jpg`, frame.stdout)
+}
+// a frame no Short names any more (short.jpg, from before a video had several) goes
+for (const f of readdirSync(OUT).filter((f) => /^short(-[\w-]{11})?\.jpg$/.test(f) && !frames.includes(f))) {
+  rmSync(join(OUT, f))
+  changed.push(`-${f}`)
 }
 
-const others = readdirSync(OUT).filter((f) => !["video.json", "thumbnail.jpg", "short.jpg", "article.md"].includes(f))
+const others = readdirSync(OUT).filter((f) => !["video.json", "thumbnail.jpg", "article.md", ...frames].includes(f))
 if (others.length) console.warn(`import-video: content/videos/${slug}/ also holds ${others.join(", ")}, which no import writes`)
 console.log(
-  `import-video: ${slug} — ${timed.length} chapters, ${terms.length} terms, ${sources.length} sources, ${credits.length} credits; ` +
+  `import-video: ${slug} — ${timed.length} chapters, ${terms.length} terms, ${sources.length} sources, ${credits.length} credits, ${shortsWanted.length} Shorts; ` +
     (changed.length ? `wrote ${changed.join(", ")}` : "nothing changed"),
 )

@@ -66,8 +66,9 @@ export interface Video {
   terms: Term[]
   sources: Source[]
   credits: Credit[]
-  /** The Short cut from the same video, shown on this page and never on one of its own. */
-  short?: { youtube: string; title: string }
+  /** The Shorts cut from the same video, shown on this page and never on pages of their own
+      (JN8), in the order the page lists them. Each one's frame is short-<youtube>.jpg. */
+  shorts?: Short[]
   /** The subject line above the title ("Controle de versão"), from marketing's site.json (JN18). */
   kicker?: string
   /** The numbers the video states, each with its source (JN18). */
@@ -76,6 +77,14 @@ export interface Video {
   production?: string
   /** How the video relates to the sponsor (JN18). */
   sponsorTie?: SponsorTie
+}
+
+export interface Short {
+  youtube: string
+  /** YouTube's title, without its hashtags. */
+  title: string
+  /** The cut's number in marketing, which scripts/scan-channel.mjs passes back to the import. */
+  cut: number
 }
 
 /** A video in production (JN18): a marketing folder with no cut yet, shown as a card. */
@@ -89,7 +98,7 @@ export interface Upcoming {
 
 type Shape = "string" | "number" | { [field: string]: Shape } | [Shape]
 
-const CHECK: { [K in Exclude<keyof Video, "short" | "kicker" | "facts" | "production" | "sponsorTie">]: Shape } = {
+const CHECK: { [K in Exclude<keyof Video, "shorts" | "kicker" | "facts" | "production" | "sponsorTie">]: Shape } = {
   slug: "string",
   title: "string",
   youtube: "string",
@@ -143,7 +152,8 @@ export function toVideo(file: string, data: unknown): Video {
   const why =
     fits(data, CHECK, "") ??
     optional(data as Video) ??
-    ((data as Video).short === undefined ? null : fits((data as Video).short, { youtube: "string", title: "string" }, "short")) ??
+    ("short" in (data as object) ? "short is the single Short of an older import" : null) ??
+    ((data as Video).shorts === undefined ? null : fits((data as Video).shorts, [{ youtube: "string", title: "string", cut: "number" }], "shorts")) ??
     (/^\d{4}-\d{2}-\d{2}$/.test((data as Video).published) ? null : "published is not YYYY-MM-DD") ??
     (file.split("/").at(-2) === (data as Video).slug ? null : `slug is not its folder's name`)
   if (why) throw new Error(`${file}: ${why}; run scripts/import-video.mjs again rather than editing it`)

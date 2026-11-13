@@ -263,15 +263,19 @@ export function VideoPage({ video, description }: { video: Video; description: s
             </ol>
           </section>
 
-          {video.short && (
-            <section aria-labelledby="short-t">
+          {video.shorts?.length ? (
+            <section aria-labelledby="short-t" className="jn-shorts">
               <h2 id="short-t" className="jn-video-label">
-                O Short
+                {video.shorts.length === 1 ? "O Short" : "Os Shorts"}
               </h2>
-              <p className="jn-short-title">{video.short.title}</p>
-              <Island name="video-facade" props={{ youtube: video.short.youtube, title: video.short.title, thumb: `/${video.slug}/short.jpg`, short: "yes" }} />
+              {video.shorts.map((s) => (
+                <div key={s.youtube} className="jn-short">
+                  <p className="jn-short-title">{s.title}</p>
+                  <Island name="video-facade" props={{ youtube: s.youtube, title: s.title, thumb: `/${video.slug}/short-${s.youtube}.jpg`, short: "yes" }} />
+                </div>
+              ))}
             </section>
-          )}
+          ) : null}
 
           <section className="jn-ficha" aria-labelledby="ficha-t" data-design="ficha">
             <h2 id="ficha-t" className="jn-video-label">

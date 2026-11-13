@@ -1,7 +1,7 @@
 {
   "$comment": "Imported by scripts/import-video.mjs from marketing/japode/scion; never edited by hand.",
   "slug": "scion-anthropic",
-  "title": "A IA escreve tanto código que a Anthropic precisou ir além do Git",
+  "title": "30 mil merges por dia: o Git não aguentou e a Anthropic criou o Scion",
   "youtube": "pffFIAU9uos",
   "published": "2026-11-11",
   "duration": 315,
@@ -425,6 +425,18 @@
       "channelUrl": "https://www.youtube.com/channel/UC5K7QcN9KC2pR7qDIe0sbtQ",
       "url": "https://www.youtube.com/watch?v=hTI5VbZt4M0",
       "license": "Creative Commons Attribution license (reuse allowed)"
+    }
+  ],
+  "shorts": [
+    {
+      "youtube": "bOBW9lbfPLs",
+      "title": "30 mil merges por dia: o Git não aguentou a IA",
+      "cut": 1
+    },
+    {
+      "youtube": "wYGPmUCXo-Q",
+      "title": "600 PB por dia: onde o Git quebrou na Anthropic",
+      "cut": 2
     }
   ],
   "production": "Narração e música geradas com ElevenLabs."
