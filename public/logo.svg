@@ -1,12 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="t">
-  <title id="t">Japode</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Japode — J em fita</title>
+  <desc id="desc">Um J de fita verde, com dobra verde-lima e curva aberta na base.</desc>
   <defs>
-    <radialGradient id="bg" cx="55%" cy="50%" r="60%">
-      <stop offset="0" stop-color="#2BCB6B"/>
-      <stop offset="1" stop-color="#11904A"/>
-    </radialGradient>
+    <radialGradient id="bg" cx="64%" cy="29%" r="82%"><stop stop-color="#163224"/><stop offset="1" stop-color="#07120D"/></radialGradient>
+    <linearGradient id="body" x1="668" y1="300" x2="339" y2="822" gradientUnits="userSpaceOnUse"><stop stop-color="#16A961"/><stop offset=".46" stop-color="#2BCB6B"/><stop offset="1" stop-color="#77F3A1"/></linearGradient>
+    <linearGradient id="fold" x1="320" y1="226" x2="764" y2="366" gradientUnits="userSpaceOnUse"><stop stop-color="#DAFF88"/><stop offset="1" stop-color="#A9EA43"/></linearGradient>
+    <path id="j" d="M320 226H764L675 650C649 785 541 850 408 817C305 793 241 726 226 629L368 604C377 652 399 679 440 688C482 698 514 674 523 631L579 366H292Z"/>
   </defs>
-  <circle cx="256" cy="256" r="256" fill="url(#bg)"/>
-  <polyline points="160,136 400,256 160,376" fill="none" stroke="#D4F7DF" stroke-width="100" stroke-linecap="round" stroke-linejoin="round"/>
-  <polyline points="160,136 400,256 160,376" fill="none" stroke="#111111" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <use href="#j" fill="#032A18" transform="translate(0 14)" opacity=".7"/>
+  <use href="#j" fill="url(#body)"/>
+  <path d="M320 226H764L731 366H292Z" fill="url(#fold)"/>
+  <path d="M579 366L764 226L731 366Z" fill="#59B941"/>
+  <path d="M579 366L731 366L722 410Z" fill="#087F49" opacity=".5"/>
 </svg>

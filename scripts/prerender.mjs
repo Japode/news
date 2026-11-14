@@ -5,7 +5,7 @@
 // and `vite build --ssr src/entry-server.tsx` (dist-server/). For each route in the
 // table, the prerendered page; then 404.html and the PNG icons, drawn from
 // public/logo.svg, which is the one source of the mark here: a copy of
-// marca/logo/japode.svg in the visibility repository, never redrawn.
+// marcas/japode-videos.svg in the visibility repository, never redrawn.
 
 import { execFileSync } from "node:child_process"
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"

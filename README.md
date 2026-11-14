@@ -14,7 +14,7 @@ lê sem JavaScript; só o vídeo roda no navegador, como uma ilha (`src/islands.
 A página é `lang="pt-BR"` e toda URL canônica fica em `https://japode.com.br`
 (`SITE.origin`, em `src/data/site.ts`). Há um tema só, o claro dos artboards. Os títulos usam Plus Jakarta Sans ExtraBold e os termos destacados
 SemiBold (`.jn-term`), a letra em que os vídeos desenham suas palavras-chave, no verde da
-marca. A marca em `public/logo.svg` é uma cópia de `marca/logo/japode.svg` do repositório
+marca. A marca em `public/logo.svg` é uma cópia do J aprovado em `marcas/japode-videos.svg` do repositório
 visibility, nunca redesenhada; o favicon, o manifest e os ícones PNG saem dela.
 
 ```

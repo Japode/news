@@ -26,7 +26,7 @@ const html = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g,
 const walk = (dir) => readdirSync(dir).flatMap((f) => (statSync(join(dir, f)).isDirectory() ? walk(join(dir, f)) : [join(dir, f)]))
 
 // JN1 — every route is static HTML that reads without JavaScript, in Portuguese, born on
-// the final origin, with the channel's mark (visibility's japode.svg, unchanged) as favicon.
+// the final origin, with the approved channel mark (visibility's japode-videos.svg) as favicon.
 check("JN1", SITE.origin === "https://japode.com.br", `the canonical origin is ${SITE.origin}, not https://japode.com.br`)
 for (const r of ROUTES) {
   const file = join(app.outputDir(r.path), "index.html")
@@ -48,9 +48,9 @@ for (const keep of ["logo.svg", "site.webmanifest", "icon-192.png", "icon-512.pn
 const manifest = JSON.parse(read("site.webmanifest"))
 for (const icon of manifest.icons) check("JN1", existsSync(join(DIST, icon.src.replace(/^\//, ""))), `the manifest names ${icon.src}, which is not built`)
 // The mark is copied, never redrawn: where the visibility repository is on this machine,
-// the copy must still be byte for byte its japode.svg. The CI has no such checkout.
-const MARK = resolve(REPO, "..", "..", "alegauss", "visibility", "marca", "logo", "japode.svg")
-if (existsSync(MARK)) check("JN1", readFileSync(MARK, "utf8") === readFileSync(join(REPO, "public", "logo.svg"), "utf8"), "public/logo.svg differs from visibility's marca/logo/japode.svg")
+// the copy must still be byte for byte its japode-videos.svg. The CI has no such checkout.
+const MARK = resolve(REPO, "..", "..", "alegauss", "visibility", "marcas", "japode-videos.svg")
+if (existsSync(MARK)) check("JN1", readFileSync(MARK, "utf8") === readFileSync(join(REPO, "public", "logo.svg"), "utf8"), "public/logo.svg differs from visibility's marcas/japode-videos.svg")
 check("JN1", !existsSync(join(DIST, "docs")) && !existsSync(join(DIST, "scripts")), "docs/ or scripts/ is published")
 // The titles' type (Plus Jakarta Sans, as the videos draw it) is served, not fallen back.
 // (The theme key JN1 also checked left with the theme toggle in JN15.)

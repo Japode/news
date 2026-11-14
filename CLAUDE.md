@@ -20,7 +20,7 @@ is worked and committed.
   japode.com, but styled by `src/design/` (tokens, base, primitives), never the Viglet design
   system. The artboards in `design/` are the target; `scripts/verify.mjs` checks the build
   against each shipped task and `npm run visual` against the artboards.
-- **The brand is the videos' brand**: the mark from visibility's `marca/logo/japode.svg`
+- **The brand is the videos' brand**: the approved ribbon J from visibility's `marcas/japode-videos.svg`
   (never redrawn), green #2BCB6B to #11904A with #D4F7DF, Plus Jakarta Sans, as
   `marketing/japode/brand` draws it in the videos.
 - **A video's facts are imported, never retyped**: they come from
