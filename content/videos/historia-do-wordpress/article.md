@@ -1,5 +1,5 @@
 ---
-draft: 2026-11-24
+approved: 2026-11-24
 ---
 O WordPress, programa que hoje [está em quase 4 de cada 10 sites da internet](https://w3techs.com/technologies/details/cm-wordpress), nasceu de um comentário de blog. Um rapaz de 19 anos escreveu que o programa do blog dele tinha parado no tempo, e um desconhecido, lá da Inglaterra, [respondeu que queria ajudar](https://ma.tt/2003/01/the-blogging-software-dilemma/) se ele fosse mesmo continuar.
 
