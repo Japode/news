@@ -15,11 +15,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -56,6 +53,17 @@ jobs:
         with:
           path: dist
 
+  # The deploy is its own job, as in GitHub's Pages starter workflow: in the build's job,
+  # deploy-pages asked for the artifact right after the upload and was told there was none
+  # (runs 45380460197 and 45390415105, 2026-11-24); a job that starts after the build has
+  # finished finds it registered.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
