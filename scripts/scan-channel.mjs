@@ -117,7 +117,12 @@ const site = readdirSync(VIDEOS_DIR)
 const cuts = new Map() // folder → [{ cut, title?, parent? }]
 for (const name of readdirSync(MARKETING)) {
   const out = join(MARKETING, name, "out")
-  if (!existsSync(out)) continue
+  // a video built by urdido writes video/<video>.pt-BR.description.txt, and no out/ folder
+  if (!existsSync(out)) {
+    const video = join(MARKETING, name, "video")
+    if (existsSync(join(MARKETING, name, "video.toml")) && existsSync(video) && readdirSync(video).some((f) => f.endsWith(".pt-BR.description.txt"))) cuts.set(name, [])
+    continue
+  }
   const list = []
   if (existsSync(join(out, `${name}-short-pt-BR.mp4`))) list.push({ cut: 1 })
   const dir = join(out, "shorts")
@@ -134,9 +139,18 @@ for (const name of readdirSync(MARKETING)) {
   }
   cuts.set(name, list.sort((a, b) => a.cut - b.cut))
 }
-const shotsTitle = (name) => {
+/** The names a folder gives its video: shots.json's title, or for urdido video.toml's name
+    ("a-historia-do-wordpress-…") and the README's heading; the folder's own name at least. */
+const titlesOf = (name) => {
   const path = join(MARKETING, name, "shots.json")
-  return existsSync(path) ? json(path).title : undefined
+  if (existsSync(path)) return [json(path).title]
+  const toml = join(MARKETING, name, "video.toml")
+  const readme = join(MARKETING, name, "README.md")
+  const said = [
+    existsSync(toml) ? readFileSync(toml, "utf8").match(/^\s*name\s*=\s*"([^"]+)"/m)?.[1]?.replace(/-/g, " ") : undefined,
+    existsSync(readme) ? readFileSync(readme, "utf8").match(/^#\s+(.+?)\s*$/m)?.[1] : undefined,
+  ].filter(Boolean)
+  return said.length ? said : [name]
 }
 
 // --- the plan ---------------------------------------------------------------------------
@@ -166,9 +180,12 @@ for (const f of feed.filter((x) => !x.short)) {
   const named = [...cuts].find(([, list]) => list.some((c) => c.parent === f.youtube))?.[0]
   const ranked = [...cuts.keys()]
     .filter((n) => !imported.has(n))
-    .map((n) => ({ folder: n, score: alike(f.title, shotsTitle(n) ?? n) }))
+    .map((n) => ({ folder: n, score: Math.max(...titlesOf(n).map((t) => alike(f.title, t))) }))
     .sort((a, b) => b.score - a.score)
-  plan.fresh.push({ youtube: f.youtube, title: bare(f.title), published: f.published, folder: named ?? (ranked[0]?.score >= LIKE ? ranked[0].folder : undefined), candidates: ranked.slice(0, 3) })
+  // a match that ties with the runner-up (two revisions of one video, say) is for a person to pick
+  const [first, second] = ranked
+  const clear = first?.score >= LIKE && !(second && first.score - second.score < 0.1)
+  plan.fresh.push({ youtube: f.youtube, title: bare(f.title), published: f.published, folder: named ?? (clear ? first.folder : undefined), candidates: ranked.slice(0, 3) })
 }
 // a video with a change takes YouTube's title, whichever change it was
 for (const c of plan.changes) {

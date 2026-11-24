@@ -33,6 +33,15 @@ It fetches the channel's feed (the newest 15 public uploads) and prints, per vid
 Report the plan to the user in Portuguese before changing anything, unless they asked for
 the update outright.
 
+Marketing holds two layouts, and both import. The older videos (docker, scion) have
+`out/`, `shots.json` and `sources.json`. The ones built by urdido (wordpress2 onwards) have
+`video.toml` and write to `video/`: the description, `credits.json` (every third-party
+image, the video's own captures left uncredited) and `qa.json` (the length). An urdido
+video has no glossary, so its terms list is empty. A folder can exist twice as revisions
+(`wordpress`, `wordpress2`): the one published is the one whose video.toml `name` matches
+YouTube's title, and the scan prefers it. When two candidates tie, it leaves the folder
+`unknown`.
+
 ## 2. Decide what the script cannot
 
 - **A new video needs a slug**, which is its address on the site: lowercase words joined by

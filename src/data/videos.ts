@@ -44,11 +44,13 @@ export interface Fact {
 export type SponsorTie = "none" | "product" | "competitor"
 
 export interface Credit {
-  /** The YouTube id of the clip. */
+  /** The YouTube id of the clip; for an image that is not on YouTube, its file name in marketing. */
   id: string
   title: string
+  /** The YouTube channel, or the author of an image from elsewhere (a video built by urdido). */
   channel: string
-  channelUrl: string
+  /** The channel's address; an author from urdido's credits.json has none. */
+  channelUrl?: string
   url: string
   license: string
 }
@@ -108,7 +110,7 @@ const CHECK: { [K in Exclude<keyof Video, "shorts" | "kicker" | "facts" | "produ
   narration: [{ chapter: "number", text: "string" }],
   terms: [{ term: "string", def: "string" }],
   sources: [{ text: "string", url: "string" }],
-  credits: [{ id: "string", title: "string", channel: "string", channelUrl: "string", url: "string", license: "string" }],
+  credits: [{ id: "string", title: "string", channel: "string", url: "string", license: "string" }],
 }
 
 function fits(value: unknown, shape: Shape, at: string): string | null {

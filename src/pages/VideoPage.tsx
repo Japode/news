@@ -79,6 +79,12 @@ export function VideoPage({ video, description }: { video: Video; description: s
   const corrections = correctionsFor(video.slug)
   const facts = video.facts?.length ? video.facts : null
   const ccBy = video.credits.length > 0 && video.credits.every((c) => CC_BY.test(c.license))
+  // a video built by urdido credits photos, documents and stock as well as YouTube clips
+  const onYouTube = video.credits.every((c) => /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//.test(c.url))
+  const imageCount = onYouTube ? plural(video.credits.length, "trecho", "trechos") : plural(video.credits.length, "imagem", "imagens")
+  let creditsLine = `${imageCount}: vídeos, fotografias e documentos, cada um com a sua licença.`
+  if (ccBy) creditsLine = `${imageCount}, todos publicados no YouTube com a licença Creative Commons Atribuição (CC BY), cortados e reenquadrados para este vídeo.`
+  else if (onYouTube) creditsLine = `${imageCount} de vídeos do YouTube, cada um com a sua licença.`
   // the page is rendered once, on the server, and never hydrated: the table can be HTML
   const inline = Boolean(article && facts && article.html.includes("<!-- numeros -->"))
   const factsHtml = inline && facts ? renderToStaticMarkup(<FactsTable facts={facts} />) : null
@@ -219,13 +225,13 @@ export function VideoPage({ video, description }: { video: Video; description: s
 
           <section id="creditos" className="jn-credits" aria-labelledby="creditos-t" data-design="credits">
             <h2 id="creditos-t">Imagens de terceiros</h2>
-            <p>{ccBy ? `${plural(video.credits.length, "trecho", "trechos")}, todos publicados no YouTube com a licença Creative Commons Atribuição (CC BY), cortados e reenquadrados para este vídeo.` : `${plural(video.credits.length, "trecho", "trechos")} de vídeos do YouTube, cada um com a sua licença.`}</p>
+            <p>{creditsLine}</p>
             <div className="jn-credits-scroll">
               <table>
                 <thead>
                   <tr>
-                    <th scope="col">Trecho</th>
-                    <th scope="col">Canal</th>
+                    <th scope="col">{onYouTube ? "Trecho" : "Imagem"}</th>
+                    <th scope="col">{onYouTube ? "Canal" : "Autor"}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -235,7 +241,7 @@ export function VideoPage({ video, description }: { video: Video; description: s
                         <a href={c.url}>{c.title.replace(NO_EMOJI, "").replace(/\s+/g, " ").trim()}</a>
                       </td>
                       <td>
-                        <a href={c.channelUrl}>{c.channel}</a>
+                        {c.channelUrl ? <a href={c.channelUrl}>{c.channel}</a> : c.channel}
                         {ccBy ? "" : ` (${c.license})`}
                       </td>
                     </tr>
@@ -291,7 +297,7 @@ export function VideoPage({ video, description }: { video: Video; description: s
               <dt>Correções</dt>
               <dd>{corrections.length ? String(corrections.length) : "nenhuma"}</dd>
               <dt>Imagens</dt>
-              <dd>{`${plural(video.credits.length, "trecho", "trechos")}${ccBy ? " CC BY" : ""}`}</dd>
+              <dd>{`${imageCount}${ccBy ? " CC BY" : ""}`}</dd>
               {tie && (
                 <>
                   <dt>Patrocínio</dt>

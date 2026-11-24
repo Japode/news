@@ -1,0 +1,366 @@
+{
+  "$comment": "Imported by scripts/import-video.mjs from marketing/japode/wordpress2; never edited by hand.",
+  "slug": "historia-do-wordpress",
+  "title": "A história do WordPress: tudo começou num comentário",
+  "youtube": "jSYqtf2ixP8",
+  "published": "2026-11-16",
+  "duration": 329,
+  "chapters": [
+    {
+      "start": 0,
+      "title": "Introdução"
+    },
+    {
+      "start": 18,
+      "title": "O comentário que virou parceria"
+    },
+    {
+      "start": 53,
+      "title": "Um nome emprestado, uma versão 0.7"
+    },
+    {
+      "start": 96,
+      "title": "O blog ganha outras possibilidades"
+    },
+    {
+      "start": 137,
+      "title": "Tem jazz no painel"
+    },
+    {
+      "start": 172,
+      "title": "Ponto com ou ponto org?"
+    },
+    {
+      "start": 212,
+      "title": "Da imprensa aos blocos"
+    },
+    {
+      "start": 253,
+      "title": "Vinte anos depois"
+    }
+  ],
+  "narration": [
+    {
+      "chapter": 0,
+      "text": "Quase quatro em cada dez sites da internet usam WordPress. E ele nasceu num comentário de blog. Sério! Um rapaz de dezenove anos escreveu que o programa do blog dele tinha parado no tempo. E um desconhecido, lá da Inglaterra, respondeu: se você for mesmo continuar, eu quero ajudar."
+    },
+    {
+      "chapter": 1,
+      "text": "O rapaz era o Matt Mullenweg. O programa era o b2/cafelog, criado pelo Michel Valdrighi, e fazia meses que ninguém atualizava. No post, o Matt ficou pensando em voz alta: troco de ferramenta ou continuo o projeto por conta própria? Como o código era aberto, dava para partir do que já existia. Isso foi em janeiro de dois mil e três."
+    },
+    {
+      "chapter": 1,
+      "text": "E o desconhecido era Mike Little. Repara: uma pessoa conta um problema, outra aparece para ajudar, e dali nasce uma parceria. A licença permitia que o trabalho continuasse mesmo se alguém precisasse sair. E é aí que começa a história do WordPress."
+    },
+    {
+      "chapter": 2,
+      "text": "Em vinte e sete de maio de dois mil e três, sai a primeira versão do WordPress. E aqui vem uma curiosidade: ela não saiu como versão um. Saiu como zero ponto sete! Sabe por quê? A última versão do b2/cafelog era a zero ponto seis. O WordPress pegou o código de onde ele tinha parado e continuou a contagem. Ou seja: ele já nasceu com uma história."
+    },
+    {
+      "chapter": 2,
+      "text": "E quem sugeriu o nome WordPress foi Christine Tremoulet, amiga de Matt. O nome pegou. Naquele começo, a proposta era publicar textos com uma administração mais simples. O site do projeto também reunia documentação e um fórum, onde quem usava podia pedir ajuda e participar."
+    },
+    {
+      "chapter": 3,
+      "text": "Em dois mil e quatro, o WordPress um ponto dois traz uma arquitetura de plugins. Pensa numa extensão que acrescenta uma função sem você precisar reescrever o programa inteiro. Cada pessoa podia adaptar o site ao que precisava, e desenvolvedores de fora podiam criar essas peças."
+    },
+    {
+      "chapter": 3,
+      "text": "No ano seguinte, a versão um ponto cinco traz um sistema de temas mais flexível e páginas separadas dos posts. Isso ajuda a explicar como o WordPress foi além dos blogs: dava para organizar conteúdo permanente e mudar a aparência do site. Os plugins cuidavam das funções; os temas, da apresentação. Um mesmo programa podia servir a projetos bem diferentes."
+    },
+    {
+      "chapter": 4,
+      "text": "Agora, a parte musical. Grandes versões do WordPress recebem nomes de artistas de jazz. A um ponto dois é Mingus, em homenagem a Charles Mingus. A um ponto cinco é Strayhorn, por Billy Strayhorn. Dá para passear pela história do programa e acabar descobrindo música no caminho."
+    },
+    {
+      "chapter": 4,
+      "text": "E sabe o Hello Dolly, aquele plugin que muita gente encontra e não entende para que serve? Quando ativado, ele mostra no painel trechos da canção que ficou famosa na voz de Louis Armstrong. É uma pequena brincadeira musical dentro de uma ferramenta de publicação. Ele não toca a música: mostra um trecho da letra."
+    },
+    {
+      "chapter": 5,
+      "text": "Em dois mil e cinco, aparece o WordPress.com. E aí nasce uma confusão que acompanha muita gente até hoje. WordPress.org é o endereço do projeto de código aberto, onde você encontra o programa para instalar na hospedagem que escolher. Você pode contratar alguém para cuidar dessa instalação também."
+    },
+    {
+      "chapter": 5,
+      "text": "Já o WordPress.com é um serviço da Automattic, com hospedagem incluída. Os dois usam WordPress, mas o projeto e o serviço comercial têm papéis diferentes. É como distinguir uma receita do lugar que prepara e entrega a comida. Entender essa diferença ajuda bastante quando alguém diz que tem um site no WordPress."
+    },
+    {
+      "chapter": 6,
+      "text": "Em dezembro de dois mil e dezoito, o WordPress cinco ponto zero coloca o editor de blocos no centro da experiência. Um parágrafo é um bloco. Uma imagem é outro. Você pode reorganizar essas partes para montar a página, em vez de tratar todo o conteúdo como uma única caixa de texto."
+    },
+    {
+      "chapter": 6,
+      "text": "O projeto desse editor se chama Gutenberg, uma homenagem ao inventor associado à imprensa de tipos móveis na Europa. A referência combina com a proposta: facilitar a publicação. Séculos depois da prensa, a pergunta continua parecida: como colocar as ferramentas de publicar nas mãos de mais pessoas? No WordPress, uma das respostas foi montar conteúdo em blocos."
+    },
+    {
+      "chapter": 7,
+      "text": "Em vinte e sete de maio de dois mil e vinte e três, o WordPress fez vinte anos. E os blocos foram além da página: no editor do site, cabeçalho, rodapé e estilos do site inteiro se ajustam do mesmo jeito. Quer experimentar sem instalar nada? O WordPress Playground roda o programa direto no navegador."
+    },
+    {
+      "chapter": 7,
+      "text": "Nem tudo é festa, tá? Em dois mil e vinte e quatro, uma disputa entre a Automattic e a WP Engine, uma grande empresa de hospedagem de WordPress, foi parar na Justiça dos Estados Unidos. O processo ainda está em andamento. E aqui no Brasil a comunidade segue forte: o WordCamp Brasil voltou em dois mil e vinte e cinco, no Rio de Janeiro, depois de dezesseis anos sem um encontro nacional. E em dois mil e vinte e seis foi a vez de Belo Horizonte."
+    },
+    {
+      "chapter": 7,
+      "text": "Hoje são milhões de sites, quase quatro em cada dez da internet. Aquela parceria de dois mil e três cresceu e virou uma referência para publicar na internet. De blogs pessoais a grandes publicações, muita gente encontrou ali um jeito de colocar suas ideias no mundo. E pensar que essa história passou por um comentário de alguém se oferecendo para ajudar. Você já usou WordPress? Conta nos comentários. E, para conhecer outras histórias da tecnologia, se inscreve no Japode. Até a próxima."
+    }
+  ],
+  "terms": [],
+  "sources": [
+    {
+      "text": "Matt Mullenweg · postagem e comentário de Mike Little · 24–25/01/2003",
+      "url": "https://ma.tt/2003/01/the-blogging-software-dilemma/"
+    },
+    {
+      "text": "WordPress 1.2 · anúncio original · 22/05/2004",
+      "url": "https://wordpress.org/news/2004/05/heres-the-beef/"
+    },
+    {
+      "text": "WordPress 1.5 · anúncio original · 17/02/2005",
+      "url": "https://wordpress.org/news/2005/02/strayhorn/"
+    },
+    {
+      "text": "Hello Dolly · descrição oficial do plugin",
+      "url": "https://wordpress.org/plugins/hello-dolly/"
+    },
+    {
+      "text": "WordPress.com · diferença entre .com e .org",
+      "url": "https://wordpress.com/support/com-vs-org/"
+    },
+    {
+      "text": "WordPress 5.0 · anúncio original · 06/12/2018",
+      "url": "https://wordpress.org/news/2018/12/bebo/"
+    },
+    {
+      "text": "International Printing Museum · a prensa de Gutenberg",
+      "url": "https://www.printmuseum.org/gutenberg-press"
+    },
+    {
+      "text": "WordPress · missão, comunidade e liberdades",
+      "url": "https://wordpress.org/about/"
+    },
+    {
+      "text": "WordPress 0.71-gold · arquivo oficial de versões",
+      "url": "https://wordpress.org/download/releases/"
+    },
+    {
+      "text": "WordPress · 20 anos · 27/05/2023",
+      "url": "https://wp20.wordpress.net/"
+    },
+    {
+      "text": "WordPress · editor do site",
+      "url": "https://wordpress.org/documentation/article/site-editor/"
+    },
+    {
+      "text": "WordPress Playground",
+      "url": "https://wordpress.org/playground/"
+    },
+    {
+      "text": "TechCrunch · WP Engine e Automattic · andamento do processo em 2026",
+      "url": "https://techcrunch.com/2026/02/12/automattic-planned-to-target-10-competitors-with-royalty-fees-wp-engine-claims-in-new-filing/"
+    },
+    {
+      "text": "WordCamp Brasil 2026 · Belo Horizonte, FUMEC · 30–31/10/2026",
+      "url": "https://brasil.wordcamp.org/2026/"
+    }
+  ],
+  "credits": [
+    {
+      "id": "LezbkeV059Q",
+      "title": "Matt Mullenweg · State of the Word 2019",
+      "channel": "WordPress",
+      "url": "https://www.youtube.com/watch?v=LezbkeV059Q",
+      "license": "CC BY 3.0"
+    },
+    {
+      "id": "retro",
+      "title": "retro · imagens ilustrativas",
+      "channel": "Cliply",
+      "url": "https://pixabay.com/videos/id-28320/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "topview",
+      "title": "topview · imagens ilustrativas",
+      "channel": "Life-Of-Vids",
+      "url": "https://pixabay.com/videos/id-3145/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "michel",
+      "title": "Michel Valdrighi · Les origines de WordPress : la naissance de b2/cafelog · WordCamp Paris 2011",
+      "channel": "WordCamp Paris 2011 / WordPress.tv",
+      "url": "https://wordpress.tv/2012/02/27/les-origines-de-wordpress-la-naissance-de-b2cafelog/",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "typewriter",
+      "title": "typewriter · imagens ilustrativas",
+      "channel": "LisaRedfern",
+      "url": "https://pixabay.com/videos/id-1334/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "library",
+      "title": "library · imagens ilustrativas",
+      "channel": "klimkin",
+      "url": "https://pixabay.com/videos/id-846/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "CnYi-2Z92hw",
+      "title": "Mike Little: WordPress · The early years. A co-founder's view",
+      "channel": "WordPress TV / WordCamp Europe 2016",
+      "url": "https://www.youtube.com/watch?v=CnYi-2Z92hw",
+      "license": "CC BY 3.0"
+    },
+    {
+      "id": "team",
+      "title": "team · imagens ilustrativas",
+      "channel": "blackmarketmusic",
+      "url": "https://pixabay.com/videos/id-137265/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "server",
+      "title": "server · imagens ilustrativas",
+      "channel": "mignic",
+      "url": "https://pixabay.com/videos/id-377885/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "typewriter-close",
+      "title": "typewriter-close · imagens ilustrativas",
+      "channel": "LisaRedfern",
+      "url": "https://pixabay.com/videos/id-1336/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "phone",
+      "title": "phone · imagens ilustrativas",
+      "channel": "Natures_Embrace",
+      "url": "https://pixabay.com/videos/id-202987/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "christine",
+      "title": "Christine Tremoulet · retrato publicado em seu site",
+      "channel": "Christine Tremoulet / site oficial",
+      "url": "https://christinetremoulet.com/",
+      "license": "Direitos reservados; citação editorial"
+    },
+    {
+      "id": "browsing",
+      "title": "Navegação no celular · imagens ilustrativas",
+      "channel": "Coverr-Free-Footage",
+      "url": "https://pixabay.com/videos/id-103/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "sax",
+      "title": "sax · imagens ilustrativas",
+      "channel": "Engin_Akyurt",
+      "url": "https://pixabay.com/videos/id-123765/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "vinyl-wide",
+      "title": "vinyl-wide · imagens ilustrativas",
+      "channel": "Matthias_Groeneveld",
+      "url": "https://pixabay.com/videos/id-65390/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "mingus",
+      "title": "Charles Mingus · 4 de julho de 1976",
+      "channel": "Tom Marcello",
+      "url": "https://commons.wikimedia.org/wiki/File:Charles_Mingus_1976.jpg",
+      "license": "CC BY-SA 2.0"
+    },
+    {
+      "id": "piano",
+      "title": "piano · imagens ilustrativas",
+      "channel": "PascalBeckmann",
+      "url": "https://pixabay.com/videos/id-13042/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "billy",
+      "title": "Billy Strayhorn · retrato de 1946–1948",
+      "channel": "William P. Gottlieb / Library of Congress",
+      "url": "https://commons.wikimedia.org/wiki/File:Billy_Strayhorn,_New_York,_N.Y.,_between_1946_and_1948_(William_P._Gottlieb_08211).jpg",
+      "license": "Domínio público"
+    },
+    {
+      "id": "vinyl-close",
+      "title": "vinyl-close · imagens ilustrativas",
+      "channel": "Matthias_Groeneveld",
+      "url": "https://pixabay.com/videos/id-38388/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "louis",
+      "title": "Louis Armstrong · retrato de 1938–1948",
+      "channel": "William P. Gottlieb / Library of Congress",
+      "url": "https://commons.wikimedia.org/wiki/File:(Portrait_of_Louis_Armstrong,_between_1938_and_1948)_(LOC)_(5189336741).jpg",
+      "license": "Domínio público"
+    },
+    {
+      "id": "vinyl",
+      "title": "vinyl · illustrative stock footage",
+      "channel": "Matthias_Groeneveld",
+      "url": "https://pixabay.com/videos/id-8437/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "gutenberg-drag",
+      "title": "Gutenberg · inserção de blocos e padrões por arrastar e soltar · 2021",
+      "channel": "annezazu / Make WordPress Core",
+      "url": "https://make.wordpress.org/core/2021/01/08/core-editor-improvement-drag-drop-blocks-and-patterns-from-the-inserter/",
+      "license": "Citação editorial; licença de reutilização não declarada"
+    },
+    {
+      "id": "gutenberg-reorder",
+      "title": "Gutenberg · reorganização real de blocos · demonstração da documentação oficial",
+      "channel": "WordPress.org Documentation",
+      "url": "https://wordpress.org/documentation/article/moving-blocks/",
+      "license": "Citação editorial; licença de reutilização não declarada"
+    },
+    {
+      "id": "gutenberg",
+      "title": "Johannes Gutenberg · gravura histórica",
+      "channel": "Historical engraving; see Commons source record",
+      "url": "https://commons.wikimedia.org/wiki/File:Johannes_Gutenberg.jpg",
+      "license": "Domínio público"
+    },
+    {
+      "id": "amman-1568",
+      "title": "Oficina de impressão · xilogravura de 1568",
+      "channel": "Jost Amman (1539–1591)",
+      "url": "https://commons.wikimedia.org/wiki/File:Printer_in_1568-ce.png",
+      "license": "Domínio público"
+    },
+    {
+      "id": "writer",
+      "title": "writer · imagens ilustrativas",
+      "channel": "SYG_Anime",
+      "url": "https://pixabay.com/videos/id-130645/",
+      "license": "Pixabay Content License"
+    },
+    {
+      "id": "wpengine-case",
+      "title": "WPEngine, Inc. v. Automattic Inc. · petição inicial, 02/10/2024 (recorte do cabeçalho)",
+      "channel": "U.S. District Court, Northern District of California, 3:24-cv-06917 (via CourtListener RECAP)",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.cand.437474/gov.uscourts.cand.437474.1.0.pdf",
+      "license": "Documento judicial público"
+    },
+    {
+      "id": "wcbr-painel",
+      "title": "WordCamp Brasil 2025 · painel Mercado WordPress no Brasil e no mundo",
+      "channel": "WordCamp Brasil 2025 / WordPress.tv",
+      "url": "https://wordpress.tv/2026/02/14/mercado-wordpress-no-brasil-e-no-mundo/",
+      "license": "CC BY-SA 4.0"
+    }
+  ],
+  "production": "Narração gerada com ElevenLabs."
+}

@@ -22,6 +22,18 @@
 // What the build cannot know is a flag: the YouTube id, the date it was published, and
 // the title when YouTube's differs from shots.json's.
 //
+// A video built by urdido (a video.toml and no out/ folder) writes its files elsewhere, and
+// the import reads those instead, <video> being video.toml's [video] name:
+//   narration/script.json                 as above
+//   video/<video>.pt-BR.description.txt   the chapters, and the sources under "Fontes e demonstrações"
+//   video/<video>.pt-BR.credits.json      every third-party image, with its author and licence
+//                                         (the video's own captures, kind "own", are not credited,
+//                                         as page: and terminal: shots are not), and each source's
+//                                         label, which replaces the description's shorter one
+//   video/<video>.pt-BR.qa.json           the length of the cut
+//   video/thumbnail.pt-BR.jpg             the thumbnail
+// It has no shots.json, so no glossary, and its title is always the --title flag.
+//
 // A video cut into Shorts as well (JN8) names each one with --short <cut>:<id>:<title>,
 // repeated, in the order the page lists them: the Shorts go on the same page, not on
 // pages of their own. <cut> is the Short's number in marketing: cut 1 is
@@ -95,11 +107,19 @@ const json = (path) => JSON.parse(readFileSync(need(path), "utf8").replace(/^﻿
 const pt = (field, where) => field?.["pt-BR"] ?? fail(`${where} has no pt-BR text`)
 const written = (text) => text.replace(/\[[^\]]*\]\s*/g, "").trim()
 
+// urdido's layout (video/) or the older one (out/, shots.json, sources.json)
+const URDIDO = existsSync(join(SRC, "video.toml")) && !existsSync(join(SRC, "out"))
+const urdidoName = URDIDO ? (readFileSync(need("video.toml"), "utf8").match(/^\s*name\s*=\s*"([^"]+)"/m)?.[1] ?? fail("video.toml has no [video] name")) : null
+const built = URDIDO ? `video/${urdidoName}.pt-BR` : null
+
 const script = json("narration/script.json")
-const shots = json("shots.json")
-const clips = json("sources.json")
-const plan = json("out/plan.json")
-const description = readFileSync(need(`out/${name}-pt-BR.description.txt`), "utf8").replace(/\r\n/g, "\n")
+const shots = URDIDO ? { title: undefined, callouts: {}, segments: [] } : json("shots.json")
+const clips = URDIDO ? {} : json("sources.json")
+const length = URDIDO ? json(`${built}.qa.json`).duration : json("out/plan.json").length
+if (typeof length !== "number" || !(length > 0)) fail("the cut's length is not a positive number")
+const urdidoCredits = URDIDO ? json(`${built}.credits.json`) : null
+const description = readFileSync(need(URDIDO ? `${built}.description.txt` : `out/${name}-pt-BR.description.txt`), "utf8").replace(/\r\n/g, "\n")
+if (URDIDO && !flags.title) fail("a video built by urdido has no shots.json title: pass --title")
 
 /** The description's sections, by heading: a heading is a line followed by its body, up to a blank line. */
 const sections = Object.fromEntries(
@@ -145,11 +165,25 @@ for (const shot of (shots.segments ?? []).flatMap((s) => s.shots)) {
   const clip = clips[shot.src] ?? fail(`a shot plays ${shot.src}, which sources.json does not credit`)
   credits.push({ id: shot.src, title: clip.title, channel: clip.channel, channelUrl: clip.channelUrl, url: clip.url, license: clip.license })
 }
+// urdido's credits.json lists each asset the cut uses, in the order it first plays: every
+// one that is not the video's own capture is credited, once per address. Its id is the
+// clip's YouTube id where it has one, else the asset's file name; it names an author, not
+// a channel with an address.
+for (const a of urdidoCredits?.assets ?? []) {
+  if (a.kind === "own" || credits.some((c) => c.url === a.url)) continue
+  for (const f of ["file", "title", "author", "url", "license"]) if (typeof a[f] !== "string" || !a[f]) fail(`credits.json has an asset with no ${f}: ${JSON.stringify(a).slice(0, 120)}`)
+  const id = a.url.match(/(?:youtu\.be\/|[?&]v=)([\w-]{11})/)?.[1] ?? basename(a.file).replace(/\.[^.]+$/, "")
+  if (credits.some((c) => c.id === id)) fail(`credits.json credits two assets as ${id}`)
+  credits.push({ id, title: a.title, channel: a.author, url: a.url, license: a.license_label ?? a.license })
+}
 
-// The primary sources: each line of the description's Fonte(s) section, with its address.
-const sources = (sections["Fontes"] ?? sections["Fonte"] ?? []).map((line) => {
+// The primary sources: each line of the description's Fonte(s) section, with its address;
+// urdido calls it "Fontes e demonstrações", and labels each source better in credits.json.
+const labels = Object.values(urdidoCredits?.sources ?? {})
+const sources = (sections["Fontes"] ?? sections["Fonte"] ?? sections["Fontes e demonstrações"] ?? []).map((line) => {
   const url = line.match(/https?:\/\/\S+/)?.[0] ?? fail(`the source "${line}" has no address`)
-  return { text: line.replace(url, "").replace(/[:\s]+$/, "").trim(), url }
+  const label = labels.find((s) => s.url === url)?.label
+  return { text: label ?? line.replace(url, "").replace(/[:\s]+$/, "").trim(), url }
 })
 
 // The production credit (JN18): the line the build writes into the description, which
@@ -182,7 +216,7 @@ const video = {
   title: flags.title ? bare(flags.title) : shots.title,
   youtube: flags.youtube,
   published: flags.published,
-  duration: Math.round(plan.length),
+  duration: Math.round(length),
   chapters: timed,
   narration,
   terms,
@@ -203,7 +237,7 @@ const put = (file, data) => {
   changed.push(file)
 }
 put("video.json", JSON.stringify(video, null, 2) + "\n")
-put("thumbnail.jpg", readFileSync(need("out/thumbnail.pt-BR.jpg")))
+put("thumbnail.jpg", readFileSync(need(URDIDO ? "video/thumbnail.pt-BR.jpg" : "out/thumbnail.pt-BR.jpg")))
 const frames = shortsWanted.map((s) => `short-${s.youtube}.jpg`)
 for (const s of shortsWanted) {
   // one frame of the Short, a second in, scaled to 720 px tall, written to stdout so `put`
